@@ -1,0 +1,7977 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07091a">
+<meta name="description" content="JK AdiStore — MLBB, VPN, Aplikasi, Digital Store & AI">
+<title>JK AdiStore</title>
+
+<style>
+:root{
+ --container:1180px;
+ --sp-1:4px;
+ --sp-2:8px;
+ --sp-3:12px;
+ --sp-4:16px;
+ --sp-5:20px;
+ --sp-6:24px;
+ --sp-7:32px;
+ --sp-8:40px;
+ --radius-sm:10px;
+ --radius-md:14px;
+ --radius-lg:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+
+html{
+ overflow-x:hidden;
+ width:100%;
+}
+
+body{
+ margin:0;
+ width:100%;
+ overflow-x:hidden;
+ font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+ background:#050716;
+ color:#fff;
+ min-height:100vh;
+ background-image:
+ radial-gradient(circle at 10% 10%,#2563eb22,transparent 30%),
+ radial-gradient(circle at 90% 20%,#00e5ff1d,transparent 30%),
+ radial-gradient(circle at 50% 90%,#8b5cf622,transparent 35%);
+}
+
+body:before{
+ content:"";
+ position:fixed;
+ inset:-50%;
+ z-index:-1;
+ background:conic-gradient(
+  #2563eb14,#38bdf810,#00e5ff14,
+  #5b5cff12,#2563eb14
+ );
+ filter:blur(55px);
+ animation:none;
+}
+
+@keyframes spin{
+ to{transform:rotate(360deg)}
+}
+
+@keyframes rainbow{
+ 0%,100%{background-position:0% 50%}
+ 50%{background-position:100% 50%}
+}
+
+@keyframes tickerMove{
+ from{transform:translateX(0)}
+ to{transform:translateX(-33.3333%)}
+}
+
+@keyframes rainbowBlink{
+ 0%,100%{opacity:1;filter:brightness(1)}
+ 50%{opacity:.9;filter:brightness(1.12)}
+}
+
+.top-ticker{
+ width:100%;
+ overflow:hidden;
+ margin-bottom:18px;
+ border:1px solid #ffffff18;
+ border-radius:14px;
+ background:#00000022;
+ box-shadow:0 0 24px #2563eb22;
+}
+
+.top-ticker-track{
+ display:flex;
+ width:max-content;
+ min-width:max-content;
+ padding:9px 0;
+ font-size:clamp(14px,2.8vw,20px);
+ font-weight:750;
+ letter-spacing:1px;
+ animation:tickerMove 32s linear infinite;
+ will-change:transform;
+}
+
+.top-ticker-text{
+ display:block;
+ flex:0 0 auto;
+ padding:0 28px;
+ background:linear-gradient(90deg,#2563eb,#1d4ed8,#38bdf8,#60a5fa,#00e5ff,#5b5cff,#2563eb);
+ background-size:500% 100%;
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+ animation:rainbow 5s linear infinite;
+}
+
+/* ============ BANNER / SLIDER (JK AdiStore) ============ */
+.jk-slider{
+ position:relative;
+ width:100%;
+ overflow:hidden;
+ background:linear-gradient(135deg,#0a0e22,#141a35);
+ touch-action:pan-y;
+ user-select:none;
+ contain:content;
+}
+.jk-slider-track{
+ display:flex;
+ width:100%;
+ height:100%;
+ will-change:transform;
+ transition:transform .5s cubic-bezier(.4,0,.2,1);
+}
+.jk-slider-track.jk-dragging{transition:none}
+.jk-slide{
+ flex:0 0 100%;
+ min-width:100%;
+ position:relative;
+ aspect-ratio:16/6;
+ max-height:420px;
+ overflow:hidden;
+ display:block;
+ cursor:pointer;
+ text-decoration:none;
+ background:radial-gradient(circle at 30% 30%,#2563eb33,transparent 60%),radial-gradient(circle at 80% 70%,#00e5ff2a,transparent 55%);
+}
+@media(max-width:700px){.jk-slide{aspect-ratio:16/10;max-height:260px}}
+.jk-slide img{
+ width:100%;height:100%;object-fit:cover;display:block;
+ pointer-events:none;
+}
+.jk-slide:after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(180deg,#00000000 40%,#050716e6 100%);
+ pointer-events:none;
+}
+.jk-slide-caption{
+ position:absolute;left:0;right:0;bottom:0;
+ padding:14px clamp(14px,4vw,40px) 24px;
+ z-index:2;
+}
+.jk-slide-caption b{
+ font-size:clamp(16px,3.2vw,26px);
+ display:block;
+ text-shadow:0 2px 14px #000a;
+}
+.jk-slider-dots{
+ position:absolute;left:0;right:0;bottom:9px;
+ display:flex;justify-content:center;gap:7px;z-index:3;
+}
+.jk-slider-dot{
+ width:8px;height:8px;border-radius:99px;
+ background:#ffffff55;border:0;padding:0;cursor:pointer;
+ transition:.25s;
+}
+.jk-slider-dot.active{background:#00e5ff;width:22px;box-shadow:0 0 10px #00e5ffaa}
+.jk-slider-arrow{
+ position:absolute;top:50%;transform:translateY(-50%);
+ width:38px;height:38px;border-radius:50%;
+ background:#00000055;border:1px solid #ffffff30;
+ color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;
+ cursor:pointer;z-index:3;backdrop-filter:blur(4px);
+}
+.jk-slider-arrow.prev{left:10px}
+.jk-slider-arrow.next{right:10px}
+@media(max-width:700px){.jk-slider-arrow{display:none}}
+
+/* ============ ADMIN: MEDIA & ULASAN LISTS ============ */
+.jk-media-row{
+ display:flex;gap:12px;align-items:center;
+ padding:10px;border:1px solid #ffffff16;border-radius:12px;
+ background:#0007;margin-bottom:9px;flex-wrap:wrap;
+}
+.jk-media-row img,.jk-media-row .jk-media-thumb{
+ width:64px;height:64px;object-fit:cover;border-radius:9px;flex:0 0 auto;
+ background:#141a35;
+}
+.jk-media-row .jk-media-info{flex:1 1 180px;min-width:0}
+.jk-media-row .jk-media-info b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jk-media-actions{display:flex;gap:6px;flex-wrap:wrap}
+.jk-media-actions button{padding:7px 10px;min-height:auto;font-size:12.5px}
+.jk-testi-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,#2563eb,#5b5cff)}
+
+.hero-title-row{
+ display:flex; align-items:center; justify-content:flex-start; gap:clamp(24px,5vw,64px);
+ flex-wrap:nowrap; margin:4px 0 10px; width:100%;
+}
+.hero-title-row h1{margin:0!important; flex:0 1 auto;}
+.store-clock{
+ flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+ min-height:64px; padding:8px 16px; border:1px solid #ffffff30; border-radius:18px;
+ background:linear-gradient(135deg,#2563eb1a,#5b5cff18,#00e5ff18);
+ box-shadow:0 0 30px #2563eb2c,inset 0 0 22px #ffffff08; overflow:hidden;
+}
+.store-clock .clock-time{display:inline-block; font-size:clamp(30px,6vw,54px); line-height:1; font-weight:800; letter-spacing:2px;
+ background:linear-gradient(90deg,#2563eb,#1d4ed8,#38bdf8,#60a5fa,#00e5ff,#5b5cff,#2563eb);
+ background-size:600% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+ animation:rainbow 4s linear infinite,rainbowBlink 2.6s ease-in-out infinite; text-shadow:0 0 18px #2563eb55}
+@media(max-width:700px){
+ .top .brand img{width:38px!important;height:38px!important}
+ .hero-card img{width:60px!important;height:60px!important}
+ .hero-title-row{gap:16px; align-items:center}
+ .hero-title-row h1{font-size:clamp(38px,10vw,58px)!important}
+ .store-clock{min-height:54px;padding:7px 11px;border-radius:15px}
+ .store-clock .clock-time{font-size:clamp(22px,6.5vw,36px);letter-spacing:1px}
+}
+.top .brand img{width:42px!important;height:42px!important;object-fit:cover;border-radius:12px}
+.hero-card img{width:74px!important;height:74px!important;object-fit:cover;border-radius:16px}
+@media(max-width:700px){.top .brand img{width:38px!important;height:38px!important}.hero-card img{width:60px!important;height:60px!important}.store-clock{min-height:64px;padding:8px 12px}}
+
+.rainbow{
+ background:linear-gradient(
+  90deg,#2563eb,#5b5cff,#00e5ff,
+  #38bdf8,#1d4ed8,#2563eb
+ );
+ background-size:400% 400%;
+ animation:rainbow 9s ease infinite;
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+}
+
+.wrap{
+ width:min(var(--container),94%);
+ margin:auto;
+ max-width:100%;
+}
+
+.top{
+ position:sticky;
+ top:0;
+ z-index:30;
+ background:#050716dd;
+ backdrop-filter:blur(16px);
+ border-bottom:1px solid #ffffff1c;
+}
+
+.nav{
+ min-height:68px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:var(--sp-4);
+}
+
+.brand{
+ display:flex;
+ gap:10px;
+ align-items:center;
+ font-weight:900;
+ border:0;
+ background:none;
+ color:#fff;
+ cursor:pointer;
+}
+
+.brand img{
+ width:42px;
+ height:42px;
+ border-radius:50%;
+ object-fit:cover;
+ border:2px solid #00e5ff;
+}
+
+.navlinks{
+ display:flex;
+ gap:var(--sp-2);
+ align-items:center;
+}
+
+button,.btn{
+ border:1px solid #ffffff1b;
+ background:#ffffff0c;
+ color:#fff;
+ border-radius:var(--radius-sm);
+ padding:10px var(--sp-4);
+ min-height:44px;
+ font-weight:800;
+ cursor:pointer;
+ line-height:1.2;
+}
+
+button:hover,.btn:hover{
+ background:#ffffff16;
+}
+
+.primary{
+ border:0;
+ background:linear-gradient(100deg,#2563eb,#5b5cff,#00e5ff);
+}
+
+.hero{
+ padding:14px 0 60px;
+}
+
+.hero-grid{
+ display:grid;
+ grid-template-columns:1.25fr .75fr;
+ gap:var(--sp-6);
+ align-items:center;
+}
+
+.hero h1{
+ font-size:clamp(45px,8vw,80px);
+ line-height:.9;
+ margin:15px 0;
+}
+
+.hero-card,.card,.panel{
+ background:#0c1227dd;
+ border:1px solid #ffffff16;
+ border-radius:20px;
+ box-shadow:0 20px 70px #0005;
+}
+
+.hero-card{
+ padding:18px;
+}
+
+.hero-card img{
+ width:100%;
+ aspect-ratio:1.3;
+ object-fit:cover;
+ border-radius:15px;
+}
+
+.muted{
+ color:#aeb7d4;
+}
+
+.marquee{
+ overflow:hidden;
+ border-block:1px solid #ffffff15;
+ white-space:nowrap;
+}
+
+.track{
+ display:inline-block;
+ padding:12px;
+ font-weight:900;
+ animation:marquee 25s linear infinite;
+}
+
+.track span{
+ margin:0 35px;
+}
+
+@keyframes marquee{
+ to{transform:translateX(-50%)}
+}
+
+section{
+ padding:var(--sp-7) 0;
+}
+
+#shop{
+ scroll-margin-top:82px;
+}
+
+.head{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ gap:var(--sp-3);
+ margin-bottom:var(--sp-4);
+ flex-wrap:wrap;
+}
+
+.head h2{
+ margin:0;
+}
+
+.input,.select,.area{
+ width:100%;
+ padding:10px var(--sp-4);
+ min-height:44px;
+ border-radius:var(--radius-sm);
+ border:1px solid #ffffff19;
+ background:#0007;
+ color:#fff;
+ outline:none;
+ box-sizing:border-box;
+}
+
+.input:focus,.area:focus,.select:focus{
+ border-color:#00e5ff;
+ box-shadow:0 0 15px #00e5ff22;
+}
+
+.area{
+ min-height:120px;
+ resize:vertical;
+}
+
+.search{
+ max-width:300px;
+}
+
+.chips{
+ display:flex;
+ gap:var(--sp-2);
+ flex-wrap:wrap;
+ margin:var(--sp-3) 0;
+ position:relative;
+ z-index:5;
+}
+
+.chip{
+ border:1px solid #ffffff18;
+ background:#ffffff09;
+ color:#fff;
+ padding:8px 11px;
+ border-radius:99px;
+ cursor:pointer;
+ pointer-events:auto;
+ touch-action:manipulation;
+ -webkit-tap-highlight-color:transparent;
+}
+
+.chip.active{
+ background:#5b5cff55;
+ border-color:#5b5cff;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(5,minmax(0,1fr));
+ gap:var(--sp-3);
+ align-items:stretch;
+ grid-auto-rows:auto;
+}
+
+/* Layout-only fix: make each product row stretch evenly. */
+.grid > .card{
+ align-self:stretch;
+ min-height:100%;
+}
+
+.grid > .card .body{
+ height:100%;
+ box-sizing:border-box;
+}
+
+.card{
+ overflow:hidden;
+ transition:.2s;
+ height:100%;
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+}
+
+.card:hover{
+ transform:translateY(-4px);
+ border-color:#00e5ff44;
+ box-shadow:0 15px 50px #0008;
+}
+
+.pic-wrap{
+ position:relative;
+ width:100%;
+ aspect-ratio:1 / 1;
+ overflow:hidden;
+ background:linear-gradient(160deg,#141a35,#0a0e22);
+ flex:0 0 auto;
+}
+
+.pic{
+ width:100%;
+ aspect-ratio:1/1;
+ height:100%;
+ object-fit:cover;
+ display:block;
+}
+
+.pic-wrap:after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(180deg,#00000000 55%,#050716dd 100%);
+ pointer-events:none;
+}
+
+.pic-badge{
+ position:absolute;
+ left:9px;
+ bottom:9px;
+ z-index:2;
+ font-size:10.5px;
+ font-weight:800;
+ letter-spacing:.3px;
+ padding:4px 9px;
+ border-radius:99px;
+ backdrop-filter:blur(4px);
+ display:inline-flex;
+ align-items:center;
+ gap:5px;
+}
+
+.pic-badge:before{
+ content:"";
+ width:6px;
+ height:6px;
+ border-radius:50%;
+ background:currentColor;
+}
+
+.body{
+ padding:var(--sp-3);
+ display:flex;
+ flex-direction:column;
+ flex:1;
+ min-width:0;
+ min-height:170px;
+}
+
+.body h3{
+ min-height:2.3em;
+ line-height:1.22;
+ margin:2px 0 5px;
+ overflow-wrap:anywhere;
+ font-size:13.5px;
+}
+
+.body > .muted{
+ min-height:2.4em;
+ line-height:1.4;
+ overflow-wrap:anywhere;
+ font-size:11.5px;
+}
+
+.badge{
+ font-size:11px;
+ color:#93c5fd;
+ background:#2563eb1b;
+ padding:4px 7px;
+ border-radius:7px;
+}
+
+.price{
+ font-size:16px;
+ font-weight:900;
+ margin:4px 0;
+ padding-top:var(--sp-2);
+ border-top:1px solid #ffffff12;
+}
+
+.old{
+ text-decoration:line-through;
+ color:#737b9c;
+ font-size:12px;
+ margin-left:5px;
+}
+
+.stock{
+ font-size:12px;
+ color:#75ffc0;
+}
+
+.actions{
+ display:flex;
+ gap:7px;
+ margin-top:auto;
+ padding-top:12px;
+}
+
+.actions .btn{
+ flex:1;
+ min-height:38px;
+ padding:8px 6px;
+ font-size:12.5px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+}
+
+.pillrow{
+ display:flex;
+ gap:var(--sp-3);
+ overflow:auto;
+}
+
+.pill{
+ min-width:130px;
+ padding:15px;
+ border-radius:14px;
+ background:#ffffff08;
+ border:1px solid #ffffff15;
+ font-weight:900;
+}
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:#000c;
+ backdrop-filter:blur(9px);
+ z-index:100;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:16px;
+}
+
+.modalbox{
+ width:min(700px,100%);
+ max-height:92vh;
+ overflow:auto;
+ background:#090d20;
+ border:1px solid #ffffff1b;
+ border-radius:20px;
+ padding:20px;
+}
+
+.modalhead{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+}
+
+.formgrid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:var(--sp-3);
+}
+
+.full{
+ grid-column:1/-1;
+}
+
+.label{
+ display:block;
+ font-size:12px;
+ color:#b9c2df;
+ margin:10px 0 5px;
+}
+
+.order{
+ padding:13px;
+ border:1px solid #ffffff15;
+ border-radius:13px;
+ margin:8px 0;
+ background:#ffffff06;
+}
+
+.adminGrid{
+ display:grid;
+ grid-template-columns:220px 1fr;
+ gap:var(--sp-4);
+}
+
+.side{
+ padding:10px;
+ height:max-content;
+ position:sticky;
+ top:83px;
+}
+
+.side button{
+ width:100%;
+ text-align:left;
+ border:0;
+ background:transparent;
+ color:#bac2df;
+ padding:11px;
+ border-radius:10px;
+}
+
+.side button.active,
+.side button:hover{
+ background:#ffffff0c;
+ color:#fff;
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:var(--sp-3);
+}
+
+.stat{
+ padding:17px;
+ border:1px solid #ffffff16;
+ border-radius:15px;
+ background:#0c1227d9;
+}
+
+.stat b{
+ display:block;
+ font-size:27px;
+ margin-top:6px;
+}
+
+.tablewrap{
+ overflow:auto;
+ border:1px solid #ffffff16;
+ border-radius:15px;
+}
+
+.table{
+ width:100%;
+ border-collapse:collapse;
+}
+
+.table th,.table td{
+ padding:11px;
+ border-bottom:1px solid #ffffff14;
+ text-align:left;
+ font-size:13px;
+}
+
+.toast{
+ position:fixed;
+ right:15px;
+ bottom:15px;
+ z-index:200;
+ background:#10162d;
+ border:1px solid #ffffff1b;
+ padding:13px 16px;
+ border-radius:12px;
+}
+
+.ai-box{
+ background:
+ linear-gradient(135deg,#5b5cff18,#2563eb18,#00e5ff10);
+ border:1px solid #ffffff18;
+ border-radius:20px;
+ padding:20px;
+}
+
+.ai-message{
+ padding:12px;
+ border-radius:13px;
+ background:#ffffff08;
+ margin:8px 0;
+ white-space:pre-wrap;
+}
+
+.ai-user{
+ border-left:3px solid #00e5ff;
+}
+
+.ai-bot{
+ border-left:3px solid #2563eb;
+}
+
+.ai-lock{
+ text-align:center;
+ padding:25px;
+}
+
+.warning{
+ color:#ffd166;
+ font-size:13px;
+}
+
+.price-list{
+ display:grid;
+ gap:var(--sp-2);
+ margin-top:var(--sp-4);
+}
+
+.price-item{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:10px;
+ padding:12px;
+ border:1px solid #ffffff14;
+ background:#ffffff06;
+ border-radius:13px;
+}
+
+.price-item b{
+ color:#fff;
+}
+
+.price-item span{
+ color:#75ffc0;
+ font-weight:900;
+}
+
+.product-detail-img{
+ width:100%;
+ aspect-ratio:1/1;
+ max-height:340px;
+ object-fit:cover;
+ border-radius:var(--radius-md);
+ margin-bottom:var(--sp-4);
+}
+
+.detail-actions{
+ display:flex;
+ gap:8px;
+ margin-top:15px;
+}
+
+.detail-actions>*{
+ flex:1;
+}
+
+.option-select{
+ margin-top:10px;
+}
+
+.category-banner{
+ padding:18px;
+ border:1px solid #ffffff14;
+ border-radius:18px;
+ margin-bottom:15px;
+ background:
+ linear-gradient(135deg,#5b5cff16,#2563eb16);
+}
+
+.hidden{
+ display:none!important;
+}
+
+.bottom{
+ display:none;
+}
+
+.quick-menu{margin-top:22px}
+.quick-menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.quick-menu-card{border:1px solid #ffffff16;background:linear-gradient(135deg,#2563eb1a,#5b5cff18,#00e5ff12);color:#fff;border-radius:16px;padding:16px;text-align:left;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 10px 30px #0005}
+.quick-menu-card:hover{transform:translateY(-2px);border-color:#00e5ff55}
+.quick-menu-card b{display:block;font-size:15px}
+.quick-menu-card small{display:block;color:#b8bfd7;margin-top:3px;font-size:12px}
+.quick-icon{font-size:28px;flex:0 0 auto}
+@media(max-width:900px){.quick-menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media(max-width:520px){
+ .wrap{
+  width:min(100% - 20px,1180px);
+ }
+ .card h3{
+  font-size:14px;
+  line-height:1.25;
+ }
+ .muted{
+  line-height:1.4;
+ }
+.quick-menu-card{padding:12px}.quick-menu-card small{font-size:10px}.quick-icon{font-size:24px}}
+
+.footer{
+ padding:40px 0 70px;
+ color:#9099b8;
+ border-top:1px solid #ffffff15;
+}
+
+@media(max-width:900px){
+
+ .hero-grid,.adminGrid{
+  grid-template-columns:1fr;
+ }
+
+ .grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+ }
+
+ .nav{
+  align-items:flex-start;
+  padding:8px 0;
+ }
+
+ .navlinks{
+  display:flex;
+  overflow-x:auto;
+  max-width:100%;
+  padding-bottom:4px;
+  scrollbar-width:none;
+ }
+
+ .navlinks::-webkit-scrollbar{
+  display:none;
+ }
+
+ .navlinks button{
+  flex:0 0 auto;
+  white-space:nowrap;
+  padding:8px 10px;
+  font-size:12px;
+ }
+
+ .bottom{
+  position:fixed;
+  display:flex;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#050716ee;
+  z-index:50;
+  padding:7px;
+  border-top:1px solid #ffffff16;
+ }
+
+ .bottom button{
+  flex:1;
+  background:none;
+  border:0;
+  color:#bbc4df;
+  font-size:11px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  padding:5px 2px;
+ }
+
+ .bottom button.bottom-active{
+  color:#00e5ff;
+ }
+
+ .bottom svg{
+  width:22px;
+  height:22px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+ }
+
+ .bottom .wish-dot{
+  position:absolute;
+  top:-2px;
+  right:-6px;
+  min-width:15px;
+  height:15px;
+  padding:0 3px;
+  border-radius:99px;
+  background:#ff4d8d;
+  color:#fff;
+  font-size:9px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+ }
+
+ .bottom .icon-wrap{
+  position:relative;
+  display:flex;
+ }
+
+ .stats{
+  grid-template-columns:repeat(2,1fr);
+ }
+
+}
+
+@media(max-width:520px){
+
+ .formgrid{
+  grid-template-columns:1fr;
+ }
+
+ .full{
+  grid-column:auto;
+ }
+
+ .hero{
+  padding-top:35px;
+ }
+
+ .grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--sp-2);
+  align-items:stretch;
+ }
+
+ .body{
+  padding:var(--sp-2);
+  min-height:175px;
+ }
+
+ .body h3{
+  min-height:2.3em;
+  font-size:12.5px;
+ }
+
+ .body > .muted{
+  min-height:2.6em;
+  font-size:11px;
+ }
+
+ .actions{
+  gap:6px;
+ }
+
+ .actions .btn{
+  min-height:36px;
+  padding:7px 6px;
+  font-size:11.5px;
+ }
+
+ .price{
+  font-size:15px;
+ }
+
+ .detail-actions{
+  flex-direction:column;
+ }
+
+}
+img{background:#080d1f;max-width:100%}
+.grid > .card img{max-width:none}
+.top .brand{flex-shrink:0}
+.navlinks select#langSwitcher{
+ min-height:44px;
+ box-sizing:border-box;
+}
+@media(max-width:380px){
+ .hero-title-row{flex-wrap:wrap}
+ .store-clock{width:100%;justify-content:flex-start}
+}
+</style>
+<style>
+.game-products {
+  padding: 30px 16px;
+  color: #fff;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.game-header > span {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #6d28d9, #38bdf8);
+  font-size: 25px;
+}
+
+.game-header h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.game-header p {
+  margin: 5px 0 0;
+  color: #a9afd0;
+  font-size: 14px;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+.game-card {
+  background: rgba(14, 18, 42, .94);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.game-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.game-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: linear-gradient(135deg,#242a5c,#1e3a8a);
+}
+
+.game-card h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.game-card small {
+  color: #9299bd;
+}
+
+.package-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.package-item {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.07);
+  background: #12162d;
+  color: #fff;
+  padding: 13px 14px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: .2s ease;
+  text-align: left;
+}
+
+.package-item:hover {
+  transform: translateY(-2px);
+  border-color: #8b5cf6;
+  background: #181d3b;
+}
+
+.package-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.package-price {
+  color: #65f7b1;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+/* MODAL */
+.game-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 99999;
+}
+
+.game-modal.active {
+  display: flex;
+}
+
+.game-modal-box {
+  width: min(430px, 100%);
+  background: #090d21;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 22px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(0,0,0,.55);
+  animation: modalIn .2s ease;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(.94) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  border-radius: 10px;
+  background: #181d35;
+  color: #fff;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.modal-icon {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+.game-modal-box h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.modal-subtitle {
+  color: #8e96bb;
+  margin: 5px 0 20px;
+}
+
+.modal-package {
+  background: linear-gradient(135deg,#151a38,#0f2b52);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 15px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-package span {
+  display: block;
+  color: #858cac;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.modal-package strong {
+  font-size: 16px;
+}
+
+.modal-price {
+  color: #66f5b2;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.modal-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.modal-info div {
+  background: #11162e;
+  border-radius: 10px;
+  padding: 10px;
+  color: #b7bdd9;
+  font-size: 12px;
+}
+
+.modal-info div:last-child {
+  grid-column: span 2;
+}
+
+.buy-button {
+  width: 100%;
+  border: 0;
+  border-radius: 13px;
+  padding: 14px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  background: linear-gradient(90deg,#2563eb,#7355ff,#00cfff);
+  background-size: 200% 100%;
+  animation: gradientMove 3s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@media(max-width:600px) {
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-modal-box {
+    padding: 20px;
+  }
+}
+
+.qr-payment{
+ text-align:center;
+}
+.qr-payment img{
+ display:block;
+ width:min(320px,100%);
+ aspect-ratio:1/1;
+ object-fit:contain;
+ margin:14px auto;
+ padding:12px;
+ background:#fff;
+ border-radius:18px;
+ border:1px solid #ffffff22;
+}
+.qr-summary{
+ padding:12px;
+ border:1px solid #ffffff14;
+ border-radius:14px;
+ background:#ffffff07;
+ margin:12px 0;
+ text-align:left;
+}
+
+</style>
+
+
+<style id="jk-professional-hero">
+.hero-main{min-width:0}
+.hero-main > .muted{max-width:560px;margin:0 0 14px;line-height:1.55}
+.hero-main > .btn{min-width:140px}
+@media(max-width:900px){
+  .hero-main{text-align:left}
+  .hero-title-row{justify-content:space-between}
+}
+@media(max-width:520px){
+  .hero-title-row{gap:10px}
+  .hero-main > .muted{font-size:13px}
+}
+</style>
+
+<style id="jk-professional-clock-side-logo">
+/* Jam dibuat kecil dan ditempatkan rapi di samping logo */
+.hero-card-head{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ margin-bottom:12px;
+}
+.hero-card-head > img{
+ flex:0 0 auto;
+}
+.hero-card-head .store-clock{
+ min-height:0;
+ height:auto;
+ padding:5px 9px;
+ border-radius:10px;
+ flex:0 0 auto;
+ box-shadow:0 0 16px #2563eb2c,inset 0 0 12px #ffffff08;
+}
+.hero-card-head .store-clock .clock-time{
+ font-size:clamp(15px,3.8vw,23px);
+ letter-spacing:1px;
+}
+@media(max-width:520px){
+ .hero-card-head{gap:9px;margin-bottom:10px}
+ .hero-card-head .store-clock{padding:4px 7px;border-radius:9px}
+ .hero-card-head .store-clock .clock-time{font-size:17px;letter-spacing:.5px}
+}
+</style>
+<style id="jk-ticker-navbar-position">
+/* Ticker RGB dipindah tepat di bawah navbar */
+.top-ticker{
+  width:min(1180px,94%);
+  margin:10px auto 0;
+}
+@media(max-width:700px){
+  .top-ticker{
+    width:94%;
+    margin-top:8px;
+  }
+}
+</style>
+
+
+<style id="clock-precision-only">
+.hero-card-head{display:flex;align-items:center;gap:14px;}
+.hero-card-head img{flex:0 0 auto;}
+.hero-card-head .store-clock{flex:0 0 auto;margin:0;}
+.hero-card-head .clock-time{font-size:clamp(26px,5vw,42px);line-height:1;white-space:nowrap;}
+@media (max-width:520px){.hero-card-head{gap:12px;}.hero-card-head .clock-time{font-size:38px;}}
+</style>
+<style id="jk-local-auth-style">
+body.jk-locked #app{display:none!important}
+#jkAuthGate{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 20% 15%,#2563eb2a,transparent 32%),radial-gradient(circle at 85% 20%,#00e5ff22,transparent 32%),linear-gradient(135deg,#050716f5,#090d20f8);backdrop-filter:blur(18px);overflow:auto}
+#jkAuthGate.hidden{display:none!important}.jk-auth-box{width:min(430px,100%);padding:24px;border:1px solid #ffffff1c;border-radius:24px;background:#0c1227ed;box-shadow:0 25px 90px #000b,inset 0 0 35px #2563eb0b}.jk-auth-logo{width:82px;height:82px;display:block;margin:0 auto 10px;border-radius:50%;object-fit:cover;border:2px solid #00e5ff;box-shadow:0 0 28px #00e5ff44}.jk-auth-title{text-align:center;margin:0 0 5px;font-size:30px;font-weight:800}.jk-auth-sub{text-align:center;color:#aeb7d4;font-size:13px;margin:0 0 18px}.jk-auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}.jk-auth-tabs button.active{background:linear-gradient(100deg,#2563eb,#5b5cff,#00e5ff);border-color:transparent}.jk-auth-form{display:none}.jk-auth-form.active{display:block}.jk-auth-error{min-height:20px;color:#93c5fd;font-size:12px;text-align:center;margin-top:10px}.jk-auth-note{text-align:center;color:#737b9c;font-size:11px;margin-top:14px}
+.jk-auth-divider{display:flex;align-items:center;gap:10px;margin:18px 0 12px;color:#737b9c;font-size:10.5px;letter-spacing:.8px;font-weight:700}
+.jk-auth-divider span{flex:1;height:1px;background:#ffffff16}
+.jk-oauth-row{display:flex;gap:9px;justify-content:center}
+.jk-oauth-btn{flex:1;max-width:64px;height:46px;display:flex;align-items:center;justify-content:center;border:1px solid #ffffff1c;border-radius:13px;background:color-mix(in srgb,var(--oauth-c) 22%,#0c1227);cursor:pointer;transition:.2s}
+.jk-oauth-btn:hover{transform:translateY(-2px);border-color:var(--oauth-c);box-shadow:0 8px 20px color-mix(in srgb,var(--oauth-c) 35%,transparent)}
+.jk-oauth-hint{text-align:center;color:#5c6488;font-size:10.5px;line-height:1.5;margin:10px 4px 0}
+</style>
+</head>
+
+<body class="jk-locked">
+
+<script>
+document.addEventListener("error",e=>{
+ const img=e.target;
+ if(img&&img.tagName==="IMG"&&!img.dataset.fallback){
+  img.dataset.fallback="1";
+  img.src="https://i.postimg.cc/TYyPvHnP/20260805-003328.jpg";
+ }
+},true);
+</script>
+
+<div id="jkAuthGate"><div class="jk-auth-box"><img class="jk-auth-logo" src="https://i.postimg.cc/TYyPvHnP/20260805-003328.jpg" onerror="this.style.display='none'"><h1 class="jk-auth-title rainbow">JK AdiStore</h1><p class="jk-auth-sub">Login atau daftar untuk masuk ke toko</p><div class="jk-auth-tabs"><button type="button" id="jkTabLogin" class="active" onclick="jkAuthTab('login')">LOGIN</button><button type="button" id="jkTabRegister" onclick="jkAuthTab('register')">DAFTAR</button></div><div id="jkLoginForm" class="jk-auth-form active"><label class="label">Email</label><input class="input" id="jkLoginEmail" type="text" autocomplete="username" placeholder="Email"><label class="label">Password</label><input class="input" id="jkLoginPassword" type="password" autocomplete="current-password" placeholder="Password"><button class="btn primary" style="width:100%;margin-top:14px" type="button" onclick="jkLocalLogin()">MASUK</button></div><div id="jkRegisterForm" class="jk-auth-form"><label class="label">Nama</label><input class="input" id="jkRegName" autocomplete="name" placeholder="Nama"><label class="label">WhatsApp</label><input class="input" id="jkRegWA" inputmode="tel" placeholder="Nomor WhatsApp"><label class="label">Email</label><input class="input" id="jkRegEmail" type="text" autocomplete="email" placeholder="Email"><label class="label">Password</label><input class="input" id="jkRegPassword" type="password" autocomplete="new-password" placeholder="Password"><button class="btn primary" style="width:100%;margin-top:14px" type="button" onclick="jkLocalRegister()">BUAT AKUN</button></div><div class="jk-auth-divider"><span></span>ATAU MASUK DENGAN<span></span></div><div class="jk-oauth-row"><button type="button" class="jk-oauth-btn" style="--oauth-c:#EA4335" onclick="loginWithGoogle()" aria-label="Login dengan Google" title="Login dengan Google"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.6 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 16.3 4 9.6 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.5 0 10.4-1.9 14.3-5.1l-6.6-5.6C29.6 35 26.9 36 24 36c-5.3 0-9.6-3.4-11.3-8.1l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.6 5.6C41.5 36 44 30.6 44 24c0-1.3-.1-2.7-.4-3.5z"/></svg></button><button type="button" class="jk-oauth-btn" style="--oauth-c:#333" onclick="loginWithGithub()" aria-label="Login dengan GitHub" title="Login dengan GitHub"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-2.15c-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.71 5.4-5.29 5.69.42.36.78 1.08.78 2.18v3.23c0 .3.21.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg></button><button type="button" class="jk-oauth-btn" style="--oauth-c:#5865F2" onclick="loginWithDiscord()" aria-label="Login dengan Discord" title="Login dengan Discord"><svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg></button><button type="button" class="jk-oauth-btn" style="--oauth-c:#26A5E4" onclick="loginWithTelegram()" aria-label="Login dengan Telegram" title="Login dengan Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.6 8.16-1.86 8.77c-.14.63-.51.78-1.03.49l-2.85-2.1-1.37 1.32c-.15.15-.28.28-.57.28l.2-2.9 5.29-4.78c.23-.2-.05-.32-.36-.11l-6.53 4.11-2.82-.88c-.61-.19-.62-.61.13-.9l11.03-4.25c.51-.19.96.12.79.91z"/></svg></button></div><p class="jk-oauth-hint">Google, GitHub &amp; Discord aktif setelah diaktifkan di Supabase Dashboard. Telegram memerlukan Edge Function tambahan.</p><div id="jkAuthError" class="jk-auth-error"></div><div class="jk-auth-note">🔐 Login aman menggunakan Supabase Authentication</div></div></div><div id="app"></div>
+<div id="toast" class="toast hidden"></div>
+<script>
+window.addEventListener("error",function(e){
+  console.error("JK AdiStore error:",e.error||e.message);
+});
+window.addEventListener("unhandledrejection",function(e){
+  console.error("JK AdiStore promise error:",e.reason);
+});
+</script>
+
+<script>
+const gameProducts = [
+  {
+    name: "Mobile Legends",
+    icon: "📱",
+    packages: [
+      ["55 Diamond", "Rp 16.650"],
+      ["86 Diamond", "Rp 25.000"],
+      ["170 Diamond", "Rp 43.000"],
+      ["275 Diamond", "Rp 83.250"],
+      ["565 Diamond", "Rp 165.390"],
+      ["1.155 Diamond", "Rp 331.890"],
+      ["2.975 Diamond", "Rp 820.290"],
+      ["6.000 Diamond", "Rp 1.659.000"]
+    ]
+  },
+
+  {
+    name: "Free Fire",
+    icon: "🔥",
+    packages: [
+      ["100 Diamond", "Rp 19.000"],
+      ["345 Diamond", "Rp 53.900"],
+      ["555 Diamond", "Rp 84.700"],
+      ["1.155 Diamond", "Rp 185.900"],
+      ["2.385 Diamond", "Rp 350.900"],
+      ["5.805 Diamond", "Rp 812.900"]
+    ]
+  },
+
+  {
+    name: "PUBG Mobile",
+    icon: "🔫",
+    packages: [
+      ["60 UC", "Rp 15.400"],
+      ["325 UC", "Rp 81.400"],
+      ["660 UC", "Rp 163.900"],
+      ["1.800 UC", "Rp 328.000"],
+      ["3.850 UC", "Rp 799.000"],
+      ["8.100 UC", "Rp 1.599.000"]
+    ]
+  },
+
+  {
+    name: "Call of Duty Mobile",
+    icon: "🎯",
+    packages: [
+      ["31 CP", "Rp 4.261"],
+      ["128 CP", "Rp 17.800"],
+      ["321 CP", "Rp 41.500"],
+      ["645 CP", "Rp 89.000"],
+      ["1.056 CP", "Rp 149.975"],
+      ["2.060 CP", "Rp 267.000"]
+    ]
+  },
+
+  {
+    name: "Super Sus",
+    icon: "⭐",
+    packages: [
+      ["310 Golden Star", "Rp 30.200"],
+      ["520 Golden Star", "Rp 50.700"],
+      ["1.060 Golden Star", "Rp 100.900"],
+      ["2.180 Golden Star", "Rp 206.800"],
+      ["5.600 Golden Star", "Rp 527.200"]
+    ]
+  },
+
+  {
+    name: "8 Ball Pool",
+    icon: "🎱",
+    packages: [
+      ["20.000 Koin", "Rp 29.730"],
+      ["52.000 Koin", "Rp 82.583"],
+      ["112.000 Koin", "Rp 164.064"],
+      ["256.000 Koin", "Rp 329.229"],
+      ["800.000 Koin", "Rp 813.713"]
+    ]
+  },
+
+  {
+    name: "Tom & Jerry Chase",
+    icon: "🐱",
+    packages: [
+      ["60 Diamond", "Rp 14.000"],
+      ["180 Diamond", "Rp 39.700"],
+      ["300 Diamond", "Rp 65.600"],
+      ["600 Diamond", "Rp 132.600"],
+      ["1.200 Diamond", "Rp 267.500"],
+      ["1.800 Diamond", "Rp 400.900"]
+    ]
+  },
+
+  {
+    name: "Wuthering Waves",
+    icon: "🌊",
+    packages: [
+      ["6.480 Lunites", "Rp 1.530.000"]
+    ]
+  },
+
+  {
+    name: "Genshin Impact",
+    icon: "✨",
+    packages: [
+      ["60 Kristal", "Rp 16.000"],
+      ["Paket Mingguan / Welkin Moon", "Rp 75.000"],
+      ["300 Kristal", "Rp 77.000"],
+      ["980 Kristal", "Rp 245.000"]
+    ]
+  },
+
+  {
+    name: "Arena of Valor",
+    icon: "⚔️",
+    packages: [
+      ["90 Diamond", "Rp 19.000"],
+      ["470 Diamond", "Rp 91.000"]
+    ]
+  }
+];
+
+window.renderGameProducts = function(){
+  const gameGrid = document.getElementById("gameGrid");
+  if(!gameGrid) return;
+  gameGrid.innerHTML="";
+
+gameProducts.forEach((game, gameIndex) => {
+
+  const card = document.createElement("div");
+  card.className = "game-card";
+
+  let packageHTML = "";
+
+  game.packages.forEach((pkg, packageIndex) => {
+    packageHTML += `
+      <button
+        class="package-item"
+        onclick="openGameModal(${gameIndex}, ${packageIndex})"
+      >
+        <span class="package-name">${pkg[0]}</span>
+        <span class="package-price">${pkg[1]}</span>
+      </button>
+    `;
+  });
+
+  card.innerHTML = `
+    <div class="game-card-top">
+      <div class="game-icon">${game.icon}</div>
+      <div>
+        <h3>${game.name}</h3>
+        <small>${game.packages.length} pilihan paket</small>
+      </div>
+    </div>
+
+    <div class="package-list">
+      ${packageHTML}
+    </div>
+  `;
+
+  gameGrid.appendChild(card);
+});
+};
+
+window.openGameModal = function(gameIndex, packageIndex){
+  const game = gameProducts[gameIndex];
+  const pkg = game.packages[packageIndex];
+
+  document.getElementById("modalIcon").textContent = game.icon;
+  document.getElementById("modalGame").textContent = game.name;
+  document.getElementById("modalPackage").textContent = pkg[0];
+  document.getElementById("modalPrice").textContent = pkg[1];
+
+  document.getElementById("gameModal").classList.add("active");
+};
+
+window.closeGameModal = function() {
+  document.getElementById("gameModal")?.classList.remove("active");
+}
+
+document.getElementById("gameModal")?.addEventListener("click", function(e) {
+  if (e.target === this) {
+    closeGameModal();
+  }
+});
+
+window.buyGamePackage = function() {
+  const game = document.getElementById("modalGame")?.textContent || "Top Up Game";
+  const paket = document.getElementById("modalPackage")?.textContent || "";
+  const harga = document.getElementById("modalPrice")?.textContent || "";
+  const text = `Halo JK AdiStore, saya mau membeli paket berikut:\n\n🎮 Game: ${game}\n📦 Paket: ${paket}\n💰 Harga: ${harga}\n\nMohon diproses ya.`;
+  window.open("https://wa.me/628991232005?text=" + encodeURIComponent(text), "_blank");
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+
+/* =========================================================
+   SUPABASE DATA ADAPTER
+   Menggantikan adapter localStorage lama. Signature fungsi
+   (doc/getDoc/setDoc/addDoc/updateDoc/deleteDoc/getDocs/collection/
+   query/orderBy) SENGAJA dibuat identik dengan versi lama supaya
+   seluruh kode di bawah (ratusan pemanggilan di seluruh file) tetap
+   berjalan tanpa perlu diubah satu per satu — hanya "pipa" di
+   belakangnya yang sekarang menuju tabel Supabase asli, bukan lagi
+   localStorage. products, testimonials, dan settings kini benar-benar
+   tersimpan di database (bukan per-perangkat), sesuai skema di
+   supabase/migrations/0001_init_schema.sql.
+   ========================================================= */
+const LOGO="https://i.postimg.cc/TYyPvHnP/20260805-003328.jpg";
+const db={};
+const localRef=(type,collectionName,id=null)=>({type,collection:collectionName,id});
+const collection=(dbRef,name)=>localRef("collection",name);
+const doc=(dbRef,name,id)=>localRef("doc",name,id);
+const query=(ref,...orders)=>({type:"query",collection:ref.collection,orders});
+const orderBy=(field,direction="asc")=>({field,direction});
+const serverTimestamp=()=>new Date().toISOString();
+const localKey=c=>`jk_local_${c}`;
+function localRead(c){try{const x=JSON.parse(localStorage.getItem(localKey(c))||"[]");return Array.isArray(x)?x:[]}catch{return[]}}
+function localWrite(c,a){localStorage.setItem(localKey(c),JSON.stringify(a));}
+
+/* Tabel Supabase yang menjadi tujuan tiap "koleksi" gaya lama. */
+const SB_TABLE={products:"products",testimonials:"testimonials",settings:"settings"};
+
+/* ---- pemetaan field lama (n/c/t/photo, image, priceList, dst)
+   ke kolom tabel Supabase yang sebenarnya, dan sebaliknya ---- */
+function jkRowToData(colName,row){
+ if(colName==="products") return {
+  name:row.name, category:row.category, price:Number(row.price||0),
+  oldPrice:Number(row.old_price||0), badge:row.badge||"",
+  stockMin:row.stock_min, stockMax:row.stock_max,
+  image:row.image_url||"", description:row.description||"",
+  priceList:row.price_list||[], active:row.active!==false,
+  createdAt:row.created_at, updatedAt:row.updated_at
+ };
+ if(colName==="testimonials") return {
+  n:row.name, c:row.role||"", t:row.message, photo:row.photo_url||"",
+  approved:row.approved, createdAt:row.created_at
+ };
+ if(colName==="settings") return {
+  name:row.name, whatsapp:row.whatsapp, telegram:row.telegram,
+  instagram:row.instagram, tiktok:row.tiktok, youtube:row.youtube,
+  background:row.background_url||"", ticker:row.ticker||"",
+  banners:Array.isArray(row.banners)?row.banners:[],
+  videos:Array.isArray(row.videos)?row.videos:[]
+ };
+ return row;
+}
+function jkDataToRow(colName,data){
+ const r={};
+ if(colName==="products"){
+  if(data.name!==undefined) r.name=data.name;
+  if(data.category!==undefined) r.category=data.category;
+  if(data.price!==undefined) r.price=data.price;
+  if(data.oldPrice!==undefined) r.old_price=data.oldPrice;
+  if(data.badge!==undefined) r.badge=data.badge;
+  if(data.stockMin!==undefined) r.stock_min=data.stockMin;
+  if(data.stockMax!==undefined) r.stock_max=data.stockMax;
+  if(data.image!==undefined) r.image_url=data.image;
+  if(data.description!==undefined) r.description=data.description;
+  if(data.priceList!==undefined) r.price_list=data.priceList;
+  if(data.active!==undefined) r.active=data.active;
+  return r;
+ }
+ if(colName==="testimonials"){
+  if(data.n!==undefined) r.name=data.n;
+  if(data.c!==undefined) r.role=data.c;
+  if(data.t!==undefined) r.message=data.t;
+  if(data.photo!==undefined) r.photo_url=data.photo;
+  return r;
+ }
+ if(colName==="settings"){
+  if(data.name!==undefined) r.name=data.name;
+  if(data.whatsapp!==undefined) r.whatsapp=data.whatsapp;
+  if(data.telegram!==undefined) r.telegram=data.telegram;
+  if(data.instagram!==undefined) r.instagram=data.instagram;
+  if(data.tiktok!==undefined) r.tiktok=data.tiktok;
+  if(data.youtube!==undefined) r.youtube=data.youtube;
+  if(data.background!==undefined) r.background_url=data.background;
+  if(data.ticker!==undefined) r.ticker=data.ticker;
+  if(data.banners!==undefined) r.banners=data.banners;
+  if(data.videos!==undefined) r.videos=data.videos;
+  return r;
+ }
+ return data;
+}
+
+async function getDocs(ref){
+ const table=SB_TABLE[ref.collection];
+ if(!table) return {docs:[]};
+ let q=sb.from(table).select("*");
+ for(const o of (ref.orders||[])){
+  const col=(ref.collection==="testimonials"&&o.field==="createdAt")?"created_at":o.field;
+  q=q.order(col,{ascending:o.direction!=="desc"});
+ }
+ const {data,error}=await q;
+ if(error){console.warn("getDocs",table,error.message);return {docs:[]};}
+ return {docs:(data||[]).map(row=>({id:row.id,data:()=>jkRowToData(ref.collection,row)}))};
+}
+async function getDoc(ref){
+ const table=SB_TABLE[ref.collection];
+ if(!table) return {exists:()=>false,data:()=>undefined,id:ref.id};
+ const {data,error}=await sb.from(table).select("*").eq("id",ref.id).maybeSingle();
+ if(error||!data) return {exists:()=>false,data:()=>undefined,id:ref.id};
+ return {exists:()=>true,data:()=>jkRowToData(ref.collection,data),id:ref.id};
+}
+async function setDoc(ref,data,opts={}){
+ const table=SB_TABLE[ref.collection];
+ if(!table) return;
+ const row={id:ref.id,...jkDataToRow(ref.collection,data)};
+ if(table==="products"||table==="settings") row.updated_at=new Date().toISOString();
+ const {error}=await sb.from(table).upsert(row,{onConflict:"id"});
+ if(error) throw new Error(error.message||"Gagal menyimpan data");
+}
+async function addDoc(ref,data){
+ const table=SB_TABLE[ref.collection];
+ if(!table) return {id:null};
+ const row=jkDataToRow(ref.collection,data);
+ const {data:inserted,error}=await sb.from(table).insert(row).select("id").single();
+ if(error) throw new Error(error.message||"Gagal menambah data");
+ return {id:inserted.id};
+}
+async function updateDoc(ref,data){return setDoc(ref,data,{merge:true})}
+async function deleteDoc(ref){
+ const table=SB_TABLE[ref.collection];
+ if(!table) return;
+ const {error}=await sb.from(table).delete().eq("id",ref.id);
+ if(error) throw new Error(error.message||"Gagal menghapus data");
+}
+const auth={currentUser:null};
+const authUsers=()=>localRead("users").filter(v=>v&&typeof v==="object"&&v.id&&v.data&&typeof v.data==="object");
+function saveAuthUsers(a){localWrite("users",Array.isArray(a)?a:[])}
+/* ---------------------------------------------------------
+   SUPABASE AUTH (asli)
+   Hanya sistem login/daftar/Discord/sesi/logout yang
+   memakai server Supabase. Data produk/pesanan/pengaturan
+   di bawah TETAP memakai penyimpanan lokal seperti semula.
+   --------------------------------------------------------- */
+/* ---------------------------------------------------------
+   PANDUAN AKTIVASI LOGIN GOOGLE / GITHUB / DISCORD
+   1. Buka Supabase Dashboard → Authentication → Providers.
+   2. Aktifkan Google, GitHub, dan Discord satu per satu, lalu
+      isi Client ID & Client Secret dari masing-masing platform
+      (dibuat di Google Cloud Console, GitHub OAuth Apps, dan
+      Discord Developer Portal).
+   3. Pada tiap platform, set Redirect URL ke:
+      https://cnsedefpnbufcizbundo.supabase.co/auth/v1/callback
+   4. Di Supabase Dashboard → Authentication → URL Configuration,
+      tambahkan domain Vercel/Cloudflare Anda pada "Redirect URLs"
+      agar pengguna diarahkan kembali ke toko dengan benar.
+   Login Email/Password sudah aktif secara default.
+   --------------------------------------------------------- */
+const SUPABASE_URL="https://cnsedefpnbufcizbundo.supabase.co";
+const SUPABASE_KEY="sb_publishable_kM5cA4y2nEIpxT5lRGF2Xg_i6jp85oE";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+function mapSupabaseUser(sbUser){
+ if(!sbUser)return null;
+ const meta=sbUser.user_metadata||{};
+ const users=authUsers();
+ let x=users.find(v=>String(v.id)===String(sbUser.id));
+ if(!x){
+  x={id:sbUser.id,data:{
+   uid:sbUser.id,
+   email:String(sbUser.email||""),
+   name:String(meta.name||meta.full_name||meta.user_name||""),
+   whatsapp:String(meta.whatsapp||""),
+   role:"user",
+   createdAt:serverTimestamp()
+  }};
+  users.push(x);
+  saveAuthUsers(users);
+ }
+ const d=x.data||{};
+ return {
+  uid:sbUser.id,
+  email:String(sbUser.email||d.email||""),
+  displayName:String(d.name||""),
+  name:String(d.name||""),
+  whatsapp:String(d.whatsapp||""),
+  role:String(d.role||"user")
+ };
+}
+
+async function syncProfileFromSupabase(u){
+ if(!u||!u.uid) return;
+ try{
+  const {data,error}=await sb.from("profiles").select("role,balance,name,whatsapp,address").eq("id",u.uid).maybeSingle();
+  if(!error&&data){
+   u.role=String(data.role||"user");
+   u.balance=Number(data.balance||0);
+   if(data.name){u.name=data.name;u.displayName=data.name;}
+   if(data.whatsapp!==null&&data.whatsapp!==undefined) u.whatsapp=data.whatsapp;
+   u.address=data.address||"";
+  }
+ }catch(e){}
+}
+
+async function refreshCurrentUser(){
+ const {data:{session}}=await sb.auth.getSession();
+ auth.currentUser=mapSupabaseUser(session?.user||null);
+ if(auth.currentUser) await syncProfileFromSupabase(auth.currentUser);
+ return auth.currentUser;
+}
+
+async function signInWithEmailAndPassword(a,email,password){
+ const e=String(email??"").trim();
+ const p=String(password??"");
+ if(!e||!p)throw new Error("Isi semua kolom terlebih dahulu");
+ const {data,error}=await sb.auth.signInWithPassword({email:e,password:p});
+ if(error)throw new Error(error.message||"Login gagal");
+ a.currentUser=mapSupabaseUser(data.user);
+ return {user:a.currentUser,session:data.session};
+}
+
+async function createUserWithEmailAndPassword(a,email,password,extra={}){
+ const e=String(email??"").trim();
+ const p=String(password??"");
+ if(!e||!p)throw new Error("Isi semua kolom terlebih dahulu");
+ const {data,error}=await sb.auth.signUp({email:e,password:p,options:{data:extra}});
+ if(error)throw new Error(error.message||"Pendaftaran gagal");
+ if(!data.user)throw new Error("Akun gagal dibuat");
+ const mapped=mapSupabaseUser(data.user);
+ if(data.session)a.currentUser=mapped;
+ return {user:mapped,session:data.session};
+}
+
+async function signInWithDiscord(){
+ const {error}=await sb.auth.signInWithOAuth({provider:"discord",options:{redirectTo:window.location.href}});
+ if(error)throw new Error(error.message||"Login Discord gagal");
+}
+
+async function signInWithGoogle(){
+ const {error}=await sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:window.location.href}});
+ if(error)throw new Error(error.message||"Login Google gagal");
+}
+
+async function signInWithGithub(){
+ const {error}=await sb.auth.signInWithOAuth({provider:"github",options:{redirectTo:window.location.href}});
+ if(error)throw new Error(error.message||"Login GitHub gagal");
+}
+
+/* Catatan Telegram:
+   Supabase belum menyediakan provider OAuth bawaan untuk Telegram
+   (berbeda dengan Google/GitHub/Discord yang tinggal diaktifkan di
+   Dashboard). Login Telegram memerlukan Telegram Login Widget +
+   sebuah Edge Function di Supabase yang memverifikasi hash dari
+   Telegram lalu membuatkan sesi (custom token) untuk pengguna.
+   Tombol Telegram di bawah sudah disiapkan tata letak & fungsinya,
+   tinggal dihubungkan ke Edge Function tersebut saat sudah dibuat. */
+async function signInWithTelegram(){
+ throw new Error("Login Telegram perlu Edge Function khusus di Supabase — lihat catatan di kode.");
+}
+
+async function updateProfile(u,data){
+ if(!u||!u.uid)return;
+ if(data?.displayName!==undefined){
+  try{await sb.auth.updateUser({data:{name:data.displayName}});}catch{}
+  const users=authUsers();
+  const i=users.findIndex(v=>String(v.id)===String(u.uid));
+  if(i>=0){
+   users[i].data={...(users[i].data||{}),name:data.displayName};
+   saveAuthUsers(users);
+  }
+  u.displayName=data.displayName;
+  u.name=data.displayName;
+ }
+}
+
+async function signOut(a){
+ await sb.auth.signOut();
+ if(a)a.currentUser=null;
+}
+
+async function sendPasswordResetEmail(a,email){
+ const {error}=await sb.auth.resetPasswordForEmail(String(email||""));
+ if(error)throw new Error(error.message||"Gagal mengirim email reset");
+ return true;
+}
+
+function onAuthStateChanged(a,cb){
+ sb.auth.onAuthStateChange(async(_evt,session)=>{
+  a.currentUser=mapSupabaseUser(session?.user||null);
+  if(a.currentUser) await syncProfileFromSupabase(a.currentUser);
+  cb(a.currentUser);
+ });
+ return ()=>{};
+}
+
+/* =========================================================
+   STATE
+   ========================================================= */
+
+let user=null;
+let admin=false;
+let ownerUnlocked=sessionStorage.getItem("jk_owner_access")==="1";
+const OWNER_CODE_HASH="edd236ac11cee8f6f18eab9dae11741afaa31cec436bafaefe9b65a943237c79";
+let products=[];
+let cart=[];
+try{
+ const rawCart=localStorage.getItem("jkcart");
+ const parsed=rawCart?JSON.parse(rawCart):[];
+ cart=Array.isArray(parsed)?parsed.filter(x=>x&&typeof x==="object"&&Number.isFinite(Number(x.price))&&Number.isFinite(Number(x.qty))&&Number(x.qty)>0):[];
+}catch{cart=[];}
+
+let wishlist=[];
+try{
+ const rawWish=localStorage.getItem("jkwishlist");
+ const parsedWish=rawWish?JSON.parse(rawWish):[];
+ wishlist=Array.isArray(parsedWish)?parsedWish.filter(x=>typeof x==="string"):[];
+}catch{wishlist=[];}
+const saveWishlist=()=>localStorage.setItem("jkwishlist",JSON.stringify(wishlist));
+window.toggleWishlist=(id,ev)=>{
+ if(ev) ev.stopPropagation();
+ const i=wishlist.indexOf(id);
+ if(i>-1){wishlist.splice(i,1);toast("Dihapus dari wishlist");}
+ else{wishlist.push(id);toast("Ditambahkan ke wishlist");}
+ saveWishlist();
+ render();
+};
+window.wishlistPage=()=>{
+ const items=products.filter(p=>wishlist.includes(p.id));
+ modal(
+  "❤️ Wishlist Saya",
+  items.length
+  ? `<div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">${items.map(card).join("")}</div>`
+  : `<p class="muted">Belum ada produk di wishlist. Ketuk ikon hati pada produk untuk menyimpannya di sini.</p>`
+ );
+};
+
+let cat="Semua";
+let search="";
+let page=1;
+const PAGE_SIZE=12;
+let jkLang=localStorage.getItem("jk_lang")||"id";
+
+/* =========================================================
+   I18N — Pemilih Bahasa (menerjemahkan teks utama antarmuka)
+   ========================================================= */
+const I18N_LANGS={
+ id:"🇮🇩 Indonesia",
+ en:"🇬🇧 English",
+ sg:"🇸🇬 English (Singapore)",
+ th:"🇹🇭 ไทย",
+ tl:"🇵🇭 Filipino",
+ my:"🇲🇲 မြန်မာ",
+ lo:"🇱🇦 ລາວ",
+ km:"🇰🇭 ខ្មែរ",
+ zh:"🇨🇳 中文"
+};
+const I18N_DICT={
+ nav_home:{id:"Beranda",en:"Home",sg:"Home",th:"หน้าแรก",tl:"Home",my:"ပင်မစာမျက်နှာ",lo:"ໜ້າຫຼັກ",km:"ទំព័រដើម",zh:"首页"},
+ nav_products:{id:"Produk",en:"Products",sg:"Products",th:"สินค้า",tl:"Produkto",my:"ကုန်ပစ္စည်းများ",lo:"ສິນຄ້າ",km:"ផលិតផល",zh:"商品"},
+ nav_topup:{id:"Top Up Game",en:"Game Top Up",sg:"Game Top Up",th:"เติมเกม",tl:"Game Top Up",my:"ဂိမ်းငွေဖြည့်",lo:"ເຕີມເງິນເກມ",km:"បញ្ចូលទឹកប្រាក់ហ្គេម",zh:"游戏充值"},
+ nav_apps:{id:"Aplikasi Premium",en:"Premium Apps",sg:"Premium Apps",th:"แอปพรีเมียม",tl:"Premium Apps",my:"ပရီမီယံအက်ပ်",lo:"ແອັບພຣີເມຍມ",km:"កម្មវិធីពិសេស",zh:"高级应用"},
+ nav_orders:{id:"Pesanan",en:"Orders",sg:"Orders",th:"คำสั่งซื้อ",tl:"Mga Order",my:"မှာယူမှုများ",lo:"ຄໍາສັ່ງຊື້",km:"ការបញ្ជាទិញ",zh:"订单"},
+ nav_profile:{id:"Profil",en:"Profile",sg:"Profile",th:"โปรไฟล์",tl:"Profile",my:"ကိုယ်ရေးအချက်အလက်",lo:"ໂປຣໄຟລ໌",km:"ប្រវត្តិរូប",zh:"个人资料"},
+ nav_logout:{id:"Keluar",en:"Log out",sg:"Log out",th:"ออกจากระบบ",tl:"Mag-log out",my:"ထွက်ရန်",lo:"ອອກຈາກລະບົບ",km:"ចាកចេញ",zh:"退出登录"},
+ nav_login:{id:"Masuk / Daftar",en:"Login / Sign up",sg:"Login / Sign up",th:"เข้าสู่ระบบ / สมัคร",tl:"Mag-login / Magrehistro",my:"ဝင်ရောက်ရန် / စာရင်းသွင်းရန်",lo:"ເຂົ້າສູ່ລະບົບ / ລົງທະບຽນ",km:"ចូល / ចុះឈ្មោះ",zh:"登录 / 注册"},
+ shop_title:{id:"Produk & Daftar Harga",en:"Products & Price List",sg:"Products & Price List",th:"สินค้าและรายการราคา",tl:"Mga Produkto at Presyo",my:"ကုန်ပစ္စည်းနှင့် ဈေးနှုန်းစာရင်း",lo:"ສິນຄ້າ ແລະ ລາຄາ",km:"ផលិតផល និងតម្លៃ",zh:"商品与价格列表"},
+ shop_desc:{id:"Klik produk untuk melihat semua pilihan harga.",en:"Click a product to see all price options.",sg:"Click a product to see all price options.",th:"คลิกสินค้าเพื่อดูตัวเลือกราคาทั้งหมด",tl:"I-click ang produkto para makita ang lahat ng presyo.",my:"စျေးနှုန်းရွေးချယ်စရာအားလုံးကိုကြည့်ရန် ကုန်ပစ္စည်းကိုနှိပ်ပါ။",lo:"ກົດສິນຄ້າເພື່ອເບິ່ງລາຄາທັງໝົດ.",km:"ចុចផលិតផលដើម្បីមើលជម្រើសតម្លៃទាំងអស់។",zh:"点击商品查看所有价格选项。"},
+ search_placeholder:{id:"Cari produk...",en:"Search products...",sg:"Search products...",th:"ค้นหาสินค้า...",tl:"Maghanap ng produkto...",my:"ကုန်ပစ္စည်းရှာရန်...",lo:"ຄົ້ນຫາສິນຄ້າ...",km:"ស្វែងរកផលិតផល...",zh:"搜索商品..."},
+ payment_title:{id:"Pembayaran",en:"Payment",sg:"Payment",th:"การชำระเงิน",tl:"Bayad",my:"ငွေပေးချေမှု",lo:"ການຊຳລະເງິນ",km:"ការទូទាត់",zh:"支付方式"},
+ service_title:{id:"Layanan",en:"Services",sg:"Services",th:"บริการ",tl:"Serbisyo",my:"ဝန်ဆောင်မှုများ",lo:"ບໍລິການ",km:"សេវាកម្ម",zh:"服务"},
+ footer_rights:{id:"Seluruh hak cipta dilindungi.",en:"All rights reserved.",sg:"All rights reserved.",th:"สงวนลิขสิทธิ์",tl:"Nakalaan ang lahat ng karapatan.",my:"မူပိုင်ခွင့်အားလုံး ရယူထားသည်။",lo:"ສະຫງວນລິຂະສິດ.",km:"រក្សាសិទ្ធិគ្រប់យ៉ាង។",zh:"版权所有。"},
+ calc_title:{id:"Kalkulator Top Up",en:"Top Up Calculator",sg:"Top Up Calculator",th:"เครื่องคำนวณเติมเงิน",tl:"Kalkulator ng Top Up",my:"ငွေဖြည့်တွက်စက်",lo:"ເຄື່ອງຄິດໄລ່ເຕີມເງິນ",km:"ម៉ាស៊ីនគណនាបញ្ចូលទឹកប្រាក់",zh:"充值计算器"},
+ calc_desc:{id:"Hitung perkiraan total harga sebelum checkout.",en:"Estimate the total price before checkout.",sg:"Estimate the total price before checkout.",th:"ประมาณราคารวมก่อนชำระเงิน",tl:"Tantiyahin ang kabuuang presyo bago mag-checkout.",my:"checkout မလုပ်မီ စုစုပေါင်းစျေးနှုန်းကို ခန့်မှန်းပါ။",lo:"ຄາດຄະເນລາຄາລວມກ່ອນຊຳລະ.",km:"ប៉ាន់ស្មានតម្លៃសរុបមុនពេលទូទាត់។",zh:"结账前预估总价。"}
+};
+window.setLang=code=>{
+ jkLang=I18N_LANGS[code]?code:"id";
+ localStorage.setItem("jk_lang",jkLang);
+ render();
+};
+window.applyI18n=()=>{
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+  const key=el.getAttribute("data-i18n");
+  const row=I18N_DICT[key];
+  if(row) el.textContent=row[jkLang]||row.id;
+ });
+ document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+  const key=el.getAttribute("data-i18n-placeholder");
+  const row=I18N_DICT[key];
+  if(row) el.setAttribute("placeholder",row[jkLang]||row.id);
+ });
+};
+
+/* =========================================================
+   AI GATEWAY — sepenuhnya server-side
+   Situs ini TIDAK menyimpan API key/model/endpoint AI apa pun
+   di browser. Semua pengaturan (termasuk API key) hanya ada di
+   tabel `ai_settings` di database, yang dikunci total dari
+   klien (RLS aktif tanpa policy). Satu-satunya yang boleh
+   membaca/menulis tabel itu adalah Edge Function `ai-gateway`
+   (memakai service_role key di server Supabase).
+   Browser hanya pernah mengirim {action, ...} ke Edge Function
+   dan menerima balasan (jawaban AI, atau status pengaturan
+   tanpa key asli) — tidak pernah rahasia apa pun.
+   ========================================================= */
+const AI_GATEWAY_URL=SUPABASE_URL+"/functions/v1/ai-gateway";
+
+async function aiGatewayCall(action,payload={}){
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session) throw new Error("Anda harus login terlebih dahulu");
+ const res=await fetch(AI_GATEWAY_URL,{
+  method:"POST",
+  headers:{
+   "Content-Type":"application/json",
+   "Authorization":"Bearer "+session.access_token
+  },
+  body:JSON.stringify({action,...payload})
+ });
+ const data=await res.json().catch(()=>({}));
+ if(!res.ok) throw new Error(data?.error||"Permintaan ke server AI gagal");
+ return data;
+}
+
+/* Hanya menampung status non-rahasia untuk mengisi form Panel
+   Admin (key TIDAK PERNAH ada di sini — hanya "key_preview"
+   4 karakter terakhir yang dikirim server untuk konfirmasi). */
+let aiAdminConfig={url:"",model:"",prompt:"",public:false,keyPreview:"",keySet:false};
+
+/* Saldo/Koin pengguna yang sedang login, untuk ditampilkan di
+   pojok kanan atas. Hanya berubah lewat refreshUserBalance()
+   yang membaca dokumen users/{uid} — angkanya sendiri hanya
+   pernah ditambah/dikurangi lewat adminAdjustBalance() (admin)
+   atau checkoutWithBalance() (saat pengguna membayar). */
+let userBalance=0;
+async function refreshUserBalance(){
+ if(!user){userBalance=0;return;}
+ try{
+  const {data,error}=await sb.from("profiles").select("balance").eq("id",user.uid).maybeSingle();
+  userBalance=(!error&&data)?Number(data.balance||0):Number(user.balance||0);
+  if(user) user.balance=userBalance;
+ }catch{userBalance=Number(user?.balance||0);}
+}
+async function loadAiConfig(){
+ if(!admin) return; // hanya admin yang boleh melihat status pengaturan AI
+ try{
+  const x=await aiGatewayCall("get_config");
+  aiAdminConfig={url:x.api_url||"",model:x.model||"",prompt:x.system_prompt||"",public:!!x.is_public,keyPreview:x.key_preview||"",keySet:!!x.key_set};
+ }catch(e){return;}
+ const map={aiUrl:aiAdminConfig.url,aiModel:aiAdminConfig.model,aiPrompt:aiAdminConfig.prompt};
+ Object.entries(map).forEach(([id,v])=>{const el=getEl(id);if(el)el.value=v;});
+ const pub=getEl("aiPublic");if(pub)pub.checked=aiAdminConfig.public;
+ const keyEl=getEl("aiKey");
+ if(keyEl){
+  keyEl.value="";
+  keyEl.placeholder=aiAdminConfig.keySet?("Sudah diisi ("+aiAdminConfig.keyPreview+") — kosongkan agar tidak diubah"):"sk-...";
+ }
+}
+window.saveAiConfig=async()=>{
+ try{
+  const payload={
+   api_url:String(getEl("aiUrl")?.value||"").trim(),
+   model:String(getEl("aiModel")?.value||"").trim(),
+   system_prompt:String(getEl("aiPrompt")?.value||"").trim(),
+   is_public:!!getEl("aiPublic")?.checked
+  };
+  const keyVal=String(getEl("aiKey")?.value||"").trim();
+  if(keyVal) payload.api_key=keyVal; // kosong = kunci lama tidak diubah
+  await aiGatewayCall("save_config",payload);
+  toast("Pengaturan AI disimpan di server");
+  await loadAiConfig();
+ }catch(e){
+  toast(e?.message||"Gagal menyimpan pengaturan AI");
+ }
+};
+window.testAiConfig=async()=>{
+ toast("Menghubungi AI Gateway...");
+ try{
+  const r=await aiCallProvider("Balas singkat: koneksi berhasil.");
+  toast(r?"AI merespons — koneksi berhasil":"AI tidak memberi jawaban");
+ }catch(e){
+  toast("Gagal terhubung: "+(e?.message||"periksa pengaturan di server"));
+ }
+};
+
+let asection="dashboard";
+let initialMenuJumpDone=false;
+
+/* =========================================================
+   BANNER SLIDER, MEDIA & TESTIMONI — state
+   ========================================================= */
+let banners=[];
+let siteVideos=[];
+let testimonials=[];
+let jkSliderIndex=0;
+let jkSliderTimer=null;
+
+const fallbackTestimoni=[
+ {n:"Andi",c:"Bandung",t:"Proses top up MLBB cepat, diamond langsung masuk beberapa menit setelah bayar."},
+ {n:"Sinta",c:"Surabaya",t:"VPN yang dibeli lancar dipakai, admin juga responsif kalau ditanya-tanya."},
+ {n:"Budi",c:"Medan",t:"Sudah beberapa kali beli aplikasi premium di sini, harganya bersaing."},
+ {n:"Rani",c:"Yogyakarta",t:"Checkout via WhatsApp praktis, tinggal konfirmasi pembayaran langsung diproses."},
+ {n:"Dimas",c:"Semarang",t:"Stok selalu update, jadi nggak khawatir pesan produk yang lagi kosong."},
+ {n:"Wulan",c:"Makassar",t:"Pelayanan ramah, cocok buat yang sering top up game."}
+];
+
+function defaultBanners(){
+ return [
+  {image:LOGO,caption:"JK AdiStore — Top Up Game, VPN & Aplikasi Premium",link:""},
+  {image:LOGO,caption:"⚡ Proses Cepat & Stok Selalu Update",link:""},
+  {image:LOGO,caption:"🔐 VPN Premium & Aplikasi Berlangganan Termurah",link:""}
+ ];
+}
+
+function jkVideoEmbed(url){
+ const u=String(url||"").trim();
+ if(!u) return "";
+ const yt=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{6,})/);
+ if(yt){
+  return `<iframe style="width:100%;aspect-ratio:16/9;border:0;display:block;border-radius:20px 20px 0 0" src="https://www.youtube.com/embed/${esc(yt[1])}" loading="lazy" allowfullscreen title="Video promosi"></iframe>`;
+ }
+ return `<video style="width:100%;aspect-ratio:16/9;display:block;border-radius:20px 20px 0 0;background:#000" src="${esc(u)}" controls preload="none"></video>`;
+}
+
+function jkSlidesForRender(){
+ return (banners&&banners.length) ? banners : defaultBanners();
+}
+
+function renderSlider(){
+ const slides=jkSlidesForRender();
+ if(jkSliderIndex>=slides.length) jkSliderIndex=0;
+ return `
+ <div class="jk-slider" id="jkSlider" aria-label="Banner promosi JK AdiStore" role="region">
+  <div class="jk-slider-track" id="jkSliderTrack" style="transform:translateX(-${jkSliderIndex*100}%)">
+   ${slides.map((b,i)=>`
+    <a class="jk-slide" href="${esc(b.link||"")||"javascript:void(0)"}" ${b.link?`target="_blank" rel="noopener"`:`onclick="event.preventDefault()"`}>
+     <img src="${esc(b.image||LOGO)}" alt="${esc(b.caption||"Banner JK AdiStore")}" ${i===0?'loading="eager" fetchpriority="high"':'loading="lazy"'} decoding="async">
+     ${b.caption?`<div class="jk-slide-caption"><b class="rainbow">${esc(b.caption)}</b></div>`:""}
+    </a>
+   `).join("")}
+  </div>
+  ${slides.length>1?`
+  <button type="button" class="jk-slider-arrow prev" onclick="jkSliderGo(-1)" aria-label="Slide sebelumnya">‹</button>
+  <button type="button" class="jk-slider-arrow next" onclick="jkSliderGo(1)" aria-label="Slide berikutnya">›</button>
+  <div class="jk-slider-dots">
+   ${slides.map((_,i)=>`<button type="button" class="jk-slider-dot ${i===jkSliderIndex?"active":""}" onclick="jkSliderGoTo(${i})" aria-label="Ke slide ${i+1}"></button>`).join("")}
+  </div>`:""}
+ </div>`;
+}
+
+function jkSliderApplyTransform(){
+ const track=getEl("jkSliderTrack");
+ if(track) track.style.transform=`translateX(-${jkSliderIndex*100}%)`;
+ document.querySelectorAll(".jk-slider-dot").forEach((d,i)=>d.classList.toggle("active",i===jkSliderIndex));
+}
+
+window.jkSliderGo=dir=>{
+ const n=jkSlidesForRender().length;
+ if(!n) return;
+ jkSliderIndex=(jkSliderIndex+dir+n)%n;
+ jkSliderApplyTransform();
+ jkSliderRestartAutoplay();
+};
+
+window.jkSliderGoTo=i=>{
+ jkSliderIndex=i;
+ jkSliderApplyTransform();
+ jkSliderRestartAutoplay();
+};
+
+function jkSliderRestartAutoplay(){
+ clearInterval(jkSliderTimer);
+ const n=jkSlidesForRender().length;
+ if(n>1) jkSliderTimer=setInterval(()=>jkSliderGo(1),4500);
+}
+
+function jkSliderInitTouch(){
+ const track=getEl("jkSliderTrack");
+ const wrap=getEl("jkSlider");
+ if(!track||!wrap||track.dataset.jkBound) return;
+ track.dataset.jkBound="1";
+ let startX=0,deltaX=0,dragging=false;
+ const width=()=>wrap.getBoundingClientRect().width;
+ track.addEventListener("touchstart",e=>{
+  dragging=true;startX=e.touches[0].clientX;deltaX=0;
+  track.classList.add("jk-dragging");
+  clearInterval(jkSliderTimer);
+ },{passive:true});
+ track.addEventListener("touchmove",e=>{
+  if(!dragging) return;
+  deltaX=e.touches[0].clientX-startX;
+  track.style.transform=`translateX(calc(-${jkSliderIndex*100}% + ${deltaX}px))`;
+ },{passive:true});
+ track.addEventListener("touchend",()=>{
+  if(!dragging) return;
+  dragging=false;
+  track.classList.remove("jk-dragging");
+  const threshold=width()*0.15;
+  if(deltaX>threshold) jkSliderGo(-1);
+  else if(deltaX<-threshold) jkSliderGo(1);
+  else jkSliderApplyTransform();
+  jkSliderRestartAutoplay();
+ },{passive:true});
+ wrap.addEventListener("mouseenter",()=>clearInterval(jkSliderTimer));
+ wrap.addEventListener("mouseleave",jkSliderRestartAutoplay);
+ jkSliderRestartAutoplay();
+}
+
+
+/* =========================================================
+   DAILY STOCK
+   Tampilan stok berubah otomatis setiap hari.
+   Ini BUKAN stok database nyata.
+   ========================================================= */
+
+function dailyNumber(id,min=800,max=10000){
+
+ const now=new Date();
+
+ const day=
+  now.getFullYear()+"-"+
+  (now.getMonth()+1)+"-"+
+  now.getDate();
+
+ const str=String(id)+day;
+
+ let hash=0;
+
+ for(let i=0;i<str.length;i++){
+  hash=
+   ((hash<<5)-hash)+
+   str.charCodeAt(i);
+
+  hash|=0;
+ }
+
+ hash=Math.abs(hash);
+
+ return min+
+  (hash%(max-min+1));
+}
+
+
+function displayStock(p){
+ let min=Number(p?.stockMin), max=Number(p?.stockMax);
+ if(!Number.isFinite(min)) min=800;
+ if(!Number.isFinite(max)) max=10000;
+ min=Math.max(800,Math.floor(min));
+ max=Math.max(min,Math.floor(max));
+ return dailyNumber(p?.id||"product",min,max);
+}
+
+
+/* =========================================================
+   FALLBACK PRODUCTS
+   ========================================================= */
+
+const fallback=[
+
+ {
+  id:"gg-v5",
+  name:"SCRIP GG X JK AdiStore",
+  category:"SCRIP GG X JK AdiStore",
+  price:5000,
+  oldPrice:7000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"POPULER",
+  image:LOGO,
+  active:true,
+  description:
+   "SCRIP GG X JK AdiStore — menu khusus SCRIP GG.",
+  priceList:[
+   {name:"1 Hari",price:5000},
+   {name:"7 Hari",price:15000},
+   {name:"30 Hari",price:35000}
+  ]
+ },
+
+ {
+  id:"warlit-fres",
+  name:"AKUN WARLIT FRES",
+  category:"AKUN WARLIT NEW/OFF",
+  price:3000,
+  oldPrice:5000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"FRESH",
+  image:LOGO,
+  active:true,
+  description:
+   "Akun WARLIT FRES untuk kebutuhan pelanggan.",
+  priceList:[
+   {name:"1 Akun",price:3000},
+   {name:"3 Akun",price:8000},
+   {name:"5 Akun",price:12000}
+  ]
+ },
+
+ {
+  id:"warlit-off-30",
+  name:"AKUN WARLIT OFF 30 DAY",
+  category:"AKUN WARLIT NEW/OFF",
+  price:6000,
+  oldPrice:8000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"OFF 30 DAY",
+  image:LOGO,
+  active:true,
+  description:
+   "Akun WARLIT OFF dengan masa 30 hari.",
+  priceList:[
+   {name:"1 Akun / 30 Hari",price:6000},
+   {name:"3 Akun / 30 Hari",price:15000},
+   {name:"5 Akun / 30 Hari",price:22000}
+  ]
+ },
+
+ {
+  id:"rw-indo",
+  name:"RW MLBB INDONESIA",
+  category:"RW/DK X JKAdiStore",
+  price:70000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"RW",
+  image:LOGO,
+  active:true,
+  description:"Produk RW MLBB Indonesia.",
+  priceList:[
+   {name:"1x",price:70000}
+  ]
+ },
+
+ {
+  id:"rw-luar",
+  name:"RW MLBB LUAR",
+  category:"RW/DK X JKAdiStore",
+  price:30000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"RW",
+  image:LOGO,
+  active:true,
+  description:"Produk RW MLBB Luar.",
+  priceList:[
+   {name:"1x",price:30000}
+  ]
+ },
+
+ {
+  id:"rank-1",
+  name:"RANK VS BOT 1 GAME",
+  category:"RENK VS BOT NEW",
+  price:4000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"4K",
+  image:LOGO,
+  active:true,
+  description:"Layanan Rank VS Bot 1 Game.",
+  priceList:[
+   {name:"1 Game",price:4000}
+  ]
+ },
+
+ {
+  id:"rank-5",
+  name:"RANK VS BOT 5 GAME",
+  category:"RENK VS BOT NEW",
+  price:20000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PAKET",
+  image:LOGO,
+  active:true,
+  description:"Paket Rank VS Bot 5 Game.",
+  priceList:[
+   {name:"5 Game",price:20000},
+   {name:"10 Game",price:38000}
+  ]
+ },
+
+  {
+  id:"mlbb-vpn",
+  name:"VPN PREMIUM",
+  category:"VPN",
+  price:3000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:
+   "VPN khusus pilihan paket untuk kebutuhan MLBB.",
+  priceList:[
+   {name:"1 Hari",price:3000},
+   {name:"3 Hari",price:7000},
+   {name:"7 Hari",price:12000},
+   {name:"30 Hari",price:25000},
+   {name:"60 Hari",price:45000},
+   {name:"90 Hari",price:60000}
+  ]
+ },
+
+ {
+  id:"nordvpn",
+  name:"NORDVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk NordVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"expressvpn",
+  name:"EXPRESSVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk ExpressVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"surfshark",
+  name:"SURFSHARK",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Surfshark digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"cyberghost",
+  name:"CYBERGHOST",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk CyberGhost digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"purevpn",
+  name:"PUREVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk PureVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"private-internet-access-pia",
+  name:"PRIVATE INTERNET ACCESS (PIA)",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Private Internet Access (PIA) digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"ipvanish",
+  name:"IPVANISH",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk IPVanish digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"proton-vpn",
+  name:"PROTON VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Proton VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"mullvad-vpn",
+  name:"MULLVAD VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Mullvad VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"hide-me-vpn",
+  name:"HIDE.ME VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Hide.me VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"windscribe",
+  name:"WINDSCRIBE",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Windscribe digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"tunnelbear",
+  name:"TUNNELBEAR",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk TunnelBear digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"bitdefender-vpn",
+  name:"BITDEFENDER VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Bitdefender VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"privatevpn",
+  name:"PRIVATEVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk PrivateVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"atlas-vpn",
+  name:"ATLAS VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Atlas VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"universal-vpn",
+  name:"UNIVERSAL VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Universal VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"vpn-lat",
+  name:"VPN.LAT",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk VPN.lat digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"octohide-vpn",
+  name:"OCTOHIDE VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Octohide VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"eut-vpn",
+  name:"EUT VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk EUT VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"rosetti-vpn",
+  name:"ROSETTI VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Rosetti VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"strongvpn",
+  name:"STRONGVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk StrongVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"buffered-vpn",
+  name:"BUFFERED VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Buffered VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"vpn-unlimited",
+  name:"VPN UNLIMITED",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk VPN Unlimited digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"safervpn",
+  name:"SAFERVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk SaferVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"zenmate",
+  name:"ZENMATE",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk ZenMate digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"hotspot-shield",
+  name:"HOTSPOT SHIELD",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Hotspot Shield digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"betternet",
+  name:"BETTERNET",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Betternet digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"vpn-gate",
+  name:"VPN GATE",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk VPN Gate digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"speedify",
+  name:"SPEEDIFY",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Speedify digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"avast-secureline",
+  name:"AVAST SECURELINE",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Avast SecureLine digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"kaspersky-vpn",
+  name:"KASPERSKY VPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Kaspersky VPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"mcafee-secure",
+  name:"MCAFEE SECURE",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk McAfee Secure digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"onevpn",
+  name:"ONEVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk OneVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"fastestvpn",
+  name:"FASTESTVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk FastestVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"veepn",
+  name:"VEEPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Veepn digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"ivacy",
+  name:"IVACY",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Ivacy digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"goosevpn",
+  name:"GOOSEVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk GooseVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"liquidvpn",
+  name:"LIQUIDVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk LiquidVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"mozvpn",
+  name:"MOZVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk MozVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"operavpn",
+  name:"OPERAVPN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk OperaVPN digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"psiphon",
+  name:"PSIPHON",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk Psiphon digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"anonytun",
+  name:"ANONYTUN",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk AnonyTun digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"http-injector",
+  name:"HTTP INJECTOR",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk HTTP Injector digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"slowdns",
+  name:"SLOWDNS",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk SlowDNS digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"openvpn-connect",
+  name:"OPENVPN CONNECT",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk OpenVPN Connect digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"wireguard-resmi",
+  name:"WIREGUARD RESMI",
+  category:"VPN",
+  price:10000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"VPN",
+  image:LOGO,
+  active:true,
+  description:"Produk WireGuard Resmi digital.",
+  priceList:[
+   {name:"1 Bulan",price:10000},
+   {name:"3 Bulan",price:25000},
+   {name:"12 Bulan",price:60000}
+  ]
+ },
+
+ {
+  id:"canva",
+  name:"CANVA",
+  category:"Aplikasi",
+  price:15000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Canva Pro premium digital.",
+  priceList:[
+   {name:"Harga Final",price:15000}
+  ]
+ },
+
+ {
+  id:"capcut",
+  name:"CAPCUT",
+  category:"Aplikasi",
+  price:27500,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"CapCut Pro premium digital.",
+  priceList:[
+   {name:"Harga Final",price:27500}
+  ]
+ },
+
+ {
+  id:"spotify",
+  name:"SPOTIFY",
+  category:"Aplikasi",
+  price:30000,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Spotify Premium digital.",
+  priceList:[
+   {name:"Harga Final",price:30000}
+  ]
+ },
+
+ {
+  id:"netflix-premium",
+  name:"NETFLIX PREMIUM",
+  category:"Aplikasi",
+  price:29000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Netflix Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:29000}
+  ]
+ },
+ {
+  id:"disney-hotstar",
+  name:"DISNEY+ HOTSTAR",
+  category:"Aplikasi",
+  price:33000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Disney+ Hotstar digital premium.",
+  priceList:[
+   {name:"Harga Final",price:33000}
+  ]
+ },
+ {
+  id:"youtube-premium",
+  name:"YOUTUBE PREMIUM",
+  category:"Aplikasi",
+  price:20000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"YouTube Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:20000}
+  ]
+ },
+ {
+  id:"wetv-premium",
+  name:"WETV PREMIUM",
+  category:"Aplikasi",
+  price:8500,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"WeTV Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:8500}
+  ]
+ },
+ {
+  id:"hbo-go",
+  name:"HBO GO",
+  category:"Aplikasi",
+  price:45000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"HBO GO digital premium.",
+  priceList:[
+   {name:"Harga Final",price:45000}
+  ]
+ },
+ {
+  id:"alight-motion-premium",
+  name:"ALIGHT MOTION PREMIUM",
+  category:"Aplikasi",
+  price:15000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Alight Motion Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:15000}
+  ]
+ },
+ {
+  id:"picsart-premier",
+  name:"PICSART PREMIER",
+  category:"Aplikasi",
+  price:18000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Picsart Premier digital premium.",
+  priceList:[
+   {name:"Harga Final",price:18000}
+  ]
+ },
+ {
+  id:"adobe-photoshop-lightroom",
+  name:"ADOBE PHOTOSHOP / LIGHTROOM",
+  category:"Aplikasi",
+  price:25000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Adobe Photoshop / Lightroom digital premium.",
+  priceList:[
+   {name:"Harga Final",price:25000}
+  ]
+ },
+ {
+  id:"pdf-agile-premium",
+  name:"PDF AGILE PREMIUM",
+  category:"Aplikasi",
+  price:20000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"PDF Agile Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:20000}
+  ]
+ },
+ {
+  id:"chatgpt-plus",
+  name:"CHATGPT PLUS",
+  category:"Aplikasi",
+  price:60000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"ChatGPT Plus digital premium.",
+  priceList:[
+   {name:"Harga Final",price:60000}
+  ]
+ },
+ {
+  id:"grammarly-premium",
+  name:"GRAMMARLY PREMIUM",
+  category:"Aplikasi",
+  price:45000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Grammarly Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:45000}
+  ]
+ },
+ {
+  id:"hbo-max",
+  name:"HBO / MAX",
+  category:"Aplikasi",
+  price:35000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"HBO / Max digital premium.",
+  priceList:[
+   {name:"Harga Final",price:35000}
+  ]
+ },
+ {
+  id:"bstation-premium",
+  name:"BSTATION PREMIUM",
+  category:"Aplikasi",
+  price:10000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Bstation Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:10000}
+  ]
+ },
+ {
+  id:"vidio-platinum",
+  name:"VIDIO PLATINUM",
+  category:"Aplikasi",
+  price:22000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Vidio Platinum digital premium.",
+  priceList:[
+   {name:"Harga Final",price:22000}
+  ]
+ },
+ {
+  id:"wetv-iqiyi-vip",
+  name:"WETV / IQIYI VIP",
+  category:"Aplikasi",
+  price:12000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"WeTV / iQIYI VIP digital premium.",
+  priceList:[
+   {name:"Harga Final",price:12000}
+  ]
+ },
+ {
+  id:"adguard",
+  name:"ADGUARD / PEMBLOKIR IKLAN",
+  category:"Aplikasi",
+  price:15000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"AdGuard / Pemblokir Iklan digital premium.",
+  priceList:[
+   {name:"Harga Final",price:15000}
+  ]
+ },
+ {
+  id:"microsoft-365",
+  name:"MICROSOFT 365 / OFFICE",
+  category:"Aplikasi",
+  price:35000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Microsoft 365 / Office digital premium.",
+  priceList:[
+   {name:"Harga Final",price:35000}
+  ]
+ },
+ {
+  id:"zoom-pro",
+  name:"ZOOM PRO",
+  category:"Aplikasi",
+  price:50000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Zoom Pro digital premium.",
+  priceList:[
+   {name:"Harga Final",price:50000}
+  ]
+ },
+ {
+  id:"duolingo-plus",
+  name:"DUOLINGO PLUS",
+  category:"Aplikasi",
+  price:25000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Duolingo Plus digital premium.",
+  priceList:[
+   {name:"Harga Final",price:25000}
+  ]
+ },
+ {
+  id:"getcontact-premium",
+  name:"GETCONTACT PREMIUM",
+  category:"Aplikasi",
+  price:20000,
+  oldPrice:0,
+  stockMin:800,
+  stockMax:10000,
+  badge:"PREMIUM",
+  image:LOGO,
+  active:true,
+  description:"Getcontact Premium digital premium.",
+  priceList:[
+   {name:"Harga Final",price:20000}
+  ]
+ }
+
+];
+
+
+/* =========================================================
+   MERGED PREMIUM APP CATALOG
+   APK PREMIUM.html telah digabung ke katalog utama V5.
+   Harga yang sebelumnya belum ditentukan diberi harga final.
+   ========================================================= */
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+
+const rp=n=>
+ new Intl.NumberFormat("id-ID",{
+  style:"currency",
+  currency:"IDR",
+  maximumFractionDigits:0
+ }).format(n||0);
+
+
+const esc=s=>
+ String(s??"").replace(
+  /[&<>"']/g,
+  c=>({
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#039;"
+  }[c])
+ );
+
+
+const save=()=>localStorage.setItem("jkcart",JSON.stringify(cart));
+const getEl=id=>document.getElementById(id);
+const getPriceOptions=p=>{
+ const raw=Array.isArray(p?.priceList)?p.priceList:[];
+ const a=raw.map(v=>({name:String(v?.name||"Paket"),price:Number(v?.price)||0})).filter(v=>v.price>=0);
+ return a.length?a:[{name:"Harga normal",price:Number(p?.price)||0}];
+};
+const cartKey=(productId,optionIndex=0)=>`${productId}::${Number(optionIndex)||0}`;
+
+
+const total=()=>{
+ return cart.reduce(
+  (s,x)=>s+x.price*x.qty,
+  0
+ );
+};
+
+
+function toast(message){
+
+ const t=
+  document.querySelector("#toast");
+
+ t.textContent=message;
+
+ t.classList.remove("hidden");
+
+ clearTimeout(window.toastTimer);
+
+ window.toastTimer=setTimeout(()=>{
+  t.classList.add("hidden");
+ },3000);
+}
+
+
+/* =========================================================
+   LOAD PRODUCTS
+   ========================================================= */
+
+function jumpToInitialMenu(){
+ if(initialMenuJumpDone || !products.length) return;
+ const menu=document.querySelector("#quickMenu");
+ if(!menu) return;
+ initialMenuJumpDone=true;
+ window.scrollTo({
+  top:Math.max(0,menu.getBoundingClientRect().top+window.scrollY-8),
+  behavior:"auto"
+ });
+}
+
+
+async function loadTestimonials(){
+ try{
+  const snap=await getDocs(query(collection(db,"testimonials"),orderBy("createdAt","desc")));
+  const rows=snap.docs.map(d=>({id:d.id,...d.data()}));
+  testimonials=rows.length?rows:fallbackTestimoni.map((x,i)=>({id:"seed-"+i,n:x.n,c:x.c,t:x.t}));
+ }catch(e){
+  testimonials=fallbackTestimoni.map((x,i)=>({id:"seed-"+i,n:x.n,c:x.c,t:x.t}));
+ }
+}
+
+async function loadSiteMedia(){
+ try{
+  const s=await getDoc(doc(db,"settings","store"));
+  const x=s.exists()?s.data():{};
+  banners=Array.isArray(x.banners)?x.banners:[];
+  siteVideos=Array.isArray(x.videos)?x.videos:[];
+ }catch(e){
+  banners=[];siteVideos=[];
+ }
+}
+
+async function load(){
+  try{
+    const snap=await getDocs(collection(db,"products"));
+    const localProducts=snap.docs.map(d=>({id:d.id,...d.data()}));
+    const normalizeMenuCategory=p=>{const name=String(p?.name||"").toUpperCase();if(name.includes("AKUN WARLIT"))return "AKUN WARLIT NEW/OFF";if(name.includes("RW MLBB"))return "RW/DK X JKAdiStore";if(name.includes("RANK VS BOT"))return "RENK VS BOT NEW";return p?.category};
+    const uniqueProducts=new Map();[...fallback,...localProducts].forEach(raw=>{const p={...raw,category:normalizeMenuCategory(raw)},key=String(p?.name||p?.id||"").toLowerCase().replace(/[^a-z0-9]+/g,"").trim();if(key)uniqueProducts.set(key,p)});products=[...uniqueProducts.values()];
+  }catch(e){products=fallback}
+  await Promise.all([loadTestimonials(),loadSiteMedia(),loadAiConfig()]);
+  render();setTimeout(jumpToInitialMenu,50)
+}
+
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+function card(p){
+
+ const stock=
+  displayStock(p);
+
+ const firstPrice=
+  p.priceList?.length
+   ? p.priceList[0].price
+   : p.price;
+
+ const badgeText=String(p.badge||p.category||"").trim();
+ const badgeColor=
+  /populer|terlaris/i.test(badgeText) ? "#93c5fd" :
+  /fresh|baru|new/i.test(badgeText) ? "#75ffc0" :
+  /promo|diskon|sale/i.test(badgeText) ? "#ffd166" :
+  "#8ee6ff";
+
+ const isWished=wishlist.includes(p.id);
+ return `
+ <div
+  class="card"
+  onclick="productDetail('${esc(p.id)}')"
+  style="cursor:pointer">
+
+  <div class="pic-wrap">
+
+   <img
+    class="pic"
+    src="${esc(p.image||LOGO)}"
+    alt="${esc(p.name)}"
+    loading="lazy"
+    decoding="async"
+   >
+
+   <button
+    type="button"
+    aria-label="Wishlist"
+    onclick="toggleWishlist('${esc(p.id)}',event)"
+    style="position:absolute;top:9px;right:9px;z-index:2;width:32px;height:32px;border-radius:50%;border:1px solid #ffffff2a;background:#00000066;backdrop-filter:blur(6px);font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:${isWished?'#ff4d8d':'#fff'}">
+    ${isWished?'❤️':'🤍'}
+   </button>
+
+   ${
+    badgeText
+    ? `<span class="pic-badge" style="color:${badgeColor};background:#00000088;border:1px solid ${badgeColor}55">${esc(badgeText)}</span>`
+    : ""
+   }
+
+  </div>
+
+  <div class="body">
+
+   <h3>
+    ${esc(p.name)}
+   </h3>
+
+   <div class="muted">
+    ${esc(p.description||"")}
+   </div>
+
+   <div class="price">
+    ${rp(firstPrice)}
+
+    ${
+     p.oldPrice
+     ? `<span class="old">
+          ${rp(p.oldPrice)}
+        </span>`
+     : ""
+    }
+   </div>
+
+   <div class="stock">
+    Stok: ${stock>=10000?"10.000+":stock}
+   </div>
+
+   <div class="actions">
+
+    <button
+     class="btn primary"
+     onclick="
+      event.stopPropagation();
+      productDetail('${esc(p.id)}')
+     ">
+
+     Lihat Harga
+
+    </button>
+
+    <button
+     class="btn"
+     onclick="
+      event.stopPropagation();
+      quickBuy('${esc(p.id)}')
+     ">
+
+     Beli
+
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>`;
+}
+
+
+/* =========================================================
+   MAIN RENDER
+   ========================================================= */
+
+function render(){
+
+ const __activeEl=document.activeElement;
+ const __restoreSearch=__activeEl&&__activeEl.classList&&__activeEl.classList.contains("search");
+ const __caret=__restoreSearch?__activeEl.selectionStart:null;
+
+ const catGroup=c=>{
+  const u=String(c||"").toUpperCase();
+  if(u.includes("VPN")) return 1;
+  if(u.includes("AKUN")||u.includes("PERINGKAT")||u.includes("RANK")||u.includes("RENK")||u.includes("BOT")||u.includes("SCRIP")||u.includes("SKRIP")||u.includes("JASA")||u.includes("JOKI")||u.includes("RW")||u.includes("DK")) return 2;
+  if(u.includes("APLIKASI")||u.includes("KEANGGOTAAN")||u.includes("PREMIUM")) return 3;
+  if(u.includes("MLBB")||u.includes("GAME")||u.includes("DIAMOND")||u.includes("STARLIGHT")) return 4;
+  return 5;
+ };
+ const cats=[
+  "Semua",
+  ...new Set(
+   products
+    .map(p=>p.category)
+    .filter(Boolean)
+  )
+ ].sort((a,b)=>a==="Semua"?-1:b==="Semua"?1:(catGroup(a)-catGroup(b))||a.localeCompare(b));
+
+ const uniqueVisible=new Map();
+ products.forEach(p=>{
+  const key=String(p?.name||p?.id||"")
+   .toLowerCase()
+   .replace(/[^a-z0-9]+/g,"")
+   .trim();
+  if(key) uniqueVisible.set(key,p);
+ });
+
+ const list=
+  [...uniqueVisible.values()].filter(p=>
+   p.active!==false &&
+   (cat==="Semua"||p.category===cat) &&
+   (
+    !search ||
+    `${p.name} ${p.category} ${p.description}`
+     .toLowerCase()
+     .includes(search.toLowerCase())
+   )
+  );
+
+
+ document.querySelector("#app").innerHTML=`
+
+ <header class="top">
+
+  <div class="wrap nav">
+
+   <button
+    class="brand"
+    onclick="home()">
+
+    <img src="${LOGO}">
+
+    <span class="rainbow">
+     JK AdiStore
+    </span>
+
+   </button>
+
+
+   <div class="navlinks">
+
+    <button onclick="home()" data-i18n="nav_home">
+     Beranda
+    </button>
+
+    <button onclick="shop()" data-i18n="nav_products">
+     Produk
+    </button>
+
+    <button onclick="openTopUpGame()">
+     🎮 <span data-i18n="nav_topup">Top Up Game</span>
+    </button>
+
+    <button onclick="openPremiumApps()">
+     📱 <span data-i18n="nav_apps">Aplikasi Premium</span>
+    </button>
+
+    <button onclick="orders()" data-i18n="nav_orders">
+     Pesanan
+    </button>
+
+    <button onclick="aiPage()">
+     🤖 AI
+    </button>
+
+    <button onclick="ownerAccess()">
+     🔐 Owner
+    </button>
+
+    <select
+     class="select"
+     id="langSwitcher"
+     style="width:auto;min-width:150px"
+     onchange="setLang(this.value)"
+     aria-label="Pilih bahasa / Language"
+    >
+     ${
+      Object.entries(I18N_LANGS).map(([code,label])=>
+       `<option value="${code}" ${code===jkLang?"selected":""}>${label}</option>`
+      ).join("")
+     }
+    </select>
+
+    ${
+     (admin||ownerUnlocked)
+     ? `<button onclick="adminPage()">
+         Admin
+        </button>`
+     : ""
+    }
+
+    <button onclick="wishlistPage()">
+     ❤️ ${wishlist.length}
+    </button>
+
+    <button onclick="cartPage()">
+     🛒 ${cart.reduce((s,x)=>s+x.qty,0)}
+    </button>
+
+
+    ${
+     user
+     ?
+     `
+     <button onclick="profile()" title="Lihat profil & saldo lengkap" style="display:flex;align-items:center;gap:6px">
+      <span data-i18n="nav_profile">Profil</span>
+      <span style="background:#ffffff14;border-radius:99px;padding:2px 9px;font-size:12px;font-weight:800">💰 ${rp(userBalance)}</span>
+     </button>
+
+     <button onclick="logout()" data-i18n="nav_logout">
+      Keluar
+     </button>
+     `
+     :
+     `
+     <button
+      class="btn primary"
+      onclick="auth()"
+      data-i18n="nav_login">
+
+      Masuk / Daftar
+
+     </button>
+     `
+    }
+
+   </div>
+
+  </div>
+
+ </header>
+
+${renderSlider()}
+
+<div class="top-ticker" aria-label="Promosi JK AdiStore">
+      <div class="top-ticker-track">
+       <span class="top-ticker-text">🔥 JK ADISTORE • PUSAT PRODUK DIGITAL • TOP UP GAME • AKUN WARLIT NEW/OFF • VPN PREMIUM • APLIKASI PREMIUM • RW/DK X JKADISTORE • RENK VS BOT NEW • SCRIPT GG X JK ADISTORE • PROMO TERBARU • HARGA TERJANGKAU • STOK TERSEDIA • FAST RESPONSE • PESAN SEKARANG 🔥</span>
+       <span class="top-ticker-text">🔥 JK ADISTORE • PUSAT PRODUK DIGITAL • TOP UP GAME • AKUN WARLIT NEW/OFF • VPN PREMIUM • APLIKASI PREMIUM • RW/DK X JKADISTORE • RENK VS BOT NEW • SCRIPT GG X JK ADISTORE • PROMO TERBARU • HARGA TERJANGKAU • STOK TERSEDIA • FAST RESPONSE • PESAN SEKARANG 🔥</span>
+       <span class="top-ticker-text">🔥 JK ADISTORE • PUSAT PRODUK DIGITAL • TOP UP GAME • AKUN WARLIT NEW/OFF • VPN PREMIUM • APLIKASI PREMIUM • RW/DK X JKADISTORE • RENK VS BOT NEW • SCRIPT GG X JK ADISTORE • PROMO TERBARU • HARGA TERJANGKAU • STOK TERSEDIA • FAST RESPONSE • PESAN SEKARANG 🔥</span>
+      </div>
+
+
+
+ <main>
+
+  <section class="hero wrap">
+
+   <div class="hero-grid">
+
+     <div class="hero-main">
+
+     <div class="hero-title-row">
+      <h1 class="rainbow">
+       JK AdiStore
+      </h1>
+     </div>
+
+     <p class="muted">
+      Store digital modern dengan katalog MLBB,
+      VPN, aplikasi, keranjang, checkout,
+      akun pelanggan, admin CMS dan AI private.
+     </p>
+
+     <button
+      class="btn"
+      onclick="aiPage()">
+
+      🤖 Buka AI
+
+     </button>
+
+     <div class="pillrow" style="margin-top:16px">
+      <div class="pill">⚡ Cepat & Aman</div>
+      <div class="pill">✅ Terjamin Resmi</div>
+      <div class="pill">🕐 Dukungan 24 Jam</div>
+      <div class="pill">👥 Terpercaya Ribuan Pembeli</div>
+     </div>
+
+    </div>
+
+    <div class="hero-card">
+
+     <div class="hero-card-head">
+      <img src="${LOGO}">
+      <div class="store-clock" aria-label="Jam toko">
+       <span id="storeClock" class="clock-time">00:00:00</span>
+      </div>
+     </div>
+
+     <h3 class="rainbow">
+      JK ADISTORE 
+     </h3>
+
+     <div class="muted">
+      Dark futuristic • responsive • Local Store
+     </div>
+
+    </div>
+
+   </div>
+
+  </section>
+
+
+  <section class="wrap" aria-label="Promo berbatas waktu">
+   <div class="category-banner rainbow" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+    <div>
+     <b style="font-size:16px">🔥 Promo Spesial Berakhir Dalam:</b>
+    </div>
+    <div id="promoCountdown" style="font-weight:900;font-size:20px;letter-spacing:1px">--:--:--</div>
+   </div>
+  </section>
+
+  <div class="marquee">
+
+   <div class="track">
+
+    <span>🔥 PROMO JK ADISTORE</span>
+    <span>⚡ PRODUK MLBB</span>
+    <span>💎 VPN PREMIUM</span>
+    <span>📱 APLIKASI PREMIUM</span>
+    <span>🤖 AI ASSISTANT</span>
+    <span>👑 ADMIN CMS</span>
+    <span>🔐 PRIVATE DATABASE</span>
+    <span>🔥 PROMO JK ADISTORE</span>
+
+   </div>
+
+  </div>
+
+
+  <section class="wrap quick-menu" id="quickMenu" aria-label="Menu utama JK AdiStore">
+   <div class="quick-menu-grid">
+    <button class="quick-menu-card" onclick="openTopUpGame()">
+     <span class="quick-icon">🎮</span>
+     <span><b>Top Up Game</b><small>MLBB, Free Fire, PUBG & lainnya</small></span>
+    </button>
+    <button class="quick-menu-card" onclick="openPremiumApps()">
+     <span class="quick-icon">📱</span>
+     <span><b>Aplikasi Premium</b><small>Semua aplikasi premium</small></span>
+    </button>
+    <button class="quick-menu-card" onclick="setCategory('AKUN WARLIT NEW/OFF')">
+     <span class="quick-icon">⚡</span>
+     <span><b>AKUN WARLIT NEW/OFF</b><small>Akun WARLIT NEW & OFF</small></span>
+    </button>
+    <button class="quick-menu-card" onclick="setCategory('VPN')">
+     <span class="quick-icon">🔐</span>
+     <span><b>VPN PREMIUM</b><small>Kumpulan VPN</small></span>
+    </button>
+    <button class="quick-menu-card" onclick="setCategory('RW/DK X JKAdiStore')">
+     <span class="quick-icon">👑</span>
+     <span><b>RW/DK X JKAdiStore</b><small>Menu RW & DK</small></span>
+    </button>
+    <button class="quick-menu-card" onclick="setCategory('RENK VS BOT NEW')">
+     <span class="quick-icon">🎯</span>
+     <span><b>RENK VS BOT NEW</b><small>Menu Rank VS Bot</small></span>
+    </button>
+    <button class="quick-menu-card" onclick="setCategory('SCRIP GG X JK AdiStore')">
+     <span class="quick-icon">⚔️</span>
+     <span><b>SCRIP GG X JK AdiStore</b><small>Menu khusus SCRIP GG</small></span>
+    </button>
+   </div>
+  </section>
+
+
+<section class="game-products wrap" id="topupGame" aria-label="Top Up Game">
+  <div class="game-header">
+    <span>🎮</span>
+    <div>
+      <h2>Top Up Game</h2>
+      <p>Pilih game dan nominal yang ingin dibeli</p>
+    </div>
+  </div>
+
+  <div class="game-grid" id="gameGrid"></div>
+</section>
+
+<!-- MODAL -->
+<div class="game-modal" id="gameModal">
+  <div class="game-modal-box">
+    <button class="modal-close" onclick="closeGameModal()">×</button>
+
+    <div class="modal-icon" id="modalIcon">🎮</div>
+    <h2 id="modalGame">Nama Game</h2>
+    <p class="modal-subtitle">Detail paket top up</p>
+
+    <div class="modal-package">
+      <div>
+        <span>Paket</span>
+        <strong id="modalPackage">-</strong>
+      </div>
+      <div class="modal-price" id="modalPrice">Rp 0</div>
+    </div>
+
+    <div class="modal-info">
+      <div>⚡ Proses cepat</div>
+      <div>🔒 Aman & terpercaya</div>
+      <div>✅ Harga final</div>
+    </div>
+
+    <button class="buy-button" onclick="buyGamePackage()">
+      🛒 Beli Sekarang
+    </button>
+  </div>
+</div>
+
+
+  <section
+   class="wrap"
+   id="shop">
+
+   <div class="head">
+
+    <div>
+
+     <h2 data-i18n="shop_title">
+      Produk & Daftar Harga
+     </h2>
+
+     <div class="muted" data-i18n="shop_desc">
+      Klik produk untuk melihat semua pilihan harga.
+     </div>
+
+    </div>
+
+    <input
+     class="input search"
+     data-i18n-placeholder="search_placeholder"
+     placeholder="Cari produk..."
+     value="${esc(search)}"
+     oninput="
+      search=this.value;
+      page=1;
+      clearTimeout(window.__jkSearchT);
+      window.__jkSearchT=setTimeout(render,160);
+     ">
+
+   </div>
+
+
+   <div class="chips">
+
+    ${
+     cats.map(c=>`
+
+      <button
+       type="button"
+       class="chip ${cat===c?"active":""}"
+       onclick="setCategory('${esc(c)}')">
+
+       ${
+        c==="MLBB" ? "🎮 MLBB" :
+        c==="VPN" ? "🔐 VPN" :
+        c==="Aplikasi" ? "📱 Aplikasi Premium" :
+        c==="SCRIP GG X JK AdiStore" ? "⚔️ SCRIP GG X JK AdiStore" :
+        c==="Semua" ? "🛍️ Semua" :
+        esc(c)
+       }
+
+      </button>
+
+     `).join("")
+    }
+
+   </div>
+
+
+   ${
+    cat!=="Semua"
+    ?
+    `
+    <div class="category-banner">
+
+     <h3>
+      ${esc(cat)}
+     </h3>
+
+     <div class="muted">
+      Semua produk kategori ${esc(cat)}
+      tersedia di bawah. Klik salah satu
+      untuk melihat pilihan paket dan harga.
+     </div>
+
+    </div>
+    `
+    :
+    ""
+   }
+
+
+   <div class="grid">
+
+    ${
+     list.length
+     ? list.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE).map(card).join("")
+     :
+     `
+     <div
+      class="panel"
+      style="
+       padding:30px;
+       text-align:center;
+       grid-column:1/-1
+      ">
+
+      Produk tidak ditemukan.
+
+     </div>
+     `
+    }
+
+   </div>
+
+   ${
+    list.length>PAGE_SIZE
+    ?
+    `
+    <div class="pagination" style="display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:20px">
+     <button type="button" class="btn" ${page<=1?"disabled":""} onclick="gotoPage(${page-1})">‹ Sebelumnya</button>
+     ${
+      Array.from({length:Math.ceil(list.length/PAGE_SIZE)},(_,i)=>i+1).map(n=>`
+       <button type="button" class="btn ${n===page?"primary":""}" onclick="gotoPage(${n})">${n}</button>
+      `).join("")
+     }
+     <button type="button" class="btn" ${page>=Math.ceil(list.length/PAGE_SIZE)?"disabled":""} onclick="gotoPage(${page+1})">Berikutnya ›</button>
+    </div>
+    `
+    : ""
+   }
+
+  </section>
+
+
+  <section class="wrap">
+
+   <h2>
+    💳 <span data-i18n="payment_title">Pembayaran</span>
+   </h2>
+
+   <div class="pillrow">
+
+    ${
+     [
+      "QRIS",
+      "DANA",
+      "OVO",
+      "GoPay",
+      "ShopeePay",
+      "LinkAja",
+      "BCA",
+      "BRI",
+      "BNI",
+      "Mandiri"
+     ].map(x=>`
+      <div class="pill">${x}</div>
+     `).join("")
+    }
+
+   </div>
+
+  </section>
+
+
+  <section class="wrap">
+
+   <h2>
+    🚀 <span data-i18n="service_title">Layanan</span>
+   </h2>
+
+   <div class="pillrow">
+
+    <div
+     class="pill"
+     onclick="setCategory('MLBB')"
+     style="cursor:pointer">
+
+     🎮 MLBB
+
+    </div>
+
+    <div
+     class="pill"
+     onclick="setCategory('VPN')"
+     style="cursor:pointer">
+
+     🔐 MLBB VPN
+
+    </div>
+
+    <div
+     class="pill"
+     onclick="setCategory('Aplikasi')"
+     style="cursor:pointer">
+
+     📱 Aplikasi Premium
+
+    </div>
+
+    <div
+     class="pill"
+     onclick="openTopUpGame()"
+     style="cursor:pointer">
+
+     🎮 Top Up Game
+
+    </div>
+
+    <div
+     class="pill"
+     onclick="setCategory('SCRIP GG X JK AdiStore')"
+     style="cursor:pointer">
+
+     ⚔️ SCRIP GG X JK AdiStore
+
+    </div>
+
+    <div
+     class="pill"
+     onclick="aiPage()"
+     style="cursor:pointer">
+
+     🤖 AI
+
+    </div>
+
+    <div class="pill">
+     💳 Pembayaran
+    </div>
+
+    <div
+     class="pill"
+     onclick="orders()"
+     style="cursor:pointer">
+
+     📦 Pesanan
+
+    </div>
+
+    ${
+     admin
+     ?
+     `
+     <div
+      class="pill"
+      onclick="adminPage()"
+      style="cursor:pointer">
+
+      👑 Admin CMS
+
+     </div>
+     `
+     :
+     ""
+    }
+
+   </div>
+
+  </section>
+
+
+  <section class="wrap" aria-label="Testimoni pelanggan">
+   <div class="head">
+    <div>
+     <h2>💬 Testimoni Pelanggan</h2>
+     <div class="muted">Contoh kesan dari pelanggan yang pernah bertransaksi.</div>
+    </div>
+    <button class="btn" onclick="openTestimoni()">Lihat Semua</button>
+   </div>
+   <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    ${testimonials.slice(0,3).map(x=>`
+     <div class="card"><div class="body">
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+       ${x.photo?`<img class="jk-testi-avatar" src="${esc(x.photo)}" alt="${esc(x.n)}" loading="lazy" decoding="async">`:`<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#5b5cff);display:flex;align-items:center;justify-content:center;font-weight:900">${esc((x.n||"?")[0])}</div>`}
+       <div><b>${esc(x.n)}</b><div class="muted" style="font-size:12px">${esc(x.c)}</div></div>
+      </div>
+      <div class="muted">${esc(x.t)}</div>
+     </div></div>
+    `).join("")}
+   </div>
+  </section>
+
+  ${siteVideos.length?`
+  <section class="wrap" aria-label="Video promosi">
+   <div class="head">
+    <div><h2>🎬 Video Promosi</h2></div>
+   </div>
+   <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+    ${siteVideos.map(v=>`
+     <div class="card"><div class="body" style="padding:0">
+      ${jkVideoEmbed(v.url)}
+      <div style="padding:12px"><b>${esc(v.title||"Video Promosi")}</b></div>
+     </div></div>
+    `).join("")}
+   </div>
+  </section>`:""}
+
+
+  <section class="wrap" aria-label="Blog dan artikel">
+   <div class="head">
+    <div>
+     <h2>🧮 <span data-i18n="calc_title">Kalkulator Top Up</span></h2>
+     <div class="muted" data-i18n="calc_desc">Hitung perkiraan total harga sebelum checkout.</div>
+    </div>
+   </div>
+   <div class="panel" style="padding:18px">
+    <div class="formgrid">
+     <div>
+      <label class="label">Harga satuan (Rp)</label>
+      <input class="input" id="calcUnit" type="number" min="0" inputmode="numeric" placeholder="Contoh: 15000" oninput="jkCalcRun()">
+     </div>
+     <div>
+      <label class="label">Jumlah</label>
+      <input class="input" id="calcQty" type="number" min="1" value="1" inputmode="numeric" oninput="jkCalcRun()">
+     </div>
+     <div>
+      <label class="label">Kode voucher / diskon (%)</label>
+      <input class="input" id="calcDisc" type="number" min="0" max="100" value="0" inputmode="numeric" oninput="jkCalcRun()">
+     </div>
+     <div>
+      <label class="label">Biaya admin (Rp)</label>
+      <input class="input" id="calcFee" type="number" min="0" value="0" inputmode="numeric" oninput="jkCalcRun()">
+     </div>
+    </div>
+    <div class="price-list">
+     <div class="price-item"><b>Subtotal</b><span id="calcSubtotal">Rp 0</span></div>
+     <div class="price-item"><b>Diskon</b><span id="calcDiscAmt">- Rp 0</span></div>
+     <div class="price-item"><b>Total Bayar</b><span id="calcTotal">Rp 0</span></div>
+    </div>
+   </div>
+
+
+   <div class="head" style="margin-top:30px">
+    <div>
+     <h2>📰 Blog & Artikel</h2>
+     <div class="muted">Tips dan panduan seputar produk digital.</div>
+    </div>
+    <button class="btn" onclick="openBlog()">Lihat Semua</button>
+   </div>
+   <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    ${BLOG_POSTS.map(p=>`
+     <div class="card" style="cursor:pointer" onclick="openArticle('${esc(p.id)}')"><div class="body">
+      <b>${esc(p.title)}</b>
+      <div class="muted" style="margin-top:6px">${esc(p.body.slice(0,80))}...</div>
+     </div></div>
+    `).join("")}
+   </div>
+  </section>
+
+
+  <section class="wrap">
+
+   <div class="ai-box">
+
+    <h2 class="rainbow">
+     🤖 JK AI Assistant
+    </h2>
+
+    <p class="muted">
+     AI khusus untuk membantu informasi
+     produk, harga, pesanan dan operasional
+     JK AdiStore.
+    </p>
+
+    <p class="warning">
+     🔐 Password, API key, token, private key
+     dan credential database tidak boleh
+     ditampilkan oleh AI.
+    </p>
+
+    <button
+     class="btn primary"
+     onclick="aiPage()">
+
+     Buka AI Assistant
+
+    </button>
+
+   </div>
+
+  </section>
+
+ 
+
+
+</main>
+
+
+ <footer class="footer">
+
+  <div class="wrap" style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px">
+
+   <div>
+    <div style="font-weight:900;margin-bottom:8px" class="rainbow">JK AdiStore</div>
+    <div class="muted" style="font-size:13px;line-height:1.6">
+     Toko digital untuk kebutuhan top up game,
+     VPN, aplikasi premium dan layanan digital lainnya.
+    </div>
+   </div>
+
+   <div>
+    <div style="font-weight:800;margin-bottom:8px">Bantuan</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+     <button class="btn" style="text-align:left" onclick="openFAQ()">FAQ</button>
+     <button class="btn" style="text-align:left" onclick="openHowToBuy()">Cara Membeli</button>
+     <button class="btn" style="text-align:left" onclick="openContact()">Hubungi Kami</button>
+     <button class="btn" style="text-align:left" onclick="orders()">Lacak Pesanan</button>
+    </div>
+   </div>
+
+   <div>
+    <div style="font-weight:800;margin-bottom:8px">Perusahaan</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+     <button class="btn" style="text-align:left" onclick="openAbout()">Tentang Kami</button>
+     <button class="btn" style="text-align:left" onclick="openBlog()">Blog & Artikel</button>
+     <button class="btn" style="text-align:left" onclick="openTestimoni()">Testimoni</button>
+    </div>
+   </div>
+
+   <div>
+    <div style="font-weight:800;margin-bottom:8px">Legal</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+     <button class="btn" style="text-align:left" onclick="openTerms()">Syarat & Ketentuan</button>
+     <button class="btn" style="text-align:left" onclick="openPrivacy()">Kebijakan Privasi</button>
+     <button class="btn" style="text-align:left" onclick="openRefund()">Kebijakan Pengembalian</button>
+    </div>
+   </div>
+
+  </div>
+
+  <div class="wrap" style="margin-top:26px;padding-top:18px;border-top:1px solid #ffffff14;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+
+   <span>© ${new Date().getFullYear()} JK AdiStore. <span data-i18n="footer_rights">Seluruh hak cipta dilindungi.</span></span>
+
+   <span class="muted">
+    Secure Store • Local • Private AI
+   </span>
+
+  </div>
+
+ </footer>
+
+
+ <nav class="bottom">
+
+  <button onclick="home()">
+   <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+   Beranda
+  </button>
+
+  <button onclick="shop()">
+   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+   Produk
+  </button>
+
+  <button onclick="wishlistPage()">
+   <span class="icon-wrap">
+    <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+    ${wishlist.length?`<span class="wish-dot">${wishlist.length}</span>`:""}
+   </span>
+   Wishlist
+  </button>
+
+  <button onclick="cartPage()">
+   <span class="icon-wrap">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="18" cy="20" r="1.4" fill="currentColor" stroke="none"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/></svg>
+    ${cart.length?`<span class="wish-dot">${cart.reduce((s,x)=>s+x.qty,0)}</span>`:""}
+   </span>
+   Keranjang
+  </button>
+
+  <button onclick="user?profile():auth()">
+   <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+   ${user?"Profil":"Masuk"}
+  </button>
+
+ </nav>
+
+ `;
+
+  if(window.renderGameProducts) window.renderGameProducts();
+
+  if(window.startStoreClock) window.startStoreClock();
+  if(window.startPromoCountdown) window.startPromoCountdown();
+  if(window.applyI18n) window.applyI18n();
+  jkSliderInitTouch();
+
+  if(__restoreSearch){
+   const el=document.querySelector(".input.search");
+   if(el){
+    el.focus();
+    try{el.setSelectionRange(__caret,__caret);}catch(e){}
+   }
+  }
+ }
+
+
+window.startStoreClock=()=>{
+ const el=document.getElementById("storeClock");
+ if(!el) return;
+ if(window.__jkClockTimer) clearInterval(window.__jkClockTimer);
+ const update=()=>{
+  el.textContent=new Intl.DateTimeFormat("id-ID",{timeZone:"Asia/Jakarta",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(new Date());
+ };
+ update();
+ window.__jkClockTimer=setInterval(update,1000);
+};
+
+window.startPromoCountdown=()=>{
+ const el=document.getElementById("promoCountdown");
+ if(!el) return;
+ if(window.__jkPromoTimer) clearInterval(window.__jkPromoTimer);
+ const update=()=>{
+  const now=new Date();
+  const end=new Date(now);
+  end.setHours(23,59,59,999);
+  let diff=Math.max(0,end-now);
+  const h=String(Math.floor(diff/3600000)).padStart(2,"0");
+  const m=String(Math.floor((diff%3600000)/60000)).padStart(2,"0");
+  const s=String(Math.floor((diff%60000)/1000)).padStart(2,"0");
+  el.textContent=`${h}:${m}:${s}`;
+ };
+ update();
+ window.__jkPromoTimer=setInterval(update,1000);
+};
+
+/* =========================================================
+   PRODUCT DETAIL
+   ========================================================= */
+
+window.productDetail=id=>{
+
+ const p=
+  products.find(x=>x.id===id);
+
+ if(!p)
+  return toast("Produk tidak ditemukan");
+
+
+ const stock=
+  displayStock(p);
+
+
+ const prices=getPriceOptions(p);
+
+
+ modal(
+  p.name,
+
+  `
+
+  <img
+   class="product-detail-img"
+   src="${esc(p.image||LOGO)}"
+   alt="${esc(p.name)}">
+
+
+  <span class="badge">
+   ${esc(p.badge||p.category)}
+  </span>
+
+
+  <h2>
+   ${esc(p.name)}
+  </h2>
+
+
+  <p class="muted">
+   ${esc(p.description||"")}
+  </p>
+
+  ${p.category==="VPN"?`
+  <div class="category-banner rainbow">
+   🔐 Pilihan VPN tersedia lengkap — pilih paket yang paling sesuai dengan kebutuhanmu.
+  </div>
+  `:""}
+
+
+  <div class="stock">
+   Stok tersedia:
+   <b>
+    ${stock>=10000?"10.000+":stock}
+   </b>
+  </div>
+
+
+  <h3>
+   📋 Daftar Harga
+  </h3>
+
+
+  <div class="price-list">
+
+   ${
+    prices.map((v,i)=>`
+
+     <div class="price-item">
+
+      <div>
+
+       <b>
+        ${esc(v.name)}
+       </b>
+
+       <div class="muted">
+        ${esc(p.name)}
+       </div>
+
+      </div>
+
+      <span>
+       ${rp(v.price)}
+      </span>
+
+     </div>
+
+    `).join("")
+   }
+
+  </div>
+
+
+  ${
+   prices.length>1
+   ?
+   `
+   <label class="label">
+    Pilih Paket
+   </label>
+
+   <select
+    class="select option-select"
+    id="productOption">
+
+    ${
+     prices.map((v,i)=>`
+
+      <option value="${i}">
+       ${esc(v.name)} — ${rp(v.price)}
+      </option>
+
+     `).join("")
+    }
+
+   </select>
+   `
+   :
+   ""
+  }
+
+
+  <div class="detail-actions">
+
+   <button
+    class="btn"
+    onclick="
+     const s=document.querySelector('#productOption');
+     add('${esc(p.id)}',s?s.value:0);
+     closeM();
+    ">
+
+    🛒 Keranjang
+
+   </button>
+
+
+   <button
+    class="btn primary"
+    onclick="
+     buySelected('${esc(p.id)}')
+    ">
+
+    ⚡ BELI SEKARANG
+
+   </button>
+
+  </div>
+
+  `
+ );
+
+};
+
+
+/* =========================================================
+   QUICK BUY
+   ========================================================= */
+
+window.quickBuy=id=>{
+ productDetail(id);
+};
+
+
+window.buySelected=id=>{
+ const p=products.find(x=>x.id===id);
+ if(!p) return toast("Produk tidak ditemukan");
+ const prices=getPriceOptions(p), select=document.querySelector("#productOption");
+ const index=Math.min(Math.max(select?Number(select.value):0,0),prices.length-1);
+ const selected=prices[index];
+ const text=
+  `Halo JK AdiStore, saya mau membeli:\n`+
+  `- ${p.name} — ${selected.name}\n`+
+  `Harga: ${rp(selected.price)}`;
+
+ closeM();
+ window.open("https://wa.me/628991232005?text="+encodeURIComponent(text),"_blank");
+};
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+function modal(title,body){
+
+ document.querySelector("#modal")?.remove();
+
+ const d=
+  document.createElement("div");
+
+ d.className="modal";
+ d.id="modal";
+
+ d.innerHTML=`
+
+ <div class="modalbox">
+
+  <div class="modalhead">
+
+   <h2>
+    ${title}
+   </h2>
+
+   <button
+    class="btn"
+    onclick="closeM()">
+
+    ✕
+
+   </button>
+
+  </div>
+
+  ${body}
+
+ </div>
+ `;
+
+ document.body.append(d);
+}
+
+
+window.closeM=()=>{
+ document.querySelector("#modal")?.remove();
+};
+
+
+/* =========================================================
+   INFO PAGES
+   ========================================================= */
+
+window.openAbout=()=>{
+ modal(
+  "Tentang Kami",
+  `
+  <p class="muted">
+   JK AdiStore adalah toko digital yang menyediakan top up game,
+   VPN premium, aplikasi berlangganan dan produk digital lainnya.
+   Kami fokus pada proses yang cepat, harga yang jelas, dan
+   dukungan pelanggan yang responsif.
+  </p>
+  <div class="stats" style="margin-top:16px">
+   <div class="stat"><span class="muted">Produk Tersedia</span><b>${products.length}+</b></div>
+   <div class="stat"><span class="muted">Kategori</span><b>${new Set(products.map(p=>p.category).filter(Boolean)).size}+</b></div>
+   <div class="stat"><span class="muted">Metode Bayar</span><b>10+</b></div>
+   <div class="stat"><span class="muted">Dukungan</span><b>Setiap Hari</b></div>
+  </div>
+  <p class="muted" style="margin-top:16px">
+   Semua transaksi diproses secara manual oleh admin melalui WhatsApp
+   agar setiap pesanan dapat dipantau dan dikonfirmasi langsung.
+  </p>
+  `
+ );
+};
+
+window.openHowToBuy=()=>{
+ modal(
+  "Cara Membeli",
+  `
+  <div class="price-list">
+   <div class="price-item"><div><b>1. Pilih Produk</b><div class="muted">Buka kategori atau cari produk yang kamu butuhkan.</div></div></div>
+   <div class="price-item"><div><b>2. Pilih Paket</b><div class="muted">Buka detail produk lalu pilih nominal/paket yang sesuai.</div></div></div>
+   <div class="price-item"><div><b>3. Masukkan ke Keranjang atau Beli Langsung</b><div class="muted">Gunakan tombol Keranjang untuk beli beberapa item, atau Beli Sekarang untuk transaksi cepat.</div></div></div>
+   <div class="price-item"><div><b>4. Checkout via WhatsApp</b><div class="muted">Detail pesanan otomatis terkirim ke admin melalui WhatsApp.</div></div></div>
+   <div class="price-item"><div><b>5. Konfirmasi Pembayaran</b><div class="muted">Kirim bukti transfer/pembayaran, admin akan memproses pesananmu.</div></div></div>
+   <div class="price-item"><div><b>6. Pesanan Diproses</b><div class="muted">Pantau status pesanan di menu Pesanan pada akunmu.</div></div></div>
+  </div>
+  `
+ );
+};
+
+window.openFAQ=()=>{
+ const faqs=[
+  ["Berapa lama proses pesanan diproses?","Sebagian besar pesanan diproses dalam beberapa menit hingga maksimal beberapa jam, tergantung antrean dan jenis produk."],
+  ["Apa saja metode pembayaran yang tersedia?","QRIS, e-wallet (DANA, OVO, GoPay, ShopeePay, LinkAja) serta transfer bank (BCA, BRI, BNI, Mandiri)."],
+  ["Apakah data dan akun saya aman?","Kami tidak membagikan data pelanggan ke pihak ketiga dan hanya menggunakannya untuk keperluan transaksi."],
+  ["Bagaimana jika pesanan belum diproses?","Hubungi admin melalui WhatsApp dengan menyertakan detail pesananmu agar dapat segera dibantu."],
+  ["Apakah bisa refund jika ada kendala?","Bisa, silakan lihat halaman Kebijakan Pengembalian untuk ketentuan lengkapnya."],
+  ["Apakah stok selalu tersedia?","Stok ditampilkan langsung pada setiap produk dan diperbarui oleh admin secara berkala."]
+ ];
+ modal(
+  "❓ Tanya Jawab (FAQ)",
+  faqs.map(([q,a])=>`
+   <div class="order">
+    <b>${esc(q)}</b>
+    <div class="muted" style="margin-top:6px">${esc(a)}</div>
+   </div>
+  `).join("")
+ );
+};
+
+window.openContact=()=>{
+ modal(
+  "Hubungi Kami",
+  `
+  <p class="muted">Tim kami siap membantu melalui kanal berikut:</p>
+  <div class="price-list">
+   <div class="price-item"><div><b>WhatsApp</b><div class="muted">Respon tercepat untuk pemesanan & bantuan</div></div>
+    <button class="btn primary" onclick="window.open('https://wa.me/628991232005','_blank')">Chat</button>
+   </div>
+   <div class="price-item"><div><b>Email</b><div class="muted">support@jkadistore.example</div></div></div>
+   <div class="price-item"><div><b>Jam Layanan</b><div class="muted">Setiap hari, 09.00 – 23.00 WIB</div></div></div>
+  </div>
+  `
+ );
+};
+
+window.openTerms=()=>{
+ modal(
+  "Syarat & Ketentuan",
+  `
+  <div class="muted" style="line-height:1.7">
+   <p><b>1. Umum</b><br>Dengan menggunakan JK AdiStore, kamu dianggap menyetujui syarat dan ketentuan berikut.</p>
+   <p><b>2. Pemesanan</b><br>Pastikan data/ID akun yang dimasukkan saat memesan sudah benar. Kesalahan input data menjadi tanggung jawab pembeli.</p>
+   <p><b>3. Pembayaran</b><br>Pesanan diproses setelah pembayaran dikonfirmasi oleh admin.</p>
+   <p><b>4. Penggunaan Produk</b><br>Produk yang dijual harus digunakan sesuai ketentuan platform/game terkait. Kami tidak bertanggung jawab atas penyalahgunaan produk oleh pembeli.</p>
+   <p><b>5. Perubahan Layanan</b><br>Kami berhak mengubah harga, stok, atau ketersediaan produk sewaktu-waktu tanpa pemberitahuan sebelumnya.</p>
+  </div>
+  `
+ );
+};
+
+window.openPrivacy=()=>{
+ modal(
+  "Kebijakan Privasi",
+  `
+  <div class="muted" style="line-height:1.7">
+   <p>Kami mengumpulkan data seperlunya (nama, WhatsApp, email, riwayat pesanan) untuk memproses transaksi dan memberikan dukungan pelanggan.</p>
+   <p>Data tidak dijual atau dibagikan ke pihak ketiga di luar keperluan pemrosesan pesanan.</p>
+   <p>Kamu dapat menghubungi admin kapan saja untuk meminta penghapusan data akunmu.</p>
+  </div>
+  `
+ );
+};
+
+window.openRefund=()=>{
+ modal(
+  "Kebijakan Pengembalian",
+  `
+  <div class="muted" style="line-height:1.7">
+   <p>Pengembalian dana dapat diajukan jika produk tidak diterima atau terjadi kesalahan dari pihak toko.</p>
+   <p>Pengajuan dilakukan maksimal 1x24 jam setelah transaksi melalui WhatsApp dengan menyertakan bukti pesanan.</p>
+   <p>Kesalahan input data oleh pembeli (ID/akun salah) tidak termasuk dalam ketentuan pengembalian dana.</p>
+  </div>
+  `
+ );
+};
+
+window.openTestimoni=()=>{
+ modal(
+  "💬 Testimoni Pelanggan",
+  `
+  <p class="muted" style="margin-bottom:12px">Beberapa kesan dari pelanggan yang pernah bertransaksi.</p>
+  <div style="display:grid;gap:10px">
+   ${testimonials.map(x=>`
+    <div class="order" style="display:flex;gap:12px;align-items:flex-start">
+     ${x.photo?`<img class="jk-testi-avatar" style="width:42px;height:42px" src="${esc(x.photo)}" alt="${esc(x.n)}" loading="lazy" decoding="async">`:`<div style="flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#5b5cff);display:flex;align-items:center;justify-content:center;font-weight:900">${esc((x.n||"?")[0])}</div>`}
+     <div>
+      <b>${esc(x.n)}</b> <span class="muted" style="font-size:12px">• ${esc(x.c)}</span>
+      <div class="muted" style="margin-top:4px">${esc(x.t)}</div>
+     </div>
+    </div>
+   `).join("")}
+  </div>
+  <p class="muted" style="margin-top:12px;font-size:12px">Testimoni ditampilkan dari data toko dan dapat dikelola admin melalui Panel Admin &raquo; Ulasan.</p>
+  `
+ );
+};
+
+const BLOG_POSTS=[
+ {id:"tips-vpn",title:"5 Tips Memilih VPN yang Tepat",body:"Perhatikan kecepatan server, kebijakan privasi, jumlah lokasi server, kompatibilitas perangkat, dan harga sebelum berlangganan VPN. VPN yang baik tidak hanya cepat tapi juga menjaga aktivitas online tetap privat."},
+ {id:"panduan-topup",title:"Panduan Top Up Game Aman & Cepat",body:"Selalu pastikan ID game yang dimasukkan benar sebelum checkout, gunakan metode pembayaran resmi, dan simpan bukti transaksi sampai pesanan selesai diproses."},
+ {id:"aplikasi-premium",title:"Kenapa Berlangganan Aplikasi Premium via Reseller?",body:"Membeli melalui reseller terpercaya bisa lebih hemat, namun tetap perhatikan reputasi toko, kejelasan garansi, dan kecepatan respon layanan pelanggan."}
+];
+
+window.openBlog=()=>{
+ modal(
+  "📰 Blog & Artikel",
+  `<div style="display:grid;gap:10px">${BLOG_POSTS.map(p=>`
+   <div class="order" style="cursor:pointer" onclick="openArticle('${esc(p.id)}')">
+    <b>${esc(p.title)}</b>
+    <div class="muted" style="margin-top:5px">${esc(p.body.slice(0,90))}...</div>
+   </div>
+  `).join("")}</div>`
+ );
+};
+
+window.openArticle=id=>{
+ const p=BLOG_POSTS.find(x=>x.id===id);
+ if(!p) return;
+ modal(p.title,`<p class="muted" style="line-height:1.7">${esc(p.body)}</p>`);
+};
+
+
+/* =========================================================
+   AUTH
+   ========================================================= */
+
+window.auth=()=>{
+
+ modal(
+  "Login & Daftar",
+  `
+
+  <div style="text-align:center">
+
+   <img
+    src="${LOGO}"
+    style="
+     width:90px;
+     height:90px;
+     border-radius:50%
+    ">
+
+   <h2 class="rainbow">
+    JK AdiStore
+   </h2>
+
+  </div>
+
+
+  <h3>
+   Login
+  </h3>
+
+
+  <label class="label">
+   Email
+  </label>
+
+  <input
+   class="input"
+   id="le"
+   type="email">
+
+
+  <label class="label">
+   Password
+  </label>
+
+  <input
+   class="input"
+   id="lp"
+   type="password">
+
+
+  <button
+   class="btn primary"
+   style="
+    width:100%;
+    margin-top:14px
+   "
+   onclick="login()">
+
+   LOGIN
+
+  </button>
+
+
+  <hr
+   style="
+    border-color:#ffffff14;
+    margin:20px 0
+   ">
+
+
+  <h3>
+   Buat Akun
+  </h3>
+
+
+  <label class="label">
+   Nama
+  </label>
+
+  <input
+   class="input"
+   id="rn">
+
+
+  <label class="label">
+   WhatsApp
+  </label>
+
+  <input
+   class="input"
+   id="rw">
+
+
+  <label class="label">
+   Email
+  </label>
+
+  <input
+   class="input"
+   id="re"
+   type="email">
+
+
+  <label class="label">
+   Password
+  </label>
+
+  <input
+   class="input"
+   id="rp"
+   type="password"
+   minlength="6">
+
+
+  <button
+   class="btn"
+   style="
+    width:100%;
+    margin-top:14px
+   "
+   onclick="register()">
+
+   DAFTAR AKUN
+
+  </button>
+
+
+  <button
+   class="btn"
+   style="
+    width:100%;
+    margin-top:8px
+   "
+   onclick="reset()">
+
+   LUPA PASSWORD
+
+  </button>
+
+  `
+ );
+};
+
+
+function jkUnlockStore(){document.body.classList.remove("jk-locked");document.getElementById("jkAuthGate")?.classList.add("hidden");render();setTimeout(jumpToInitialMenu,50)}
+function jkAuthMessage(msg){const e=document.getElementById("jkAuthError");if(e)e.textContent=msg||""}
+window.jkAuthTab=function(tab){const login=tab==="login";document.getElementById("jkLoginForm")?.classList.toggle("active",login);document.getElementById("jkRegisterForm")?.classList.toggle("active",!login);document.getElementById("jkTabLogin")?.classList.toggle("active",login);document.getElementById("jkTabRegister")?.classList.toggle("active",!login);jkAuthMessage("")}
+window.jkLocalLogin=async()=>{
+ try{
+  const email=document.getElementById("jkLoginEmail")?.value??"";
+  const password=document.getElementById("jkLoginPassword")?.value??"";
+
+  if(!String(email).trim()||!String(password).trim()){
+   return jkAuthMessage("Isi semua kolom terlebih dahulu");
+  }
+
+  const c=await signInWithEmailAndPassword(auth,email,password);
+  user=c?.user||null;
+  admin=String(user?.role||"user")==="admin";
+
+  jkUnlockStore();
+  document.getElementById("modal")?.remove();
+  toast("Login berhasil");
+ }catch(e){
+  jkAuthMessage(e?.message||"Login gagal");
+ }
+};
+
+window.jkLocalRegister=async()=>{
+ try{
+  const name=document.getElementById("jkRegName")?.value??"";
+  const whatsapp=document.getElementById("jkRegWA")?.value??"";
+  const email=document.getElementById("jkRegEmail")?.value??"";
+  const password=document.getElementById("jkRegPassword")?.value??"";
+
+  if(!String(name).trim()||!String(whatsapp).trim()||!String(email).trim()||!String(password).trim()){
+   return jkAuthMessage("Isi semua kolom terlebih dahulu");
+  }
+
+  const c=await createUserWithEmailAndPassword(auth,email,password,{name:String(name),whatsapp:String(whatsapp)});
+  const su=c?.user;
+  if(!su)throw new Error("Akun gagal dibuat");
+
+  if(!c.session){
+   jkAuthMessage("Akun dibuat. Silakan cek email Anda untuk verifikasi, lalu login.");
+   jkAuthTab("login");
+   toast("Cek email untuk verifikasi akun");
+   return;
+  }
+
+  // Pastikan nama & WhatsApp yang diisi di formulir tersimpan di profil lokal.
+  const users=authUsers();
+  const idx=users.findIndex(v=>String(v?.id)===String(su.uid));
+  if(idx>=0){
+   users[idx].data={...(users[idx].data||{}),name:String(name),whatsapp:String(whatsapp)};
+   saveAuthUsers(users);
+  }
+  su.displayName=String(name);
+  su.name=String(name);
+  su.whatsapp=String(whatsapp);
+
+  user=su;
+  admin=false;
+
+  jkUnlockStore();
+  document.getElementById("modal")?.remove();
+  toast("Akun berhasil dibuat");
+ }catch(e){
+  jkAuthMessage(e?.message||"Pendaftaran gagal");
+ }
+};
+
+window.login=window.jkLocalLogin;
+window.register=window.jkLocalRegister;
+window.loginWithDiscord=async()=>{
+ try{
+  await signInWithDiscord();
+ }catch(e){
+  jkAuthMessage(e?.message||"Login Discord gagal");
+ }
+};
+window.loginWithGoogle=async()=>{
+ try{
+  await signInWithGoogle();
+ }catch(e){
+  jkAuthMessage(e?.message||"Login Google gagal");
+ }
+};
+window.loginWithGithub=async()=>{
+ try{
+  await signInWithGithub();
+ }catch(e){
+  jkAuthMessage(e?.message||"Login GitHub gagal");
+ }
+};
+window.loginWithTelegram=async()=>{
+ try{
+  await signInWithTelegram();
+ }catch(e){
+  jkAuthMessage(e?.message||"Login Telegram belum aktif — perlu konfigurasi Edge Function Supabase terlebih dahulu.");
+ }
+};
+window.reset=async()=>{
+ try{
+  const email=document.getElementById("le")?.value||document.getElementById("jkLoginEmail")?.value||"";
+  if(!String(email).trim())return jkAuthMessage("Isi email terlebih dahulu untuk reset password");
+  await sendPasswordResetEmail(auth,email);
+  jkAuthMessage("Tautan reset password sudah dikirim ke email Anda.");
+ }catch(e){
+  jkAuthMessage(e?.message||"Gagal mengirim email reset");
+ }
+};
+
+function err(e){
+
+ return ({
+  "auth/invalid-credential":
+   "Email atau password salah.",
+  "auth/email-already-in-use":
+   "Email sudah dipakai.",
+ }[e.code]||
+ e.message||
+ "Terjadi kesalahan");
+
+}
+
+
+/* =========================================================
+   CART
+   ========================================================= */
+
+window.add=(id,optionIndex=0)=>{
+ const p=products.find(x=>x.id===id);
+ if(!p) return toast("Produk tidak ditemukan");
+ const prices=getPriceOptions(p);
+ const index=Math.min(Math.max(Number(optionIndex)||0,0),prices.length-1);
+ const selected=prices[index], key=cartKey(p.id,index);
+ const existing=cart.find(x=>x.id===key);
+ if(existing) existing.qty=Number(existing.qty||0)+1;
+ else cart.push({id:key,productId:p.id,optionIndex:index,name:`${p.name} — ${selected.name}`,price:selected.price,qty:1});
+ save(); toast(`${selected.name} masuk keranjang`); render();
+};
+
+
+window.buy=id=>{
+ productDetail(id);
+};
+
+
+/* =========================================================
+   CART PAGE
+   ========================================================= */
+
+window.cartPage=()=>{
+
+ modal(
+  "Keranjang",
+
+  cart.length
+  ?
+  cart.map((x,i)=>`
+
+   <div class="order">
+
+    <b>
+     ${esc(x.name)}
+    </b>
+
+    <div style="margin-top:7px">
+
+     ${rp(x.price)} × ${x.qty}
+
+     <button
+      class="btn"
+      onclick="cq(${i},-1)">
+
+      −
+
+     </button>
+
+     <button
+      class="btn"
+      onclick="cq(${i},1)">
+
+      +
+
+     </button>
+
+     <button
+      class="btn"
+      onclick="rq(${i})">
+
+      Hapus
+
+     </button>
+
+    </div>
+
+   </div>
+
+  `).join("")+
+
+  `
+  <h3>
+   Total: ${rp(total())}
+  </h3>
+
+  <button
+   class="btn primary"
+   style="width:100%"
+   onclick="checkout()">
+
+   CHECKOUT VIA WHATSAPP
+
+  </button>
+
+  ${user?`
+  <button
+   class="btn"
+   style="width:100%;margin-top:8px"
+   onclick="checkoutWithBalance()">
+
+   💰 BAYAR DENGAN SALDO
+
+  </button>
+  `:""}
+  `
+
+  :
+
+  `
+  <p class="muted">
+   Keranjang kosong.
+  </p>
+  `
+ );
+
+};
+
+
+window.cq=(i,d)=>{
+ if(!cart[i]) return;
+ cart[i].qty=Number(cart[i].qty||0)+Number(d||0);
+ if(cart[i].qty<1) cart.splice(i,1);
+ save(); closeM(); cartPage(); render();
+};
+
+window.rq=i=>{
+ if(!cart[i]) return;
+ cart.splice(i,1); save(); closeM(); cartPage(); render();
+};
+
+
+/* =========================================================
+   CHECKOUT
+   ========================================================= */
+
+window.checkout=async()=>{
+ if(!cart.length){closeM();return toast("Keranjang masih kosong");}
+
+ const items=cart.map(x=>({...x}));
+ const grandTotal=total();
+ const text=
+  `Halo JK AdiStore, saya mau checkout:\n`+
+  items.map(x=>`- ${x.name} x${x.qty} = ${rp(Number(x.price||0)*Number(x.qty||0))}`).join("\n")+
+  `\nTotal ${rp(grandTotal)}`;
+
+ window.open("https://wa.me/628991232005?text="+encodeURIComponent(text),"_blank");
+};
+
+
+/* Pembayaran memakai Saldo/Koin. Saldo hanya bisa BERTAMBAH
+   lewat Panel Admin (adminAdjustBalance); di sini saldo hanya
+   dikurangi sebesar total belanja saat pengguna membayar. */
+window.checkoutWithBalance=async()=>{
+ if(!user) return toast("Silakan login terlebih dahulu");
+ if(!cart.length){closeM();return toast("Keranjang masih kosong");}
+
+ const items=cart.map(x=>({...x}));
+ const grandTotal=total();
+
+ try{
+
+  /* Dipanggil lewat fungsi RPC spend_balance() di server Supabase —
+     bukan baca-lalu-tulis dari browser — supaya atomik & tidak bisa
+     "double spend" walau checkout diklik dua kali/dua tab sekaligus.
+     Lihat supabase/schema.sql bagian 7. */
+  const {data,error}=await sb.rpc("spend_balance",{
+   p_items:items,
+   p_total:grandTotal
+  });
+
+  if(error) throw new Error(error.message||"Saldo tidak cukup");
+
+  cart=[];
+  save();
+  userBalance=Number(data?.balance??0);
+  if(user) user.balance=userBalance;
+  closeM();
+  render();
+  toast("Pembayaran berhasil memakai saldo. Sisa saldo: "+rp(userBalance));
+
+ }catch(e){
+  toast(e?.message||"Gagal memproses pembayaran saldo");
+ }
+};
+
+
+window.sendCheckoutWhatsApp=()=>{
+ const text=window.pendingCheckoutText||"";
+ if(!text) return toast("Detail pesanan tidak tersedia");
+ window.open("https://wa.me/628991232005?text="+text,"_blank");
+};
+
+
+
+/* =========================================================
+   ORDERS
+   ========================================================= */
+
+window.orders=async()=>{
+
+ if(!user)
+  return auth();
+
+
+ try{
+
+  let q=sb.from("orders").select("uid,items,total,status").order("created_at",{ascending:false});
+  if(!admin) q=q.eq("uid",user.uid);
+  const {data:a,error:ordersErr}=await q;
+  if(ordersErr) throw ordersErr;
+
+
+  modal(
+   "Pesanan",
+
+   a.length
+   ?
+
+   a.map(x=>`
+
+    <div class="order">
+
+     <b>
+      ${esc(
+       (x.items||[])
+        .map(
+         i=>
+          i.name+
+          " × "+
+          i.qty
+        )
+        .join(", ")
+      )}
+     </b>
+
+     <br><br>
+
+     ${rp(x.total)}
+
+     <br>
+
+     <span class="muted">
+      ${esc(x.status)}
+     </span>
+
+    </div>
+
+   `).join("")
+
+   :
+
+   `
+   <p class="muted">
+    Belum ada pesanan.
+   </p>
+   `
+  );
+
+
+ }catch(e){
+
+  toast(
+   "Gagal memuat pesanan"
+  );
+
+ }
+
+};
+
+
+/* =========================================================
+   PROFILE
+   ========================================================= */
+
+window.profile=async()=>{
+
+ if(!user)
+  return auth();
+
+
+ let u={};
+ let orderCount=0;
+
+
+ try{
+
+  const {data,error}=
+   await sb.from("profiles")
+    .select("name,whatsapp,address,balance")
+    .eq("id",user.uid)
+    .maybeSingle();
+
+  if(!error&&data)
+   u=data;
+
+ }catch{}
+
+ try{
+  const {data:os,error:ocErr}=await sb.from("orders").select("status").eq("uid",user.uid).eq("status","Selesai");
+  orderCount=ocErr?0:(os||[]).length;
+ }catch{}
+
+ const points=orderCount*10;
+ const balance=Number(u.balance||0);
+ userBalance=balance;
+
+ modal(
+  "Profil",
+
+  `
+
+  <div class="stats" style="margin-bottom:16px">
+   <div class="stat"><span class="muted">💰 Saldo/Koin</span><b>${rp(balance)}</b></div>
+   <div class="stat"><span class="muted">Poin Keanggotaan</span><b>${points}</b></div>
+   <div class="stat"><span class="muted">Pesanan Selesai</span><b>${orderCount}</b></div>
+  </div>
+
+  <label class="label">
+   Email
+  </label>
+
+  <input
+   class="input"
+   value="${esc(user.email||"")}"
+   disabled>
+
+  <label class="label">
+   Nama
+  </label>
+
+  <input
+   class="input"
+   id="pn"
+   value="${esc(
+    u.name||
+    user.displayName||
+    ""
+   )}">
+
+
+  <label class="label">
+   Nomor WhatsApp
+  </label>
+
+  <input
+   class="input"
+   id="pw"
+   placeholder="628..."
+   value="${esc(
+    u.whatsapp||""
+   )}">
+
+
+  <label class="label">
+   Alamat Tersimpan
+  </label>
+
+  <textarea
+   class="area"
+   id="pa"
+   placeholder="Alamat pengiriman/penagihan (opsional)">${esc(
+    u.address||""
+   )}</textarea>
+
+
+  <button
+   class="btn primary"
+   style="
+    width:100%;
+    margin-top:14px
+   "
+   onclick="saveProfile()">
+
+   SIMPAN PROFIL
+
+  </button>
+
+  <button
+   class="btn"
+   style="width:100%;margin-top:8px"
+   onclick="wishlistPage()">
+
+   ❤️ Lihat Wishlist (${wishlist.length})
+
+  </button>
+
+  <hr style="border-color:#ffffff1c;margin:18px 0">
+
+  <label class="label">
+   Ubah Sandi
+  </label>
+
+  <input
+   class="input"
+   id="ppw1"
+   type="password"
+   autocomplete="new-password"
+   placeholder="Sandi baru (minimal 6 karakter)">
+
+  <input
+   class="input"
+   id="ppw2"
+   type="password"
+   autocomplete="new-password"
+   placeholder="Ulangi sandi baru"
+   style="margin-top:8px">
+
+  <button
+   class="btn"
+   style="width:100%;margin-top:8px"
+   onclick="changePassword()">
+
+   🔒 SIMPAN SANDI BARU
+
+  </button>
+
+  `
+ );
+
+};
+
+window.changePassword=async()=>{
+ const p1=String(getEl("ppw1")?.value||"");
+ const p2=String(getEl("ppw2")?.value||"");
+ if(!p1||p1.length<6) return toast("Sandi minimal 6 karakter");
+ if(p1!==p2) return toast("Konfirmasi sandi tidak sama");
+ try{
+  const {error}=await sb.auth.updateUser({password:p1});
+  if(error) throw new Error(error.message||"Gagal mengubah sandi");
+  if(getEl("ppw1"))getEl("ppw1").value="";
+  if(getEl("ppw2"))getEl("ppw2").value="";
+  toast("Sandi berhasil diubah");
+ }catch(e){
+  toast(e?.message||"Gagal mengubah sandi");
+ }
+};
+
+
+window.saveProfile=async()=>{
+
+ try{
+
+  await updateProfile(
+   user,
+   {
+    displayName:getEl("pn").value
+   }
+  );
+
+
+  const {error}=await sb.from("profiles")
+   .update({
+    name:getEl("pn").value,
+    whatsapp:getEl("pw").value,
+    address:getEl("pa")?getEl("pa").value:""
+   })
+   .eq("id",user.uid);
+
+  if(error) throw new Error(error.message);
+
+
+  toast(
+   "Profil disimpan"
+  );
+
+
+ }catch{
+
+  toast(
+   "Gagal menyimpan"
+  );
+
+ }
+
+};
+
+
+window.logout=async()=>{await signOut(auth);user=null;admin=false;document.body.classList.add("jk-locked");document.getElementById("jkAuthGate")?.classList.remove("hidden");jkAuthTab("login");toast("Berhasil keluar")};
+
+
+/* =========================================================
+   AI ASSISTANT — Bawa API Sendiri
+   Tidak ada API key/model AI yang ditanam di kode situs ini.
+   Semua permintaan hanya dikirim jika admin sudah mengisi
+   endpoint & kunci API miliknya sendiri di Panel Admin »
+   Pengaturan » AI Assistant (lihat aiConfig / loadAiConfig).
+
+   CATATAN KEAMANAN JUJUR:
+   Situs ini berjalan 100% di browser (tanpa server backend
+   milik sendiri). Jika kolom "Aktifkan untuk semua pengguna"
+   dinyalakan, maka setiap pengguna yang memakai fitur AI akan
+   mengirim permintaan langsung dari browser mereka ke endpoint
+   AI memakai kunci API yang admin masukkan — sehingga kunci
+   itu bisa terlihat oleh pengguna tersebut lewat DevTools/tab
+   Network saat fitur dipakai. Ini bukan kelemahan kode, tapi
+   batas bawaan dari arsitektur "situs statis tanpa server".
+   Agar kunci API benar-benar tidak pernah sampai ke browser
+   pengguna, kunci tersebut harus disimpan di server/proxy
+   terpisah (mis. Supabase Edge Function) yang meneruskan
+   permintaan AI — bukan di file HTML ini. Selama itu belum
+   dibuat, disarankan biarkan "Aktifkan untuk semua pengguna"
+   tetap nonaktif dan gunakan tombol "Tes AI" di Panel Admin
+   untuk mencoba sendiri.
+   ========================================================= */
+
+async function aiCallProvider(message){
+ // Pesan dikirim ke Edge Function ai-gateway; server yang menyimpan &
+ // memakai API key dari tabel ai_settings, browser hanya menerima jawaban.
+ const data=await aiGatewayCall("chat",{message:String(message||"").slice(0,4000)});
+ return data?.answer||"";
+}
+
+window.aiPage=async()=>{
+
+ if(!user){
+
+  modal(
+   "AI Assistant",
+
+   `
+   <div class="ai-lock">
+
+    <h2 class="rainbow">
+     🤖 JK AI ASSISTANT
+    </h2>
+
+    <p class="muted">
+     Login terlebih dahulu untuk menggunakan
+     AI Assistant JK AdiStore.
+    </p>
+
+    <button
+     class="btn primary"
+     onclick="
+      closeM();
+      auth()
+     ">
+
+     LOGIN
+
+    </button>
+
+   </div>
+   `
+  );
+
+  return;
+ }
+
+
+ // Catatan: status "aktif untuk semua pengguna" & "sudah tersambung"
+ // sekarang murni ditentukan oleh server (tabel ai_settings + Edge
+ // Function ai-gateway), bukan oleh nilai di browser. Kalau memang
+ // belum aktif/tersambung, pesan errornya akan muncul otomatis di
+ // jendela chat saat pengguna mengirim pertanyaan (lihat askAI()).
+
+ modal(
+  "🤖 JK AI Assistant",
+
+  `
+
+  <div
+   id="aiMessages"
+   style="
+    max-height:350px;
+    overflow:auto
+   ">
+
+   <div class="ai-message ai-bot">
+
+    Halo. Saya JK AI Assistant.
+
+    Saya bisa membantu informasi produk,
+    harga, pesanan dan operasional store.
+
+   </div>
+
+  </div>
+
+
+  <label class="label">
+   Pertanyaan
+  </label>
+
+  <textarea
+   class="area"
+   id="aiInput"
+   placeholder="
+    Tanyakan sesuatu tentang JK AdiStore...
+   "></textarea>
+
+
+  <button
+   class="btn primary"
+   style="
+    width:100%;
+    margin-top:10px
+   "
+   onclick="askAI()">
+
+   🤖 TANYA AI
+
+  </button>
+
+
+  <p class="warning">
+
+   🔒 AI tidak boleh meminta, menampilkan,
+   menebak atau membocorkan password,
+   API key, token, secret database,
+   private key atau credential.
+
+  </p>
+
+  `
+ );
+
+};
+
+
+/* =========================================================
+   ASK AI
+   ========================================================= */
+
+window.askAI=async()=>{
+
+ const input=
+  document.querySelector(
+   "#aiInput"
+  );
+
+
+ const question=
+  input?.value.trim();
+
+
+ if(!question)
+  return toast(
+   "Tulis pertanyaan dulu"
+  );
+
+
+ const box=
+  document.querySelector(
+   "#aiMessages"
+  );
+
+
+ box.innerHTML+=`
+
+  <div class="ai-message ai-user">
+   ${esc(question)}
+  </div>
+
+ `;
+
+
+ input.value="";
+
+ box.scrollTop=box.scrollHeight;
+
+
+ try{
+
+  const answer=await aiCallProvider(question);
+
+  box.innerHTML+=`
+
+   <div class="ai-message ai-bot">
+
+    ${esc(
+     answer||
+     "AI tidak memberikan jawaban."
+    )}
+
+   </div>
+
+  `;
+
+
+  box.scrollTop=
+   box.scrollHeight;
+
+
+ }catch(e){
+
+  box.innerHTML+=`
+
+   <div class="ai-message ai-bot">
+
+    ⚠️ ${esc(e?.message||"Permintaan tidak dapat diproses.")}
+
+   </div>
+
+  `;
+
+  box.scrollTop=box.scrollHeight;
+
+ }
+
+};
+
+
+/* =========================================================
+   OWNER ACCESS
+   ========================================================= */
+
+async function ownerSha256(text){
+ const data=new TextEncoder().encode(text);
+ const hash=await crypto.subtle.digest("SHA-256",data);
+ return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+window.ownerAccess=async()=>{
+ if(ownerUnlocked) return adminPage();
+ modal("Owner Access",`
+  <div style="text-align:center">
+   <div style="font-size:42px">🔐</div>
+   <h3 class="rainbow">Akses Owner JK AdiStore</h3>
+   <p class="muted">Masukkan kode owner untuk membuka CMS.</p>
+  </div>
+  <label class="label">Kode Akses Owner</label>
+  <input class="input" id="ownerAccessCode" type="password" autocomplete="off" placeholder="Masukkan kode owner">
+  <button class="btn primary" style="width:100%;margin-top:14px" onclick="verifyOwnerAccess()">🔓 Buka Owner CMS</button>
+ `);
+ setTimeout(()=>document.querySelector("#ownerAccessCode")?.focus(),50);
+};
+
+window.verifyOwnerAccess=async()=>{
+ const input=document.querySelector("#ownerAccessCode");
+ const code=input?.value?.trim()||"";
+ if(!code) return toast("Masukkan kode owner");
+ const hash=await ownerSha256(code);
+ if(hash!==OWNER_CODE_HASH){
+  if(input){input.value="";input.focus();}
+  return toast("Kode owner salah");
+ }
+ ownerUnlocked=true;
+ sessionStorage.setItem("jk_owner_access","1");
+ closeM();
+ toast("Akses owner aktif");
+ adminPage();
+};
+
+window.lockOwner=()=>{
+ ownerUnlocked=false;
+ sessionStorage.removeItem("jk_owner_access");
+ home();
+ toast("Owner CMS dikunci");
+};
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+window.adminPage=async()=>{
+
+ if(!(admin||ownerUnlocked))
+  return ownerAccess();
+
+
+ document.querySelector(
+  "#app"
+ ).innerHTML=`
+
+ <header class="top">
+
+  <div class="wrap nav">
+
+   <b class="rainbow">
+    JK AdiStore • ADMIN
+   </b>
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn" onclick="home()">Lihat Toko</button>
+    ${ownerUnlocked ? `<button class="btn" onclick="lockOwner()">🔒 Kunci Owner</button>` : ""}
+   </div>
+
+  </div>
+
+ </header>
+
+
+ <main
+  class="wrap"
+  style="padding:30px 0">
+
+  <div class="adminGrid">
+
+   <aside class="side panel">
+
+    ${
+     [
+      "dashboard",
+      "produk",
+      "pesanan",
+      "pengguna",
+      "ulasan",
+      "media",
+      "pelanggan",
+      "laporan",
+      "ai",
+      "pengaturan"
+     ].map(x=>`
+
+      <button
+       class="${asection===x?"active":""}"
+       onclick="
+        asection='${x}';
+        adminPage()
+       ">
+
+       ${
+        ({
+         dashboard:"📊 Dashboard",
+         produk:"🛒 Produk",
+         pesanan:"📦 Pesanan",
+         pengguna:"👤 Pengguna",
+         ulasan:"⭐ Ulasan",
+         media:"🖼️ Media",
+         pelanggan:"🧑 Pelanggan",
+         laporan:"📈 Laporan",
+         ai:"🤖 AI Private",
+         pengaturan:"⚙️ Pengaturan"
+        })[x]
+       }
+
+      </button>
+
+     `).join("")
+    }
+
+   </aside>
+
+
+   <section>
+
+    ${adminContent()}
+
+   </section>
+
+  </div>
+
+ </main>
+ `;
+
+
+ if(
+  asection==="pesanan"
+ )
+  loadOrders();
+
+
+ if(
+  asection==="pengguna"||
+  asection==="pelanggan"
+ )
+  loadUsers();
+
+ if(asection==="pengaturan") loadSettings();
+ if(asection==="ai") loadAiConfig();
+
+};
+
+
+/* =========================================================
+   ADMIN CONTENT
+   ========================================================= */
+
+function adminContent(){
+
+ if(
+  asection==="dashboard"
+ ){
+
+  return `
+
+   <h1>
+    Dashboard
+   </h1>
+
+   <div class="stats">
+
+    <div class="stat">
+     Produk
+     <b>${products.length}</b>
+    </div>
+
+    <div class="stat">
+     Kategori
+     <b>
+      ${new Set(
+       products.map(
+        x=>x.category
+       )
+      ).size}
+     </b>
+    </div>
+
+    <div class="stat">
+     Stok tampilan
+     <b>
+      ${products.reduce(
+       (s,x)=>
+        s+
+        displayStock(x),
+       0
+      )}
+     </b>
+    </div>
+
+    <div class="stat">
+     Status
+     <b>ONLINE</b>
+    </div>
+
+   </div>
+
+
+   <div
+    class="panel"
+    style="
+     padding:20px;
+     margin-top:15px
+    ">
+
+    <h3>
+     🔐 Security Center
+    </h3>
+
+    <p class="muted">
+     Password dan secret tidak disimpan
+     di frontend. AI private menggunakan
+     endpoint backend.
+    </p>
+
+    <button
+     class="btn primary"
+     onclick="
+      asection='ai';
+      adminPage()
+     ">
+
+     🤖 AI Security
+
+    </button>
+
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="produk"
+ ){
+
+  return `
+
+   <div class="head">
+
+    <div>
+
+     <h1>
+      Produk
+     </h1>
+
+     <div class="muted">
+      Kelola katalog, harga,
+      daftar paket dan stok.
+     </div>
+
+    </div>
+
+
+    <button
+     class="btn primary"
+     onclick="editProduct()">
+
+     ＋ Tambah
+
+    </button>
+
+   </div>
+
+
+   <div class="grid">
+
+    ${
+     products.map(p=>`
+
+      <div class="card">
+
+       <img
+        class="pic"
+        src="${esc(
+         p.image||LOGO
+        )}">
+
+       <div class="body">
+
+        <span class="badge">
+         ${esc(
+          p.badge||
+          p.category
+         )}
+        </span>
+
+        <h3>
+         ${esc(p.name)}
+        </h3>
+
+        <div>
+         ${rp(p.price)}
+        </div>
+
+        <div class="stock">
+         Stok tampilan:
+         ${displayStock(p)}
+        </div>
+
+
+        <button
+         class="btn"
+         onclick="
+          editProduct(
+           '${esc(p.id)}'
+          )
+         ">
+
+         Edit
+
+        </button>
+
+
+        <button
+         class="btn"
+         onclick="
+          delProduct(
+           '${esc(p.id)}'
+          )
+         ">
+
+         Hapus
+
+        </button>
+
+       </div>
+
+      </div>
+
+     `).join("")
+    }
+
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="pesanan"
+ ){
+
+  return `
+
+   <h1>
+    Pesanan
+   </h1>
+
+   <div
+    id="ordersBox"
+    class="tablewrap">
+
+    Memuat...
+
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="pengguna"||
+  asection==="pelanggan"
+ ){
+
+  return `
+
+   <h1>
+    ${
+     asection==="pengguna"
+     ?
+     "Pengguna"
+     :
+     "Pelanggan"
+    }
+   </h1>
+
+   <div
+    id="usersBox"
+    class="tablewrap">
+
+    Memuat...
+
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="ulasan"
+ ){
+
+  return `
+
+   <div class="head">
+    <div>
+     <h1>Ulasan / Testimoni</h1>
+     <div class="muted">Kelola testimoni pelanggan yang tampil di beranda.</div>
+    </div>
+    <button class="btn primary" onclick="editTestimoni()">＋ Tambah Testimoni</button>
+   </div>
+
+   <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    ${
+     testimonials.length ? testimonials.map(x=>`
+      <div class="card"><div class="body">
+       <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px">
+        ${x.photo?`<img class="jk-testi-avatar" src="${esc(x.photo)}" loading="lazy" decoding="async">`:`<div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#5b5cff);display:flex;align-items:center;justify-content:center;font-weight:900">${esc((x.n||"?")[0])}</div>`}
+        <div><b>${esc(x.n)}</b><div class="muted" style="font-size:12px">${esc(x.c)}</div></div>
+       </div>
+       <div class="muted" style="margin-bottom:10px">${esc(x.t)}</div>
+       <div class="jk-media-actions">
+        <button class="btn" onclick="editTestimoni('${esc(x.id)}')">Edit</button>
+        <button class="btn" onclick="delTestimoni('${esc(x.id)}')">Hapus</button>
+       </div>
+      </div></div>
+     `).join("") : `<div class="panel muted" style="padding:20px">Belum ada testimoni. Klik "Tambah Testimoni" untuk menambahkan.</div>`
+    }
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="media"
+ ){
+
+  return `
+
+   <h1>🖼️ Media — Banner &amp; Video</h1>
+   <div class="muted" style="margin-bottom:16px">Kelola gambar slider/banner di paling atas situs dan video promosi. Perubahan langsung tampil di beranda setelah disimpan.</div>
+
+   <div class="panel" style="padding:20px;margin-bottom:18px">
+    <div class="head">
+     <h3 style="margin:0">Banner / Slider Beranda</h3>
+     <button class="btn primary" onclick="editBanner()">＋ Tambah Banner</button>
+    </div>
+    ${
+     banners.length ? banners.map((b,i)=>`
+      <div class="jk-media-row">
+       <img src="${esc(b.image||LOGO)}" loading="lazy" decoding="async">
+       <div class="jk-media-info">
+        <b>${esc(b.caption||"(tanpa teks)")}</b>
+        <div class="muted" style="font-size:12px">${esc(b.link||"Tanpa tautan")}</div>
+       </div>
+       <div class="jk-media-actions">
+        <button class="btn" onclick="moveBanner(${i},-1)" ${i===0?"disabled":""}>↑</button>
+        <button class="btn" onclick="moveBanner(${i},1)" ${i===banners.length-1?"disabled":""}>↓</button>
+        <button class="btn" onclick="editBanner(${i})">Edit</button>
+        <button class="btn" onclick="delBanner(${i})">Hapus</button>
+       </div>
+      </div>
+     `).join("") : `<p class="muted">Belum ada banner kustom — slider memakai tampilan bawaan. Tambahkan banner agar lebih menarik.</p>`
+    }
+   </div>
+
+   <div class="panel" style="padding:20px">
+    <div class="head">
+     <h3 style="margin:0">Video Promosi</h3>
+     <button class="btn primary" onclick="editVideo()">＋ Tambah Video</button>
+    </div>
+    <div class="muted" style="margin-bottom:10px;font-size:13px">Tempel tautan YouTube atau file video (.mp4) langsung — tanpa perlu edit kode.</div>
+    ${
+     siteVideos.length ? siteVideos.map((v,i)=>`
+      <div class="jk-media-row">
+       <div class="jk-media-thumb" style="display:flex;align-items:center;justify-content:center;font-size:22px">🎬</div>
+       <div class="jk-media-info">
+        <b>${esc(v.title||"(tanpa judul)")}</b>
+        <div class="muted" style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(v.url||"")}</div>
+       </div>
+       <div class="jk-media-actions">
+        <button class="btn" onclick="moveVideo(${i},-1)" ${i===0?"disabled":""}>↑</button>
+        <button class="btn" onclick="moveVideo(${i},1)" ${i===siteVideos.length-1?"disabled":""}>↓</button>
+        <button class="btn" onclick="editVideo(${i})">Edit</button>
+        <button class="btn" onclick="delVideo(${i})">Hapus</button>
+       </div>
+      </div>
+     `).join("") : `<p class="muted">Belum ada video promosi.</p>`
+    }
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="laporan"
+ ){
+
+  return `
+
+   <h1>
+    Laporan
+   </h1>
+
+   <div class="stats">
+
+    <div class="stat">
+     Produk
+     <b>${products.length}</b>
+    </div>
+
+    <div class="stat">
+     Aktif
+     <b>
+      ${products.filter(
+       x=>x.active!==false
+      ).length}
+     </b>
+    </div>
+
+    <div class="stat">
+     Stok tampilan
+     <b>
+      ${products.reduce(
+       (s,x)=>
+        s+
+        displayStock(x),
+       0
+      )}
+     </b>
+    </div>
+
+    <div class="stat">
+     Kategori
+     <b>
+      ${new Set(
+       products.map(
+        x=>x.category
+       )
+      ).size}
+     </b>
+    </div>
+
+   </div>
+
+  `;
+ }
+
+
+ if(
+  asection==="ai"
+ ){
+
+  return `
+
+   <h1>
+    🤖 AI Assistant — Bawa API Sendiri
+   </h1>
+
+   <div class="muted" style="margin-bottom:16px">
+    Situs ini tidak menanam API key atau server AI apa pun.
+    Isi kolom di bawah dengan endpoint &amp; kunci API milik
+    Anda sendiri (OpenAI, Groq, OpenRouter, atau layanan lain
+    yang kompatibel dengan format Chat Completions).
+   </div>
+
+   <div class="panel" style="padding:20px;margin-bottom:16px">
+
+    <div class="formgrid">
+
+     <div class="full">
+      <label class="label">API URL (endpoint chat completions)</label>
+      <input class="input" id="aiUrl" placeholder="https://api.openai.com/v1/chat/completions" value="${esc(aiAdminConfig.url)}">
+     </div>
+
+     <div>
+      <label class="label">API Key</label>
+      <input class="input" id="aiKey" type="password" autocomplete="off" placeholder="${aiAdminConfig.keySet?('Sudah diisi ('+esc(aiAdminConfig.keyPreview)+') — kosongkan agar tidak diubah'):'sk-...'}">
+     </div>
+
+     <div>
+      <label class="label">Model</label>
+      <input class="input" id="aiModel" placeholder="gpt-4o-mini" value="${esc(aiAdminConfig.model)}">
+     </div>
+
+     <div class="full">
+      <label class="label">System Prompt (opsional)</label>
+      <textarea class="area" id="aiPrompt" placeholder="Kamu adalah asisten toko JK AdiStore...">${esc(aiAdminConfig.prompt)}</textarea>
+     </div>
+
+     <div class="full" style="display:flex;align-items:center;gap:8px">
+      <input type="checkbox" id="aiPublic" ${aiAdminConfig.public?"checked":""} style="width:18px;height:18px">
+      <label for="aiPublic" style="margin:0">Aktifkan AI untuk semua pengguna (bukan hanya admin)</label>
+     </div>
+
+    </div>
+
+    <button class="btn primary" onclick="saveAiConfig()" style="margin-top:12px">💾 Simpan Pengaturan AI</button>
+    <button class="btn" onclick="testAiConfig()" style="margin-top:12px">🔌 Tes Koneksi</button>
+    <button class="btn" onclick="aiPage()" style="margin-top:12px">🤖 Buka AI Assistant</button>
+
+   </div>
+
+   <div class="panel" style="padding:20px">
+
+    <h3>🔐 Catatan Keamanan (baca sebelum mengaktifkan untuk umum)</h3>
+
+    <ul class="muted">
+     <li>Kunci API HANYA tersimpan di tabel <code>ai_settings</code> di database Supabase, yang dikunci total (RLS tanpa policy) — tidak bisa dibaca lewat DevTools/tab Network oleh siapa pun, termasuk oleh Anda sendiri saat login sebagai admin di sini.</li>
+     <li>Semua permintaan AI diproses oleh Edge Function <code>ai-gateway</code> di server Supabase, yang membaca kunci dengan service_role key (hanya ada di server). Browser hanya mengirim pertanyaan & menerima jawaban teksnya saja.</li>
+     <li>Kolom "API Key" di atas selalu kosong saat dibuka — mengetik nilai baru akan MENIMPA kunci lama; membiarkannya kosong saat menyimpan berarti kunci lama tetap dipakai.</li>
+     <li>Aman menyalakan "Aktifkan untuk semua pengguna": kunci API tidak pernah dikirim ke browser pengguna mana pun, baik admin maupun bukan.</li>
+     <li>AI tidak diberi akses ke password, API key lain, atau data pengguna lain — ia hanya menerima pertanyaan yang diketik pada kotak chat.</li>
+    </ul>
+
+   </div>
+
+  `;
+ }
+
+
+ return `
+
+  <h1>
+   Pengaturan
+  </h1>
+
+  <div
+   class="panel"
+   style="padding:20px">
+
+   <div class="formgrid">
+
+    <div>
+
+     <label class="label">
+      Nama toko
+     </label>
+
+     <input
+      class="input"
+      id="sn"
+      value="JK AdiStore">
+
+    </div>
+
+
+    <div>
+
+     <label class="label">
+      WhatsApp
+     </label>
+
+     <input
+      class="input"
+      id="sw"
+      placeholder="628...">
+
+    </div>
+
+
+    <div>
+
+     <label class="label">
+      Telegram
+     </label>
+
+     <input
+      class="input"
+      id="st"
+      placeholder="@username">
+
+    </div>
+
+
+    <div>
+
+     <label class="label">
+      Instagram
+     </label>
+
+     <input
+      class="input"
+      id="si"
+      placeholder="@username">
+
+    </div>
+
+
+    <div>
+
+     <label class="label">
+      TikTok
+     </label>
+
+     <input
+      class="input"
+      id="sk"
+      placeholder="@username">
+
+    </div>
+
+
+    <div>
+
+     <label class="label">
+      YouTube
+     </label>
+
+     <input
+      class="input"
+      id="sy"
+      placeholder="channel">
+
+    </div>
+
+
+    <div class="full">
+
+     <label class="label">
+      Background URL
+     </label>
+
+     <input
+      class="input"
+      id="sb"
+      placeholder="https://.../background.jpg">
+
+    </div>
+
+
+    <div class="full">
+
+     <label class="label">
+      Teks berjalan
+     </label>
+
+     <textarea
+      class="area"
+      id="ticker">🔥 PROMO JK ADISTORE • ⚡ PRODUK MLBB • 💎 MLBB VPN • 🤖 AI
+     </textarea>
+
+    </div>
+
+   </div>
+
+
+   <button
+    class="btn primary"
+    onclick="saveSettings()">
+
+    SIMPAN
+
+   </button>
+
+  </div>
+
+ `;
+}
+
+
+/* =========================================================
+   EDIT PRODUCT
+   ========================================================= */
+
+window.editProduct=async id=>{
+
+ let p=
+  id
+  ?
+  products.find(
+   x=>x.id===id
+  )
+  :
+  {
+   name:"",
+   category:"MLBB",
+   price:0,
+   oldPrice:0,
+   stock:0,
+   stockMin:800,
+   stockMax:10000,
+   badge:"BARU",
+   image:LOGO,
+   description:"",
+   active:true,
+   priceList:[
+    {
+     name:"Harga normal",
+     price:0
+    }
+   ]
+  };
+
+
+ modal(
+  id
+  ?
+  "Edit Produk"
+  :
+  "Tambah Produk",
+
+  `
+
+  <div class="formgrid">
+
+   <div>
+    <label class="label">
+     Nama
+    </label>
+
+    <input
+     class="input"
+     id="xn"
+     value="${esc(
+      p.name
+     )}">
+   </div>
+
+
+   <div>
+    <label class="label">
+     Kategori
+    </label>
+
+    <input
+     class="input"
+     id="xc"
+     value="${esc(
+      p.category
+     )}">
+   </div>
+
+
+   <div>
+    <label class="label">
+     Harga utama
+    </label>
+
+    <input
+     class="input"
+     id="xp"
+     type="number"
+     value="${p.price||0}">
+   </div>
+
+
+   <div>
+    <label class="label">
+     Harga coret
+    </label>
+
+    <input
+     class="input"
+     id="xo"
+     type="number"
+     value="${p.oldPrice||0}">
+   </div>
+
+
+   <div>
+    <label class="label">
+     Stok minimum tampilan
+    </label>
+
+    <input
+     class="input"
+     id="xmin"
+     type="number"
+     value="${p.stockMin||800}">
+   </div>
+
+
+   <div>
+    <label class="label">
+     Stok maksimum tampilan
+    </label>
+
+    <input
+     class="input"
+     id="xmax"
+     type="number"
+     value="${p.stockMax||10000}">
+   </div>
+
+
+   <div>
+    <label class="label">
+     Badge
+    </label>
+
+    <input
+     class="input"
+     id="xb"
+     value="${esc(
+      p.badge||""
+     )}">
+   </div>
+
+
+   <div class="full">
+
+    <label class="label">
+     Gambar URL
+    </label>
+
+    <input
+     class="input"
+     id="xi"
+     value="${esc(
+      p.image||LOGO
+     )}">
+
+   </div>
+
+
+   <div class="full">
+
+    <label class="label">
+     Deskripsi
+    </label>
+
+    <textarea
+     class="area"
+     id="xd">${esc(
+      p.description||""
+     )}</textarea>
+
+   </div>
+
+
+   <div class="full">
+
+    <label class="label">
+     Daftar harga
+    </label>
+
+    <textarea
+     class="area"
+     id="xprices"
+     placeholder="1 Hari|3000
+3 Hari|7000
+7 Hari|12000
+30 Hari|25000">${esc(
+      (p.priceList||[])
+       .map(
+        v=>
+         `${v.name}|${v.price}`
+       )
+       .join("\n")
+     )}</textarea>
+
+    <small class="muted">
+     Satu paket per baris dengan format:
+     NAMA PAKET|HARGA
+    </small>
+
+   </div>
+
+  </div>
+
+
+  <button
+   class="btn primary"
+   style="
+    width:100%;
+    margin-top:14px
+   "
+   onclick="
+    saveProduct(
+     '${esc(id||"")}'
+    )
+   ">
+
+   SIMPAN PRODUK
+
+  </button>
+
+  `
+ );
+
+};
+
+
+/* =========================================================
+   SAVE PRODUCT
+   ========================================================= */
+
+window.saveProduct=async id=>{
+
+ const priceList=
+  getEl("xprices").value
+   .split("\n")
+   .map(x=>x.trim())
+   .filter(Boolean)
+   .map(line=>{
+
+    const parts=
+     line.split("|");
+
+    return {
+     name:parts[0]?.trim()||
+      "Paket",
+     price:+(
+      parts[1]||0
+     )
+    };
+
+   });
+
+
+ const stockMin=Math.max(800,Number(getEl("xmin").value)||800);
+ const stockMax=Math.max(stockMin,Number(getEl("xmax").value)||10000);
+ if(!getEl("xn").value.trim()) return toast("Nama produk wajib diisi");
+ const d={
+  name:getEl("xn").value.trim(),
+  category:getEl("xc").value.trim()||"Lainnya",
+  price:Math.max(0,Number(getEl("xp").value)||0),
+  oldPrice:Math.max(0,Number(getEl("xo").value)||0),
+  stockMin,
+  stockMax,
+
+  badge:getEl("xb").value,
+
+  image:
+   getEl("xi").value||LOGO,
+
+  description:
+   getEl("xd").value,
+
+  priceList:
+
+   priceList.length
+   ?
+   priceList
+   :
+   [
+    {
+     name:"Harga normal",
+     price:+getEl("xp").value||0
+    }
+   ],
+
+  active:true,
+
+  updatedAt:
+   serverTimestamp()
+ };
+
+
+ try{
+
+  if(id){
+
+   await setDoc(
+    doc(
+     db,
+     "products",
+     id
+    ),
+    d,
+    {
+     merge:true
+    }
+   );
+
+  }else{
+
+   await addDoc(
+    collection(
+     db,
+     "products"
+    ),
+    {
+     ...d,
+     createdAt:
+      serverTimestamp()
+    }
+   );
+
+  }
+
+
+  toast(
+   "Produk disimpan"
+  );
+
+  closeM();
+
+  load();
+
+
+ }catch(e){
+
+  console.error(e);
+
+  toast(
+   "Gagal menyimpan produk"
+  );
+
+ }
+
+};
+
+
+/* =========================================================
+   DELETE PRODUCT
+   ========================================================= */
+
+window.delProduct=async id=>{
+
+ if(!confirm(
+  "Hapus produk?"
+ ))
+  return;
+
+
+ try{
+
+  await deleteDoc(
+   doc(
+    db,
+    "products",
+    id
+   )
+  );
+
+
+  toast(
+   "Produk dihapus"
+  );
+
+  load();
+
+
+ }catch{
+
+  toast(
+   "Gagal menghapus"
+  );
+
+ }
+
+};
+
+
+/* =========================================================
+   MEDIA HELPERS — upload file lokal jadi gambar (data URL)
+   ========================================================= */
+
+window.jkPickImage=(fileInputId,targetInputId)=>{
+ const f=getEl(fileInputId)?.files?.[0];
+ if(!f) return;
+ if(!f.type.startsWith("image/")){ toast("File harus berupa gambar"); return; }
+ if(f.size>800*1024){ toast("Ukuran gambar maksimal 800KB agar situs tetap ringan & cepat"); return; }
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const el=getEl(targetInputId);
+  if(el) el.value=reader.result;
+  toast("Gambar siap — klik Simpan");
+ };
+ reader.readAsDataURL(f);
+};
+
+
+/* =========================================================
+   TESTIMONI CRUD
+   ========================================================= */
+
+window.editTestimoni=id=>{
+
+ const x=id?testimonials.find(t=>t.id===id):{n:"",c:"",t:"",photo:""};
+
+ modal(
+  id?"Edit Testimoni":"Tambah Testimoni",
+  `
+  <div class="formgrid">
+   <div>
+    <label class="label">Nama pelanggan</label>
+    <input class="input" id="tn" value="${esc(x.n||"")}">
+   </div>
+   <div>
+    <label class="label">Kota</label>
+    <input class="input" id="tc" value="${esc(x.c||"")}">
+   </div>
+   <div class="full">
+    <label class="label">Isi testimoni</label>
+    <textarea class="area" id="tt">${esc(x.t||"")}</textarea>
+   </div>
+   <div class="full">
+    <label class="label">Foto (URL) — opsional</label>
+    <input class="input" id="tp" placeholder="https://.../foto.jpg" value="${esc(x.photo||"")}">
+    <input class="input" style="margin-top:8px" type="file" accept="image/*" id="tpFile" onchange="jkPickImage('tpFile','tp')">
+    <small class="muted">Kosongkan jika ingin memakai avatar inisial nama.</small>
+   </div>
+  </div>
+  <button class="btn primary" style="width:100%;margin-top:14px" onclick="saveTestimoni('${esc(id||"")}')">SIMPAN TESTIMONI</button>
+  `
+ );
+};
+
+async function ensureTestimoniSeeded(){
+ let snap=await getDocs(collection(db,"testimonials"));
+ if(snap.docs.length===0){
+  for(const x of fallbackTestimoni){
+   await addDoc(collection(db,"testimonials"),{n:x.n,c:x.c,t:x.t,photo:"",createdAt:serverTimestamp()});
+  }
+  snap=await getDocs(collection(db,"testimonials"));
+ }
+ return snap.docs.map(d=>({id:d.id,...d.data()}));
+}
+
+window.saveTestimoni=async id=>{
+
+ if(!getEl("tn").value.trim()) return toast("Nama wajib diisi");
+ if(!getEl("tt").value.trim()) return toast("Isi testimoni wajib diisi");
+
+ const d={
+  n:getEl("tn").value.trim(),
+  c:getEl("tc").value.trim(),
+  t:getEl("tt").value.trim(),
+  photo:getEl("tp").value.trim(),
+  updatedAt:serverTimestamp()
+ };
+
+ try{
+  const seeded=await ensureTestimoniSeeded();
+  let realId=id;
+  if(id&&String(id).startsWith("seed-")){
+   realId=seeded[Number(id.split("-")[1])]?.id;
+  }
+  if(realId){
+   await setDoc(doc(db,"testimonials",realId),d,{merge:true});
+  }else{
+   await addDoc(collection(db,"testimonials"),{...d,createdAt:serverTimestamp()});
+  }
+  toast("Testimoni disimpan");
+  closeM();
+  await loadTestimonials();
+  render();
+  adminPage();
+ }catch(e){
+  console.error(e);
+  toast("Gagal menyimpan testimoni");
+ }
+};
+
+window.delTestimoni=async id=>{
+ if(!confirm("Hapus testimoni ini?")) return;
+ try{
+  const seeded=await ensureTestimoniSeeded();
+  let realId=id;
+  if(String(id).startsWith("seed-")){
+   realId=seeded[Number(id.split("-")[1])]?.id;
+  }
+  if(realId) await deleteDoc(doc(db,"testimonials",realId));
+  toast("Testimoni dihapus");
+  await loadTestimonials();
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal menghapus testimoni");
+ }
+};
+
+
+/* =========================================================
+   BANNER SLIDER CRUD (disimpan di settings/store.banners)
+   ========================================================= */
+
+async function persistMedia(){
+ const cur=await getDoc(doc(db,"settings","store"));
+ const base=cur.exists()?cur.data():{};
+ await setDoc(doc(db,"settings","store"),{...base,banners,videos:siteVideos,updatedAt:serverTimestamp()},{merge:true});
+}
+
+window.editBanner=(i)=>{
+ const b=(i!==undefined&&banners[i])?banners[i]:{image:"",caption:"",link:""};
+ modal(
+  (i!==undefined)?"Edit Banner":"Tambah Banner",
+  `
+  <div class="formgrid">
+   <div class="full">
+    <label class="label">Gambar banner (URL)</label>
+    <input class="input" id="bnImg" placeholder="https://.../banner.jpg" value="${esc(b.image||"")}">
+    <input class="input" style="margin-top:8px" type="file" accept="image/*" id="bnFile" onchange="jkPickImage('bnFile','bnImg')">
+    <small class="muted">Disarankan gambar lebar (rasio ± 16:6) agar tampil rapi di slider. Maks. 800KB per gambar untuk menjaga kecepatan situs.</small>
+   </div>
+   <div class="full">
+    <label class="label">Teks caption (opsional)</label>
+    <input class="input" id="bnCaption" value="${esc(b.caption||"")}">
+   </div>
+   <div class="full">
+    <label class="label">Tautan saat diklik (opsional)</label>
+    <input class="input" id="bnLink" placeholder="https://wa.me/... atau kosongkan" value="${esc(b.link||"")}">
+   </div>
+  </div>
+  <button class="btn primary" style="width:100%;margin-top:14px" onclick="saveBanner(${i!==undefined?i:"null"})">SIMPAN BANNER</button>
+  `
+ );
+};
+
+window.saveBanner=async i=>{
+ const img=getEl("bnImg").value.trim();
+ if(!img) return toast("Gambar banner wajib diisi");
+ const d={image:img,caption:getEl("bnCaption").value.trim(),link:getEl("bnLink").value.trim()};
+ if(i===null||i===undefined) banners=[...banners,d];
+ else banners[i]=d;
+ try{
+  await persistMedia();
+  toast("Banner disimpan");
+  closeM();
+  jkSliderIndex=0;
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal menyimpan banner");
+ }
+};
+
+window.delBanner=async i=>{
+ if(!confirm("Hapus banner ini?")) return;
+ banners=banners.filter((_,idx)=>idx!==i);
+ try{
+  await persistMedia();
+  toast("Banner dihapus");
+  jkSliderIndex=0;
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal menghapus banner");
+ }
+};
+
+window.moveBanner=async(i,dir)=>{
+ const j=i+dir;
+ if(j<0||j>=banners.length) return;
+ [banners[i],banners[j]]=[banners[j],banners[i]];
+ try{
+  await persistMedia();
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal mengubah urutan");
+ }
+};
+
+
+/* =========================================================
+   VIDEO PROMOSI CRUD (disimpan di settings/store.videos)
+   ========================================================= */
+
+window.editVideo=(i)=>{
+ const v=(i!==undefined&&siteVideos[i])?siteVideos[i]:{title:"",url:""};
+ modal(
+  (i!==undefined)?"Edit Video":"Tambah Video",
+  `
+  <div class="formgrid">
+   <div class="full">
+    <label class="label">Judul video</label>
+    <input class="input" id="vdTitle" value="${esc(v.title||"")}">
+   </div>
+   <div class="full">
+    <label class="label">Tautan video (YouTube atau .mp4)</label>
+    <input class="input" id="vdUrl" placeholder="https://youtube.com/watch?v=... atau https://.../video.mp4" value="${esc(v.url||"")}">
+   </div>
+  </div>
+  <button class="btn primary" style="width:100%;margin-top:14px" onclick="saveVideo(${i!==undefined?i:"null"})">SIMPAN VIDEO</button>
+  `
+ );
+};
+
+window.saveVideo=async i=>{
+ const url=getEl("vdUrl").value.trim();
+ if(!url) return toast("Tautan video wajib diisi");
+ const d={title:getEl("vdTitle").value.trim()||"Video Promosi",url};
+ if(i===null||i===undefined) siteVideos=[...siteVideos,d];
+ else siteVideos[i]=d;
+ try{
+  await persistMedia();
+  toast("Video disimpan");
+  closeM();
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal menyimpan video");
+ }
+};
+
+window.delVideo=async i=>{
+ if(!confirm("Hapus video ini?")) return;
+ siteVideos=siteVideos.filter((_,idx)=>idx!==i);
+ try{
+  await persistMedia();
+  toast("Video dihapus");
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal menghapus video");
+ }
+};
+
+window.moveVideo=async(i,dir)=>{
+ const j=i+dir;
+ if(j<0||j>=siteVideos.length) return;
+ [siteVideos[i],siteVideos[j]]=[siteVideos[j],siteVideos[i]];
+ try{
+  await persistMedia();
+  render();
+  adminPage();
+ }catch(e){
+  toast("Gagal mengubah urutan");
+ }
+};
+
+
+/* =========================================================
+   ADMIN ORDERS
+   ========================================================= */
+
+async function loadOrders(){
+
+ try{
+
+  const {data:a,error:ordersErr}=
+   await sb.from("orders")
+    .select("id,email,total,status")
+    .order("created_at",{ascending:false});
+
+  if(ordersErr) throw ordersErr;
+
+
+  const ordersContainer=getEl("ordersBox"); if(!ordersContainer) return; ordersContainer.innerHTML=`
+
+   <table class="table">
+
+    <tr>
+
+     <th>ID</th>
+     <th>Email</th>
+     <th>Total</th>
+     <th>Status</th>
+
+    </tr>
+
+
+    ${
+     a.map(o=>`
+
+      <tr>
+
+       <td>
+        ${esc(
+         o.id.slice(0,8)
+        )}
+       </td>
+
+       <td>
+        ${esc(
+         o.email
+        )}
+       </td>
+
+       <td>
+        ${rp(o.total)}
+       </td>
+
+       <td>
+
+        <select
+         class="select"
+         onchange="
+          updateOrderStatus(
+           '${esc(o.id)}',
+           this.value
+          )
+         ">
+
+         ${
+          [
+           "Menunggu pembayaran",
+           "Pembayaran diproses",
+           "Diproses",
+           "Selesai",
+           "Dibatalkan"
+          ].map(s=>`
+
+           <option
+            ${s===o.status
+             ?"selected"
+             :
+             ""}>
+
+            ${s}
+
+           </option>
+
+          `).join("")
+         }
+
+        </select>
+
+       </td>
+
+      </tr>
+
+     `).join("")
+    }
+
+   </table>
+
+  `;
+
+
+ }catch{
+
+  toast(
+   "Gagal memuat pesanan"
+  );
+
+ }
+
+}
+
+
+window.updateOrderStatus=async(
+ id,
+ s
+)=>{
+
+ try{
+
+  const {error}=await sb.from("orders")
+   .update({status:s})
+   .eq("id",id);
+
+  if(error) throw new Error(error.message);
+
+
+  toast(
+   "Status diperbarui"
+  );
+
+
+ }catch{
+
+  toast(
+   "Gagal memperbarui"
+  );
+
+ }
+
+};
+
+
+/* =========================================================
+   USERS
+   ========================================================= */
+
+async function loadUsers(){
+
+ try{
+
+  const {data:rows,error:usersErr}=
+   await sb.from("profiles")
+    .select("id,name,email,whatsapp,role,balance")
+    .order("created_at",{ascending:false});
+
+  if(usersErr) throw usersErr;
+
+
+  const usersContainer=getEl("usersBox"); if(!usersContainer) return; usersContainer.innerHTML=`
+
+   <table class="table">
+
+    <tr>
+     <th>Nama</th>
+     <th>Email</th>
+     <th>WA</th>
+     <th>Role</th>
+     <th>Saldo</th>
+     <th>Atur Saldo</th>
+    </tr>
+
+
+    ${
+     (rows||[]).map(u=>{
+
+      const uid=u.id;
+
+
+      return `
+
+       <tr>
+
+        <td>
+         ${esc(
+          u.name
+         )}
+        </td>
+
+        <td>
+         ${esc(
+          u.email
+         )}
+        </td>
+
+        <td>
+         ${esc(
+          u.whatsapp
+         )}
+        </td>
+
+        <td>
+         ${esc(u.role||"user")}
+         ${
+          u.role==="admin"
+          ?`<button class="btn" style="min-height:28px;padding:3px 8px;font-size:11px;margin-left:6px" onclick="adminSetRole('${esc(uid)}','user')">Jadikan User</button>`
+          :`<button class="btn" style="min-height:28px;padding:3px 8px;font-size:11px;margin-left:6px" onclick="adminSetRole('${esc(uid)}','admin')">Jadikan Admin</button>`
+         }
+        </td>
+
+        <td>
+         ${rp(Number(u.balance||0))}
+        </td>
+
+        <td style="display:flex;gap:6px;flex-wrap:wrap">
+         <input class="input" id="bal_${esc(uid)}" type="number" placeholder="cth. 50000" style="width:120px;min-height:36px;padding:6px 8px">
+         <button class="btn" style="min-height:36px;padding:6px 10px" onclick="adminAdjustBalance('${esc(uid)}',1)">+ Tambah</button>
+         <button class="btn" style="min-height:36px;padding:6px 10px" onclick="adminAdjustBalance('${esc(uid)}',-1)">− Kurangi</button>
+        </td>
+
+       </tr>
+
+      `;
+
+     }).join("")
+    }
+
+   </table>
+
+  `;
+
+
+ }catch{
+
+  toast(
+   "Gagal memuat pengguna"
+  );
+
+ }
+
+}
+
+/* Hanya admin yang dapat mengubah saldo/role pengguna lain —
+   ditegakkan DUA KALI: sekali di UI (tombol ini disembunyikan di
+   balik halaman admin) dan sekali lagi (yang sesungguhnya, tak
+   bisa dilewati) oleh Row Level Security + fungsi adjust_balance()
+   di server Supabase. Lihat supabase/schema.sql. */
+window.adminAdjustBalance=async(uid,sign)=>{
+ if(!(admin||ownerUnlocked)) return toast("Hanya admin yang dapat mengatur saldo");
+ const raw=Number(getEl("bal_"+uid)?.value||0);
+ if(!raw||raw<0) return toast("Masukkan jumlah saldo yang valid");
+ try{
+  const {data,error}=await sb.rpc("adjust_balance",{
+   p_target_id:uid,
+   p_delta:sign*raw,
+   p_reason:"Penyesuaian admin lewat Panel Admin"
+  });
+  if(error) throw new Error(error.message||"Gagal mengubah saldo");
+  toast("Saldo diperbarui: "+rp(Number(data)));
+  if(user&&user.uid===uid){userBalance=Number(data);user.balance=userBalance;render();}
+  loadUsers();
+ }catch(e){
+  toast(e?.message||"Gagal mengubah saldo");
+ }
+};
+
+window.adminSetRole=async(uid,role)=>{
+ if(!(admin||ownerUnlocked)) return toast("Hanya admin yang dapat mengubah role");
+ try{
+  const {error}=await sb.from("profiles").update({role}).eq("id",uid);
+  if(error) throw new Error(error.message||"Gagal mengubah role");
+  toast("Role diperbarui menjadi "+role);
+  loadUsers();
+ }catch(e){
+  toast(e?.message||"Gagal mengubah role");
+ }
+};
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function applyStoreBackground(url){
+ const u=String(url||"").trim().replace(/"/g,"");
+ if(u){
+  document.body.style.backgroundImage=`linear-gradient(#050716aa,#050716aa),url("${u}"),radial-gradient(circle at 10% 10%,#2563eb22,transparent 30%),radial-gradient(circle at 90% 20%,#00e5ff1d,transparent 30%),radial-gradient(circle at 50% 90%,#8b5cf622,transparent 35%)`;
+  document.body.style.backgroundSize="cover";
+  document.body.style.backgroundAttachment="fixed";
+ }else{
+  document.body.style.backgroundImage="";
+  document.body.style.backgroundSize="";
+  document.body.style.backgroundAttachment="";
+ }
+}
+
+async function loadSettings(){
+ try{
+  const s=await getDoc(doc(db,"settings","store"));
+  if(!s.exists()) return;
+  const x=s.data();
+  applyStoreBackground(x.background||"");
+  const fields={sn:x.name||"JK AdiStore",sw:x.whatsapp||"",st:x.telegram||"",si:x.instagram||"",sk:x.tiktok||"",sy:x.youtube||"",sb:x.background||"",ticker:x.ticker||""};
+  Object.entries(fields).forEach(([id,v])=>{const el=getEl(id);if(el)el.value=v;});
+ }catch(e){console.warn("Gagal memuat pengaturan",e);}
+}
+
+window.saveSettings=async()=>{
+
+ try{
+
+  await setDoc(
+   doc(
+    db,
+    "settings",
+    "store"
+   ),
+   {
+    name:getEl("sn").value,
+    whatsapp:getEl("sw").value,
+    telegram:getEl("st").value,
+    instagram:getEl("si").value,
+    tiktok:getEl("sk").value,
+    youtube:getEl("sy").value,
+    background:getEl("sb").value.trim(),
+    ticker:getEl("ticker").value,
+    updatedAt:
+     serverTimestamp()
+   },
+   {
+    merge:true
+   }
+  );
+
+
+  toast(
+   "Pengaturan disimpan"
+  );
+
+
+ }catch{
+
+  toast(
+   "Gagal menyimpan"
+  );
+
+ }
+
+};
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+window.jkCalcRun=()=>{
+ const unit=Number(getEl("calcUnit")?.value||0);
+ const qty=Number(getEl("calcQty")?.value||1);
+ const disc=Number(getEl("calcDisc")?.value||0);
+ const fee=Number(getEl("calcFee")?.value||0);
+ const subtotal=unit*qty;
+ const discAmt=subtotal*(Math.min(Math.max(disc,0),100)/100);
+ const total=Math.max(0,subtotal-discAmt+fee);
+ if(getEl("calcSubtotal")) getEl("calcSubtotal").textContent=rp(subtotal);
+ if(getEl("calcDiscAmt")) getEl("calcDiscAmt").textContent="- "+rp(discAmt);
+ if(getEl("calcTotal")) getEl("calcTotal").textContent=rp(total);
+};
+
+window.gotoPage=n=>{
+ page=Math.max(1,n);
+ render();
+ setTimeout(()=>{
+  document.documentElement.style.scrollBehavior="auto";
+  const target=document.querySelector("#shop");
+  if(target){
+   window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+window.scrollY-8),behavior:"auto"});
+  }
+ },0);
+};
+
+window.home=()=>{
+
+ cat="Semua";
+ search="";
+ page=1;
+
+ render();
+
+ document.documentElement.style.scrollBehavior="auto";
+ window.scrollTo({top:0,behavior:"auto"});
+
+};
+
+
+window.setCategory=c=>{
+
+ cat=c||"Semua";
+ search="";
+ page=1;
+ render();
+
+ setTimeout(()=>{
+  document.documentElement.style.scrollBehavior="auto";
+  const target=document.querySelector("#shop");
+  if(target){
+   window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+window.scrollY-8),behavior:"auto"});
+  }
+ },0);
+
+};
+
+(async()=>{
+ try{
+  const snap=await getDoc(doc(db,"settings","store"));
+  if(snap.exists()) applyStoreBackground(snap.data().background||"");
+ }catch(e){}
+})();
+
+window.openPremiumApps=()=>{
+ setCategory("Aplikasi");
+};
+
+window.openTopUpGame=()=>{
+ cat="Semua";
+ search="";
+ render();
+
+ setTimeout(()=>{
+  document.documentElement.style.scrollBehavior="auto";
+  const target=document.querySelector("#topupGame");
+  if(target){
+   window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+window.scrollY-8),behavior:"auto"});
+  }
+ },0);
+};
+
+window.shop=()=>{
+
+ render();
+
+ setTimeout(()=>{
+  document.documentElement.style.scrollBehavior="auto";
+  const target=document.querySelector("#shop");
+  if(target){
+   window.scrollTo({top:Math.max(0,target.getBoundingClientRect().top+window.scrollY-8),behavior:"auto"});
+  }
+ },0);
+
+};
+
+
+/* =========================================================
+   SUPABASE AUTH STATE
+   Cek sesi otomatis ke server Supabase + pantau perubahan.
+   ========================================================= */
+function jkApplyAuthState(u){
+ user=u||null;
+ admin=String(user?.role||"user")==="admin";
+ if(user){
+  jkUnlockStore();
+  refreshUserBalance().then(render);
+ }else{
+  userBalance=0;
+  document.body.classList.add("jk-locked");
+  document.getElementById("jkAuthGate")?.classList.remove("hidden");
+ }
+}
+
+(async()=>{
+ try{
+  const u=await refreshCurrentUser();
+  jkApplyAuthState(u);
+ }catch(e){
+  jkApplyAuthState(null);
+ }
+ onAuthStateChanged(auth,jkApplyAuthState);
+})();
+
+/* =========================================================
+   START
+   ========================================================= */
+
+load();
+
+</script>
+
+
+</body>
+</html>
